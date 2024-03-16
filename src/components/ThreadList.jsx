@@ -1,19 +1,19 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import axios from 'axios';
+import threadService from '../services/threads';
 
 const ThreadList = () => {
   const [threads, setThreads] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/posts').then((response) => {
-      setThreads(response.data);
+    threadService.getAll().then((data) => {
+      setThreads(data);
     });
   });
   return (
-    <div className="text-3xl font-bold underline">
+    <div className="text-zinc-100 py-12">
       {threads.map((post) => (
-        <div key={post.id}>{post.content}</div>
+        <div key={post.id}>{post.title}</div>
       ))}
     </div>
   );
