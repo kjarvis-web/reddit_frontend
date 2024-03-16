@@ -13,7 +13,7 @@ const ThreadList = () => {
   return (
     <div className="text-3xl font-bold underline">
       {threads.map((post) => (
-        <div>{post.content}</div>
+        <div key={post.id}>{post.content}</div>
       ))}
     </div>
   );
