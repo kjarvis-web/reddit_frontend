@@ -9,7 +9,7 @@ const ThreadList = () => {
     threadService.getAll().then((data) => {
       setThreads(data);
     });
-  });
+  }, []);
   return (
     <div className="text-zinc-100 py-12">
       {threads.map((post) => (
