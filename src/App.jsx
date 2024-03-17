@@ -5,7 +5,8 @@ import ThreadForm from './components/ThreadForm';
 import ThreadList from './components/ThreadList';
 
 function App() {
-  const user = useSelector((state) => state);
+  const user = useSelector((state) => state.login);
+
   return (
     <main className="flex min-h-screen flex-col bg-zinc-600 text-zinc-100">
       <Navbar />

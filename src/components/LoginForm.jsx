@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import loginService from '../services/login';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUser } from '../reducers/loginReducer';
+import threadService from '../services/threads';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -15,6 +16,7 @@ const LoginForm = () => {
         username,
         password,
       });
+      threadService.setToken(user.token);
       dispatch(setUser(user));
       setUsername('');
       setPassword('');

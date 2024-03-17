@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import threadService from '../services/threads';
+import { useDispatch } from 'react-redux';
+import { initializeThreads, updateThreads } from '../reducers/threadReducer';
 
 const ThreadForm = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -12,6 +15,7 @@ const ThreadForm = () => {
       content,
     };
     threadService.create(newThread);
+    dispatch(updateThreads(newThread));
     setTitle('');
     setContent('');
   };
