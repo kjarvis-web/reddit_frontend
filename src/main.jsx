@@ -4,7 +4,6 @@ import App from './App.jsx';
 import './index.css';
 import { Provider } from 'react-redux';
 import loginReducer from './reducers/loginReducer.js';
-import { combineReducers, createStore } from 'redux';
 import threadReducer from './reducers/threadReducer.js';
 import { configureStore } from '@reduxjs/toolkit';
 

@@ -5,10 +5,13 @@ import { getThreads } from '../reducers/threadReducer';
 const ThreadList = () => {
   const dispatch = useDispatch();
   const threads = useSelector((state) => state.thread.threads);
+  const loading = useSelector((state) => state.thread.loading);
 
   useEffect(() => {
     dispatch(getThreads());
   }, [dispatch]);
+
+  if (loading) return <div>loading...</div>;
 
   return (
     <div className="text-zinc-100 py-12">

@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../reducers/loginReducer';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const loading = useSelector((state) => state.login.loading);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,6 +18,8 @@ const LoginForm = () => {
       console.log(exception);
     }
   };
+
+  if (loading) return <div>logging you in...</div>;
 
   return (
     <form onSubmit={handleLogin} className="text-black flex flex-col">
