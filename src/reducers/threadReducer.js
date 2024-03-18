@@ -1,3 +1,5 @@
+import threadService from '../services/threads';
+
 const initialState = {
   threads: [],
   loading: false,
@@ -14,6 +16,13 @@ const threadReducer = (state = initialState, action) => {
   }
 };
 
+export const appendThread = (payload) => {
+  return {
+    type: 'CREATE',
+    payload,
+  };
+};
+
 export const initializeThreads = (payload) => {
   return {
     type: 'INITIALIZE_THREADS',
@@ -21,8 +30,18 @@ export const initializeThreads = (payload) => {
   };
 };
 
-export const updateThreads = (newThread) => {
-  return { type: 'CREATE', payload: newThread };
+export const createThread = (object) => {
+  return async (dispatch) => {
+    const newThread = await threadService.create(object);
+    dispatch(appendThread(newThread));
+  };
+};
+
+export const initializeThunk = () => {
+  return async (dispatch) => {
+    const threads = await threadService.getAll();
+    dispatch(initializeThreads(threads));
+  };
 };
 
 export default threadReducer;

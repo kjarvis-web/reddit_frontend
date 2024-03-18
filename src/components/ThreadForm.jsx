@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import threadService from '../services/threads';
 import { useDispatch } from 'react-redux';
-import { initializeThreads, updateThreads } from '../reducers/threadReducer';
+import { createThread } from '../reducers/threadReducer';
 
 const ThreadForm = () => {
   const [title, setTitle] = useState('');
@@ -14,8 +14,9 @@ const ThreadForm = () => {
       title,
       content,
     };
-    threadService.create(newThread);
-    dispatch(updateThreads(newThread));
+    // threadService.create(newThread);
+    // dispatch(updateThreads(newThread));
+    dispatch(createThread(newThread));
     setTitle('');
     setContent('');
   };

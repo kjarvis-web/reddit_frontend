@@ -6,13 +6,22 @@ import { Provider } from 'react-redux';
 import loginReducer from './reducers/loginReducer.js';
 import { combineReducers, createStore } from 'redux';
 import threadReducer from './reducers/threadReducer.js';
+import { configureStore } from '@reduxjs/toolkit';
 
-const reducer = combineReducers({
-  login: loginReducer,
-  thread: threadReducer,
+// const reducer = combineReducers({
+//   login: loginReducer,
+//   thread: threadReducer,
+// });
+
+// const store = createStore(reducer);
+
+//redux toolkit
+const store = configureStore({
+  reducer: {
+    login: loginReducer,
+    thread: threadReducer,
+  },
 });
-
-const store = createStore(reducer);
 
 console.log(store.getState());
 
