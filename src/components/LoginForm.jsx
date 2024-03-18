@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import loginService from '../services/login';
 import { useDispatch } from 'react-redux';
-import { setUser } from '../reducers/loginReducer';
-import threadService from '../services/threads';
+import { loginUser } from '../reducers/loginReducer';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -12,12 +10,7 @@ const LoginForm = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const user = await loginService.login({
-        username,
-        password,
-      });
-      threadService.setToken(user.token);
-      dispatch(setUser(user));
+      dispatch(loginUser(username, password));
       setUsername('');
       setPassword('');
     } catch (exception) {

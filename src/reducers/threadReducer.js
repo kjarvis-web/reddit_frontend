@@ -6,32 +6,6 @@ const initialState = {
   loading: false,
 };
 
-// Redux no toolkit
-// const threadReducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case 'CREATE':
-//       return { ...state, threads: [...state.threads, action.payload] };
-//     case 'INITIALIZE_THREADS':
-//       return { ...state, threads: action.payload };
-//     default:
-//       return state;
-//   }
-// };
-
-// const appendThread = (payload) => {
-//   return {
-//     type: 'CREATE',
-//     payload,
-//   };
-// };
-
-// const initializeThreads = (payload) => {
-//   return {
-//     type: 'INITIALIZE_THREADS',
-//     payload,
-//   };
-// };
-
 //toolkit
 const threadSlice = createSlice({
   name: 'threads',
