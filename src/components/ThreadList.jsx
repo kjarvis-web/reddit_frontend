@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
-import threadService from '../services/threads';
 import { useDispatch, useSelector } from 'react-redux';
-import { initializeThreads, initializeThunk } from '../reducers/threadReducer';
+import { getThreads } from '../reducers/threadReducer';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
   const threads = useSelector((state) => state.thread.threads);
 
   useEffect(() => {
-    dispatch(initializeThunk());
+    dispatch(getThreads());
   }, [dispatch]);
 
   return (

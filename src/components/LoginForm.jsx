@@ -26,12 +26,14 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleLogin} className="text-black">
+    <form onSubmit={handleLogin} className="text-black flex flex-col">
       <label>Username: </label>
       <input value={username} onChange={(e) => setUsername(e.target.value)} />
       <label>Password: </label>
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button type="submit">Login</button>
+      <button type="submit" className="bg-green-600">
+        Login
+      </button>
     </form>
   );
 };
