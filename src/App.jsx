@@ -10,8 +10,8 @@ function App() {
   return (
     <main className="flex min-h-screen flex-col bg-zinc-600 text-zinc-100">
       <Navbar />
-      <div className="container mx-auto py-12">
-        {!user ? <LoginForm /> : <ThreadForm />}
+      <div className="container mx-auto mt-24">
+        {user && <ThreadForm />}
         <ThreadList />
       </div>
     </main>

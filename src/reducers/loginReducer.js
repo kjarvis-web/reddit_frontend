@@ -4,7 +4,7 @@ import threadService from '../services/threads';
 
 const loginSlice = createSlice({
   name: 'login',
-  initialState: { user: null, loading: false },
+  initialState: { user: null, loading: false, error: false },
   reducers: {
     setUser(state, action) {
       return { ...state, user: action.payload };
@@ -15,21 +15,33 @@ const loginSlice = createSlice({
     setLoading(state, action) {
       return { ...state, loading: action.payload };
     },
+    setError(state, action) {
+      return { ...state, error: action.payload };
+    },
   },
 });
 
-export const { setUser, logout, setLoading } = loginSlice.actions;
+export const { setUser, logout, setLoading, setError } = loginSlice.actions;
 
 export const loginUser = (username, password) => {
   return async (dispatch) => {
-    dispatch(setLoading(true));
-    const user = await loginService.login({
-      username,
-      password,
-    });
-    threadService.setToken(user.token);
-    dispatch(setUser(user));
-    dispatch(setLoading(false));
+    try {
+      dispatch(setLoading(true));
+      const user = await loginService.login({
+        username,
+        password,
+      });
+      threadService.setToken(user.token);
+      dispatch(setUser(user));
+      dispatch(setLoading(false));
+    } catch (error) {
+      console.log('error', error.response.data.error);
+      dispatch(setLoading(false));
+      dispatch(setError(true));
+      setTimeout(() => {
+        dispatch(setError(false));
+      }, 3000);
+    }
   };
 };
 
