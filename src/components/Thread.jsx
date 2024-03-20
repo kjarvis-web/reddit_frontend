@@ -28,14 +28,24 @@ const Thread = () => {
   return threads.length === 0 ? (
     <div>loading...</div>
   ) : (
-    <div className="mt-24 text-black">
-      <h1 className="font-bold text-3xl">{thread.title}</h1>
-      <div>{thread.content}</div>
-      {thread.comments.map((c, i) => (
-        <div key={i}>{c.text}</div>
-      ))}
-      <input value={comment} onChange={(e) => setComment(e.target.value)} />
-      <button onClick={() => handleComment({ comment })}>reply</button>
+    <div>
+      <div className="mt-24 bg-zinc-800">
+        <h1 className="font-bold text-3xl">{thread.title}</h1>
+        <div className=" mb-2">{thread.content}</div>
+        {thread.comments.map((c, i) => (
+          <div key={i} className="bg-zinc-800 text-zinc-100 mb-2 p-4 text-sm">
+            {c.text}
+          </div>
+        ))}
+        <input
+          className="text-zinc-800"
+          value={comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+      </div>
+      <button className="bg-blue-600 p-4" onClick={() => handleComment({ comment })}>
+        Reply
+      </button>
     </div>
   );
 };

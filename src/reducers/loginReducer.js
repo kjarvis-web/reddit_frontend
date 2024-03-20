@@ -9,8 +9,9 @@ const loginSlice = createSlice({
     setUser(state, action) {
       return { ...state, user: action.payload };
     },
-    logout() {
-      return null;
+    logout(state) {
+      window.localStorage.clear();
+      return { ...state, user: null };
     },
     setLoading(state, action) {
       return { ...state, loading: action.payload };
@@ -31,6 +32,7 @@ export const loginUser = (username, password) => {
         username,
         password,
       });
+      window.localStorage.setItem('loggedUser', JSON.stringify(user));
       threadService.setToken(user.token);
       dispatch(setUser(user));
       dispatch(setLoading(false));

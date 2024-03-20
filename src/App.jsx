@@ -1,19 +1,25 @@
-import { useSelector } from 'react-redux';
 import Navbar from './components/Navbar';
-import ThreadForm from './components/ThreadForm';
 import ThreadList from './components/ThreadList';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Thread from './components/Thread';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUser } from './reducers/loginReducer';
 
 function App() {
-  const user = useSelector((state) => state.login.user);
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedUser');
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      dispatch(setUser(user));
+    }
+  }, [dispatch]);
   return (
     <Router>
-      <main className="flex min-h-screen flex-col bg-zinc-600 text-zinc-100">
+      <main className="flex min-h-screen flex-col bg-zinc-500 text-zinc-100">
         <Navbar />
-        <div className="container mx-auto mt-24">
-          {user && <ThreadForm />}
+        <div className="container mx-auto mt-12">
           <Routes>
             <Route path="/" element={<ThreadList />} />
             <Route path="/posts/:id" element={<Thread />} />
