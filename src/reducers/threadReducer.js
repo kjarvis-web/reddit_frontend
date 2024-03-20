@@ -21,8 +21,13 @@ const threadSlice = createSlice({
       state.loading = action.payload;
     },
     appendComment(state, action) {
-      const updatedThreads = state.threads.filter((t) => t.id !== action.payload.id);
-      return { ...state, threads: [...updatedThreads, action.payload] };
+      // const updatedThreads = state.threads.filter((t) => t.id !== action.payload.id);
+      // return { ...state, threads: [...updatedThreads, action.payload] };
+      const findThread = state.threads.find((t) => t.id === action.payload.originalId);
+      const newThread = { ...findThread, comments: [...findThread.comments, action.payload] };
+      console.log(newThread);
+      const newThreads = state.threads.filter((t) => t.id !== action.payload.originalId);
+      return { ...state, threads: [...newThreads, newThread] };
     },
   },
 });
@@ -50,7 +55,7 @@ export const getThreads = () => {
 export const addComment = (id, comment) => {
   return async (dispatch) => {
     const newComment = await threadService.addComment(id, comment);
-    console.log('newcomment', newComment);
+    console.log('addcomment', newComment);
     dispatch(appendComment(newComment));
   };
 };

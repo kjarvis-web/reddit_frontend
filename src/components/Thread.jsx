@@ -7,12 +7,15 @@ import { useState } from 'react';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getThreads());
   }, [dispatch]);
 
   const id = useParams().id;
+  console.log(id);
+
   const thread = threads.find((t) => t.id === id);
 
   const [comment, setComment] = useState('');
@@ -29,7 +32,7 @@ const Thread = () => {
       <h1 className="font-bold text-3xl">{thread.title}</h1>
       <div>{thread.content}</div>
       {thread.comments.map((c, i) => (
-        <div key={i}>{c}</div>
+        <div key={i}>{c.text}</div>
       ))}
       <input value={comment} onChange={(e) => setComment(e.target.value)} />
       <button onClick={() => handleComment({ comment })}>reply</button>
