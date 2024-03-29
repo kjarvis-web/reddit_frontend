@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { addComment, addReply, getComments, getThreads } from '../reducers/threadReducer';
 import { useState } from 'react';
+import Reply from './Reply';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
@@ -74,7 +75,8 @@ const Thread = () => {
                   reply.parentId === c.id && (
                     <div className={`ml-8 flex justify-between`} key={reply.id}>
                       <div>{reply.text}</div>
-                      <button onClick={fetchComments}>LOAD REPLIES</button>
+                      {/* <button onClick={fetchComments}>LOAD REPLIES</button> */}
+                      <Reply replyId={reply.id} />
                     </div>
                   )
               )}
