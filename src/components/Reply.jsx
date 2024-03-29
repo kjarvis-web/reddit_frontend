@@ -1,13 +1,12 @@
+/* eslint-disable react/prop-types */
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { getComments } from '../reducers/threadReducer';
 
-const Reply = ({ replyId }) => {
+const Reply = ({ replyId, handleReply }) => {
   const comments = useSelector((state) => state.thread.comments);
   const nestedComments = comments.filter((c) => c.parentId === replyId);
-  console.log('nest', nestedComments);
-  console.log('comments', comments);
 
   const dispatch = useDispatch();
 
@@ -21,9 +20,9 @@ const Reply = ({ replyId }) => {
       <div className="mx-4" key={c.id}>
         <div className="flex justify-between">
           <span>{c.text}</span>
-          <button>REPLY</button>
+          <button onClick={() => handleReply(replyId)}>REPLY</button>
         </div>
-        <Reply replyId={c.id} />
+        <Reply handleReply={handleReply} replyId={c.id} />
       </div>
     ));
 

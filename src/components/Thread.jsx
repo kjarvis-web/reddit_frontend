@@ -43,6 +43,7 @@ const Thread = () => {
   const getId = (id) => {
     setReplyId(id);
     setVisible(!visible);
+    console.log(id);
   };
 
   const hide = { display: !visible ? 'none' : '' };
@@ -76,9 +77,9 @@ const Thread = () => {
                     <div className={`ml-8 flex flex-col`} key={reply.id}>
                       <div className="flex justify-between">
                         <span>{reply.text}</span>
-                        <button>REPLY</button>
+                        <button onClick={() => getId(reply.id)}>REPLY</button>
                       </div>
-                      <Reply replyId={reply.id} />
+                      <Reply handleReply={getId} replyId={reply.id} />
                     </div>
                   )
               )}

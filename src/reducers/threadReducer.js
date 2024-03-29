@@ -69,7 +69,6 @@ export const getThreads = () => {
 export const getComments = () => {
   return async (dispatch) => {
     const comments = await threadService.getComments();
-    console.log(comments);
     dispatch(initializeComments(comments));
   };
 };
