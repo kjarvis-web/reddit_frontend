@@ -73,9 +73,8 @@ const Thread = () => {
               comments.map(
                 (reply) =>
                   reply.parentId === c.id && (
-                    <div className={`ml-8 flex justify-between`} key={reply.id}>
+                    <div className={`ml-8 flex flex-col`} key={reply.id}>
                       <div>{reply.text}</div>
-                      {/* <button onClick={fetchComments}>LOAD REPLIES</button> */}
                       <Reply replyId={reply.id} />
                     </div>
                   )

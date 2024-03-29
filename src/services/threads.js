@@ -38,7 +38,10 @@ const addComment = async (id, comment) => {
 };
 
 const addReply = async (id, reply) => {
-  const response = await axios.post(`http://localhost:3000/api/comments/${id}`, reply);
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.post(`http://localhost:3000/api/comments/${id}`, reply, config);
 
   return response.data;
 };
