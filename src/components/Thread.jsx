@@ -36,10 +36,6 @@ const Thread = () => {
     dispatch(getComments());
   };
 
-  const fetchComments = () => {
-    dispatch(getComments());
-  };
-
   const getId = (id) => {
     setReplyId(id);
     setVisible(!visible);
@@ -56,27 +52,30 @@ const Thread = () => {
         <h1 className="font-bold text-3xl">
           {thread.title} posted by {thread.user.name}
         </h1>
-        <div className="mb-2 ml-4 p-4">{thread.content}</div>
+        <div className="mb-2 ml-4 p-4 bg-zinc-400 text-zinc-900">{thread.content}</div>
         <div style={hide}>
           <input className="text-black" value={reply} onChange={(e) => setReply(e.target.value)} />
           <button onClick={() => handleReply()}>submit</button>
         </div>
         {thread.comments.map((c, i) => (
           <div key={i} className="flex flex-col text-sm">
-            <div>
+            <div className="font-bold">
               by {c.user.username} at {c.created}
             </div>
-            <div className="bg-zinc-800 text-zinc-100 m-4 ml-4">{c.text}</div>
-            <button className="bg-green-500 p-2" onClick={() => getId(c.id)}>
-              reply
-            </button>
+            <div className="bg-zinc-700 text-zinc-100 ml-4 flex justify-between items-center">
+              {c.text}
+              <button className="bg-green-500 text-zinc-900" onClick={() => getId(c.id)}>
+                REPLY
+              </button>
+            </div>
+
             {c.comments.length > 0 &&
               comments.map(
                 (reply) =>
                   reply.parentId === c.id && (
                     <div className={`ml-8 flex flex-col`} key={reply.id}>
                       <div className="flex justify-between">
-                        <span>{reply.text}</span>
+                        <span>1{reply.text}</span>
                         <button onClick={() => getId(reply.id)}>REPLY</button>
                       </div>
                       <Reply handleReply={getId} replyId={reply.id} />
@@ -85,16 +84,15 @@ const Thread = () => {
               )}
           </div>
         ))}
-        <input
-          className="text-zinc-800"
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-        />
       </div>
-      <button className="bg-blue-600 p-4" onClick={() => handleComment({ comment })}>
+      <input
+        className="text-zinc-800 mt-4"
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+      />
+      <button className="bg-blue-600" onClick={() => handleComment({ comment })}>
         Reply
       </button>
-      <button onClick={fetchComments}>LOAD REPLIES</button>
     </div>
   );
 };

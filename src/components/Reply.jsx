@@ -18,9 +18,10 @@ const Reply = ({ replyId, handleReply }) => {
   if (nestedComments.length > 0)
     return nestedComments.map((c) => (
       <div className="mx-4" key={c.id}>
+        {console.log(nestedComments)}
         <div className="flex justify-between">
-          <span>{c.text}</span>
-          <button onClick={() => handleReply(replyId)}>REPLY</button>
+          <span>2{c.text}</span>
+          <button onClick={() => handleReply(c.id)}>REPLY</button>
         </div>
         <Reply handleReply={handleReply} replyId={c.id} />
       </div>
