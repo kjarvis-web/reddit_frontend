@@ -28,11 +28,11 @@ const threadSlice = createSlice({
       const newThreads = state.threads.filter((t) => t.id !== action.payload.parentId);
       return { ...state, threads: [...newThreads, newThread] };
     },
-    replyToComment(state, action) {
-      console.log(action.payload);
-    },
     initializeComments(state, action) {
       return { ...state, comments: action.payload };
+    },
+    appendReply(state, action) {
+      return { ...state, comments: [...state.comments, action.payload] };
     },
   },
 });
@@ -45,6 +45,7 @@ export const {
   appendComment,
   replyToComment,
   initializeThread,
+  appendReply,
 } = threadSlice.actions;
 
 export const createThread = (object) => {
@@ -85,7 +86,7 @@ export const addReply = (id, comment) => {
   return async (dispatch) => {
     const newReply = await threadService.addReply(id, comment);
     console.log('reply', newReply);
-    dispatch(replyToComment(newReply));
+    dispatch(appendReply(newReply));
   };
 };
 

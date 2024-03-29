@@ -2,22 +2,18 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {
-  addComment,
-  addReply,
-  getComments,
-  getThreads,
-  replyToComment,
-} from '../reducers/threadReducer';
+import { addComment, addReply, getComments, getThreads } from '../reducers/threadReducer';
 import { useState } from 'react';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
+  const comments = useSelector((state) => state.thread.comments);
   const id = useParams().id;
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getThreads());
+    dispatch(getComments());
   }, [dispatch]);
 
   const thread = threads.find((t) => t.id === id);
@@ -36,6 +32,7 @@ const Thread = () => {
     setVisible(!visible);
     dispatch(addReply(replyId, { comment: reply }));
     console.log({ comment: reply });
+    dispatch(getComments());
   };
 
   const fetchComments = () => {
@@ -72,12 +69,15 @@ const Thread = () => {
               reply
             </button>
             {c.comments.length > 0 &&
-              c.comments.map((nest) => (
-                <div className={`ml-8 flex justify-between`} key={nest._id}>
-                  <span>{nest.text}</span>
-                  <button onClick={fetchComments}>LOAD REPLIES</button>
-                </div>
-              ))}
+              comments.map(
+                (reply) =>
+                  reply.parentId === c.id && (
+                    <div className={`ml-8 flex justify-between`} key={reply.id}>
+                      <div>{reply.text}</div>
+                      <button onClick={fetchComments}>LOAD REPLIES</button>
+                    </div>
+                  )
+              )}
           </div>
         ))}
         <input
