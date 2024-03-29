@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getThreads } from '../reducers/threadReducer';
+import { getComments, getThreads } from '../reducers/threadReducer';
 import { Link } from 'react-router-dom';
 import ThreadForm from './ThreadForm';
 
@@ -12,6 +12,7 @@ const ThreadList = () => {
 
   useEffect(() => {
     dispatch(getThreads());
+    // dispatch(getComments());
   }, [dispatch]);
 
   if (loading) return <div>loading...</div>;

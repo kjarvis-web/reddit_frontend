@@ -11,6 +11,11 @@ const getAll = async () => {
   return request.data;
 };
 
+const getThread = async (id) => {
+  const request = await axios.get(`${baseUrl}/${id}`);
+  return request.data;
+};
+
 const create = async (newObject) => {
   const config = {
     headers: { Authorization: token },
@@ -32,4 +37,15 @@ const addComment = async (id, comment) => {
   return response.data;
 };
 
-export default { getAll, create, setToken, update, addComment };
+const addReply = async (id, reply) => {
+  const response = await axios.post(`http://localhost:3000/api/comments/${id}`, reply);
+
+  return response.data;
+};
+
+const getComments = async () => {
+  const request = await axios.get(`http://localhost:3000/api/comments`);
+  return request.data;
+};
+
+export default { getAll, create, setToken, update, addComment, getComments, getThread, addReply };
