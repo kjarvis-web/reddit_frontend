@@ -18,8 +18,12 @@ const Reply = ({ replyId }) => {
 
   if (nestedComments.length > 0)
     return nestedComments.map((c) => (
-      <div className="ml-4" key={c.id}>
-        {c.text} <Reply replyId={c.id} />
+      <div className="mx-4" key={c.id}>
+        <div className="flex justify-between">
+          <span>{c.text}</span>
+          <button>REPLY</button>
+        </div>
+        <Reply replyId={c.id} />
       </div>
     ));
 

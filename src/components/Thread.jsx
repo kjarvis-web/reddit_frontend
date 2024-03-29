@@ -74,7 +74,10 @@ const Thread = () => {
                 (reply) =>
                   reply.parentId === c.id && (
                     <div className={`ml-8 flex flex-col`} key={reply.id}>
-                      <div>{reply.text}</div>
+                      <div className="flex justify-between">
+                        <span>{reply.text}</span>
+                        <button>REPLY</button>
+                      </div>
                       <Reply replyId={reply.id} />
                     </div>
                   )
