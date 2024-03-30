@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { addComment, addReply, getComments, getThreads } from '../reducers/threadReducer';
 import { useState } from 'react';
 import Reply from './Reply';
+import Timestamp from './Timestamp';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
@@ -13,6 +14,7 @@ const Thread = () => {
 
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log('thread use effect');
     dispatch(getThreads());
     dispatch(getComments());
   }, [dispatch]);
@@ -34,6 +36,7 @@ const Thread = () => {
     dispatch(addReply(replyId, { comment: reply }));
     console.log({ comment: reply });
     dispatch(getComments());
+    setReply('');
   };
 
   const getId = (id) => {
@@ -55,33 +58,30 @@ const Thread = () => {
         <div className="mb-2 ml-4 p-4 bg-zinc-400 text-zinc-900">{thread.content}</div>
         <div style={hide}>
           <input className="text-black" value={reply} onChange={(e) => setReply(e.target.value)} />
-          <button onClick={() => handleReply()}>submit</button>
+          <button onClick={() => handleReply()}>SUBMIT</button>
         </div>
         {thread.comments.map((c, i) => (
           <div key={i} className="flex flex-col text-sm">
-            <div className="font-bold">
-              by {c.user.username} at {c.created}
-            </div>
-            <div className="bg-zinc-700 text-zinc-100 ml-4 flex justify-between items-center">
+            <Timestamp c={c} />
+            <div className="flex justify-between items-center">
               {c.text}
               <button className="bg-green-500 text-zinc-900" onClick={() => getId(c.id)}>
-                REPLY
+                REPLY...
               </button>
             </div>
-
-            {c.comments.length > 0 &&
-              comments.map(
-                (reply) =>
-                  reply.parentId === c.id && (
-                    <div className={`ml-8 flex flex-col`} key={reply.id}>
-                      <div className="flex justify-between">
-                        <span>1{reply.text}</span>
-                        <button onClick={() => getId(reply.id)}>REPLY</button>
-                      </div>
-                      <Reply handleReply={getId} replyId={reply.id} />
+            {comments.map(
+              (reply) =>
+                reply.parentId === c.id && (
+                  <div className="flex flex-col ml-4" key={reply.id}>
+                    <Timestamp c={c} />
+                    <div className="flex justify-between">
+                      <span>{reply.text}</span>
+                      <button onClick={() => getId(reply.id)}>REPLY</button>
                     </div>
-                  )
-              )}
+                    <Reply handleReply={getId} replyId={reply.id} />
+                  </div>
+                )
+            )}
           </div>
         ))}
       </div>

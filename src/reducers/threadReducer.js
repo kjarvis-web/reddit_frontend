@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import threadService from '../services/threads';
+import { useParams } from 'react-router-dom';
 
 const initialState = {
   threads: [],
@@ -34,6 +35,16 @@ const threadSlice = createSlice({
     appendReply(state, action) {
       return { ...state, comments: [...state.comments, action.payload] };
     },
+    magic(state, action) {
+      const findParent = state.comments.find((c) => c.id === action.payload.parentId);
+
+      const findThread = state.threads.find((t) => t.id === findParent.parentId);
+
+      const findComment = findThread.comments.find((c) => c.id === action.payload.parentId);
+      const newComment = { ...findComment, comments: [...findComment.comments, action.payload] };
+      const newThread = { ...findThread, comments: [...findThread.comments, newComment] };
+      return { ...state, threads: [...state.threads, newThread] };
+    },
   },
 });
 
@@ -46,6 +57,7 @@ export const {
   replyToComment,
   initializeThread,
   appendReply,
+  magic,
 } = threadSlice.actions;
 
 export const createThread = (object) => {
@@ -86,6 +98,7 @@ export const addReply = (id, comment) => {
     const newReply = await threadService.addReply(id, comment);
     console.log('reply', newReply);
     dispatch(appendReply(newReply));
+    // dispatch(magic(newReply));
   };
 };
 
