@@ -19,11 +19,8 @@ const Modal = forwardRef((props, refs) => {
 
   return (
     <div>
-      <button
-        onClick={toggleModal}
-        className="bg-green-500 hover:bg-green-600 text-zinc-900 font-bold py-2 px-4 rounded mb-2"
-      >
-        Add Comment {'\u2295'}
+      <button onClick={toggleModal} className={props.className}>
+        {props.buttonLabel}
       </button>
       {isOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50">

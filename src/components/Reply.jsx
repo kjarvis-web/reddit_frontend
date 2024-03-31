@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useSelector } from 'react-redux';
 import Timestamp from './Timestamp';
+import ModalReply from './ModalReply';
 
 const Reply = ({ replyId, handleReply }) => {
   const comments = useSelector((state) => state.thread.comments);
@@ -12,9 +13,11 @@ const Reply = ({ replyId, handleReply }) => {
         <Timestamp c={c} />
         <div className="flex justify-between">
           <span>{c.text}</span>
-          <button onClick={() => handleReply(c.id)}>REPLY</button>
+          {/* <button onClick={() => handleReply(c.id)}>REPLY</button> */}
+          <ModalReply replyId={c.id} />
         </div>
-        <Reply handleReply={handleReply} replyId={c.id} />
+        {/* <Reply handleReply={handleReply} replyId={c.id} /> */}
+        <Reply replyId={c.id} />
       </div>
     ));
 

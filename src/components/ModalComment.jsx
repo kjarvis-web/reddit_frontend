@@ -11,16 +11,20 @@ const ModalComment = () => {
 
   const id = useParams().id;
   const dispatch = useDispatch();
-  const commentFormRef = useRef();
+  const ref = useRef();
 
   const handleComment = (comment) => {
     dispatch(addComment(id, comment));
     setComment('');
     //for toggle visibility of comment modal window after submit
-    commentFormRef.current.toggleModal();
+    ref.current.toggleModal();
   };
   return (
-    <Modal ref={commentFormRef}>
+    <Modal
+      ref={ref}
+      buttonLabel={`Add Comment \u2295`}
+      className="bg-green-500 hover:bg-green-600 text-zinc-900 font-bold py-2 px-4 rounded mb-2"
+    >
       <div className="mt-4 text-zinc-800">
         <textarea
           className="text-zinc-800 mt-4 w-full h-28"
