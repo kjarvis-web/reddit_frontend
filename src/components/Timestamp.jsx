@@ -1,8 +1,13 @@
+import { Link } from 'react-router-dom';
+
 /* eslint-disable react/prop-types */
 const Timestamp = ({ c }) => {
   return (
     <div className="font-bold">
-      <span>{c.username}</span> {'\u2219'} {c.created}
+      <Link to={`/users/${c.user.id}`}>
+        <span>{c.username}</span>
+      </Link>{' '}
+      {'\u2219'} {c.created}
     </div>
   );
 };

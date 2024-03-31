@@ -19,7 +19,7 @@ const ModalReply = ({ replyId }) => {
   };
 
   return (
-    <Modal ref={ref} className="bg-green-500 text-zinc-900" buttonLabel="REPLY">
+    <Modal ref={ref} className="bg-green-500 p-2 rounded text-zinc-900" buttonLabel="REPLY">
       <div>
         <input className="text-black" value={reply} onChange={(e) => setReply(e.target.value)} />
         <button onClick={() => handleReply()}>SUBMIT</button>

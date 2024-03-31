@@ -45,7 +45,7 @@ const Thread = () => {
                 reply.parentId === c.id && (
                   <div className="flex flex-col mx-2" key={reply.id}>
                     <Timestamp c={c} />
-                    <div className="flex justify-between">
+                    <div className="flex justify-between items-center">
                       <span>{reply.text}</span>
                       <ModalReply replyId={reply.id} />
                     </div>

@@ -3,15 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getComments, getThreads } from '../reducers/threadReducer';
 import { Link } from 'react-router-dom';
 import ThreadForm from './ThreadForm';
+import { getUsers } from '../reducers/userReducer';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
   const threads = useSelector((state) => state.thread.threads);
   const loading = useSelector((state) => state.thread.loading);
   const user = useSelector((state) => state.login.user);
+  const users = useSelector((state) => state.users);
+  console.log(users);
 
   useEffect(() => {
     dispatch(getThreads());
+    dispatch(getUsers());
     // dispatch(getComments());
   }, [dispatch]);
 

@@ -6,12 +6,14 @@ import { Provider } from 'react-redux';
 import loginReducer from './reducers/loginReducer.js';
 import threadReducer from './reducers/threadReducer.js';
 import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './reducers/userReducer.js';
 
 //redux toolkit
 const store = configureStore({
   reducer: {
     login: loginReducer,
     thread: threadReducer,
+    users: userReducer,
   },
 });
 
