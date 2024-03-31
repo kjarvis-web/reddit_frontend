@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { addComment, addReply, getComments, getThreads } from '../reducers/threadReducer';
+import { addReply, getComments, getThreads } from '../reducers/threadReducer';
 import { useState } from 'react';
 import Reply from './Reply';
 import Timestamp from './Timestamp';
-import Modal from './Modal';
+import ModalComment from './ModalComment';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
@@ -51,7 +51,9 @@ const Thread = () => {
           {thread.title} posted by {thread.user.name}
         </h1>
         <div className="mb-2 ml-4 p-4 bg-zinc-400 text-zinc-900">{thread.content}</div>
-        <Modal />
+
+        <ModalComment />
+
         <div style={hide}>
           <input className="text-black" value={reply} onChange={(e) => setReply(e.target.value)} />
           <button onClick={() => handleReply()}>SUBMIT</button>

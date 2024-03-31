@@ -1,30 +1,27 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/display-name */
 import { useState } from 'react';
-import { addComment } from '../reducers/threadReducer';
-import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { forwardRef } from 'react';
+import { useImperativeHandle } from 'react';
 
-const Modal = () => {
+const Modal = forwardRef((props, refs) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [comment, setComment] = useState('');
-
-  const id = useParams().id;
-  const dispatch = useDispatch();
-
-  const handleComment = (comment) => {
-    dispatch(addComment(id, comment));
-    setComment('');
-    setIsOpen(!isOpen);
-  };
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
 
+  useImperativeHandle(refs, () => {
+    return {
+      toggleModal,
+    };
+  });
+
   return (
     <div>
       <button
         onClick={toggleModal}
-        className="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded mb-2"
+        className="bg-green-500 hover:bg-green-600 text-zinc-900 font-bold py-2 px-4 rounded mb-2"
       >
         Add Comment {'\u2295'}
       </button>
@@ -37,25 +34,12 @@ const Modal = () => {
                 {'\u00D7'}
               </button>
             </div>
-            <div className="mt-4 text-zinc-800">
-              <textarea
-                className="text-zinc-800 mt-4 w-full h-28"
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                placeholder="Type your comment here..."
-              />
-              <button
-                className="bg-blue-600 text-zinc-100 p-2 rounded float-right"
-                onClick={() => handleComment({ comment })}
-              >
-                Reply
-              </button>
-            </div>
+            <div>{props.children}</div>
           </div>
         </div>
       )}
     </div>
   );
-};
+});
 
 export default Modal;
