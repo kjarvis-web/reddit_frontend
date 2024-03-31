@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import threadService from '../services/threads';
-import { useParams } from 'react-router-dom';
 
 const initialState = {
   threads: [],

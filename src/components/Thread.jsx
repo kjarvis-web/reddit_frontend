@@ -6,13 +6,14 @@ import { addComment, addReply, getComments, getThreads } from '../reducers/threa
 import { useState } from 'react';
 import Reply from './Reply';
 import Timestamp from './Timestamp';
+import Modal from './Modal';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
   const comments = useSelector((state) => state.thread.comments);
   const id = useParams().id;
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     console.log('thread use effect');
     dispatch(getThreads());
@@ -21,15 +22,9 @@ const Thread = () => {
 
   const thread = threads.find((t) => t.id === id);
 
-  const [comment, setComment] = useState('');
   const [reply, setReply] = useState('');
   const [visible, setVisible] = useState(false);
   const [replyId, setReplyId] = useState('');
-
-  const handleComment = (comment) => {
-    dispatch(addComment(id, comment));
-    setComment('');
-  };
 
   const handleReply = () => {
     setVisible(!visible);
@@ -51,11 +46,12 @@ const Thread = () => {
     <div>loading...</div>
   ) : (
     <div>
-      <div className="mt-24 bg-zinc-800">
+      <div className="mt-24 bg-zinc-800 p-4">
         <h1 className="font-bold text-3xl">
           {thread.title} posted by {thread.user.name}
         </h1>
         <div className="mb-2 ml-4 p-4 bg-zinc-400 text-zinc-900">{thread.content}</div>
+        <Modal />
         <div style={hide}>
           <input className="text-black" value={reply} onChange={(e) => setReply(e.target.value)} />
           <button onClick={() => handleReply()}>SUBMIT</button>
@@ -85,14 +81,6 @@ const Thread = () => {
           </div>
         ))}
       </div>
-      <input
-        className="text-zinc-800 mt-4"
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-      />
-      <button className="bg-blue-600" onClick={() => handleComment({ comment })}>
-        Reply
-      </button>
     </div>
   );
 };
