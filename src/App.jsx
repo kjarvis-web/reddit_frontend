@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setUser } from './reducers/loginReducer';
 import User from './components/User';
+import threadService from './services/threads';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ function App() {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
       dispatch(setUser(user));
+      threadService.setToken(user.token);
     }
   }, [dispatch]);
   return (
