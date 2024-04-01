@@ -4,9 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Thread from './components/Thread';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setUser } from './reducers/loginReducer';
+import { loggedUser } from './reducers/loginReducer';
 import User from './components/User';
-import threadService from './services/threads';
 
 function App() {
   const dispatch = useDispatch();
@@ -14,8 +13,7 @@ function App() {
     const loggedUserJSON = window.localStorage.getItem('loggedUser');
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON);
-      dispatch(setUser(user));
-      threadService.setToken(user.token);
+      dispatch(loggedUser(user));
     }
   }, [dispatch]);
   return (

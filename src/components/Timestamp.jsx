@@ -8,19 +8,26 @@ import { getUsers } from '../reducers/userReducer';
 const Timestamp = ({ c }) => {
   const comments = useSelector((state) => state.thread.comments);
   const comment = comments.find((comment) => comment.id === c.id);
-  console.log(comment);
+
   const dispatch = useDispatch();
 
-  console.log('c id', c.id);
+  const users = useSelector((state) => state.users);
+  const user = users.find((user) => user.id === c.user.id);
+
+  console.log('c id', c.user.id);
+  // console.log(comment);
+  console.log('users', users);
 
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
+
+  if (!user) return <div>loading...</div>;
   return (
     <div className="font-bold">
-      {/* <Link to={`/users/${user.id}`}> */}
-      <span>{c.username}</span>
-      {/* </Link> */}
+      <Link to={`/users/${user.id}`}>
+        <span>{user.username}</span>
+      </Link>
       {'\u2219'} {c.date}
     </div>
   );

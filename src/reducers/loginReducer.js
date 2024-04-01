@@ -47,4 +47,11 @@ export const loginUser = (username, password) => {
   };
 };
 
+export const loggedUser = (user) => {
+  return async (dispatch) => {
+    dispatch(setUser(user));
+    threadService.setToken(user.token);
+  };
+};
+
 export default loginSlice.reducer;
