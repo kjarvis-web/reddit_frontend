@@ -6,17 +6,15 @@ import { getUsers } from '../reducers/userReducer';
 
 /* eslint-disable react/prop-types */
 const Timestamp = ({ c }) => {
-  const comments = useSelector((state) => state.thread.comments);
-  const comment = comments.find((comment) => comment.id === c.id);
-
   const dispatch = useDispatch();
 
   const users = useSelector((state) => state.users);
   const user = users.find((user) => user.id === c.user.id);
 
-  console.log('c id', c.user.id);
+  // console.log('c id', c.user.id);
   // console.log(comment);
-  console.log('users', users);
+  // console.log('users', users);
+  // console.log('c', c);
 
   useEffect(() => {
     dispatch(getUsers());

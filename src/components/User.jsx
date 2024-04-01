@@ -35,7 +35,9 @@ const User = () => {
       ))}
       <div>
         <h1>Comments</h1>
-        {comments.map((c) => c.text)}
+        {comments.map((c) => (
+          <div key={c.id}>{c.text}</div>
+        ))}
       </div>
     </div>
   );
