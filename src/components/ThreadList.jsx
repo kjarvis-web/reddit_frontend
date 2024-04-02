@@ -1,12 +1,10 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getThreads, upVote, updateLikes } from '../reducers/threadReducer';
+import { downVote, getThreads, upVote } from '../reducers/threadReducer';
 import { Link } from 'react-router-dom';
 import ThreadForm from './ThreadForm';
 import { getUsers } from '../reducers/userReducer';
 import { TiArrowUpThick, TiArrowDownThick } from 'react-icons/ti';
-import threadService from '../services/threads';
-import { useState } from 'react';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
@@ -15,8 +13,6 @@ const ThreadList = () => {
   const user = useSelector((state) => state.login.user);
 
   const sorted = [...threads].sort((a, b) => a.created - b.created);
-  console.log(sorted);
-  console.log(user);
 
   useEffect(() => {
     dispatch(getThreads());
@@ -24,14 +20,25 @@ const ThreadList = () => {
   }, [dispatch]);
 
   const addLike = (thread) => {
-    const post = { likes: thread.likes + 1, id: thread.id };
-    // dispatch(updateLikes(post));
+    const post = {
+      likes: thread.likes + 1,
+      id: thread.id,
+      downVotes: thread.downVotes.find((userId) => userId === user.id)
+        ? thread.downVotes.filter((userId) => userId !== user.id)
+        : thread.downVotes,
+    };
     dispatch(upVote(post));
   };
 
   const removeLike = (thread) => {
-    const post = { likes: thread.likes - 1, id: thread.id };
-    dispatch(updateLikes(post));
+    const post = {
+      likes: thread.likes - 1,
+      id: thread.id,
+      upVotes: thread.upVotes.find((userId) => userId === user.id)
+        ? thread.upVotes.filter((userId) => userId !== user.id)
+        : thread.upVotes,
+    };
+    dispatch(downVote(post));
   };
 
   if (loading) return <div>loading...</div>;
@@ -51,10 +58,14 @@ const ThreadList = () => {
               />
             )}
             <span className="font-bold">{post.likes}</span>
-            <TiArrowDownThick
-              className="w-6 h-6 cursor-pointer hover:text-red-500"
-              onClick={() => removeLike(post)}
-            />
+            {user.id === post.downVotes.find((userId) => userId === user.id) ? (
+              <TiArrowDownThick className="w-6 h-6 cursor-pointer text-red-500" />
+            ) : (
+              <TiArrowDownThick
+                className="w-6 h-6 cursor-pointer hover:text-red-500"
+                onClick={() => removeLike(post)}
+              />
+            )}
           </div>
           <Link to={`/posts/${post.id}`}>
             <div className="ml-5">
