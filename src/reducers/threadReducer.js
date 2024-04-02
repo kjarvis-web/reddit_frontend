@@ -47,7 +47,6 @@ const threadSlice = createSlice({
         const newThread = {
           ...findThread,
           likes: action.payload.likes,
-          upVotes: action.payload.upVotes,
           downVotes: removeDownVote,
         };
         const newThreads = state.threads.filter((t) => t.id !== action.payload.id);
@@ -77,7 +76,6 @@ const threadSlice = createSlice({
         const newThread = {
           ...findThread,
           likes: action.payload.likes,
-          downVotes: action.payload.downVotes,
           upVotes: removeUpvote,
         };
         const newThreads = state.threads.filter((t) => t.id !== action.payload.id);

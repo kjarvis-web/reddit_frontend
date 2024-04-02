@@ -13,6 +13,7 @@ const ThreadList = () => {
   const user = useSelector((state) => state.login.user);
 
   const sorted = [...threads].sort((a, b) => a.created - b.created);
+  console.log(sorted);
 
   useEffect(() => {
     dispatch(getThreads());
