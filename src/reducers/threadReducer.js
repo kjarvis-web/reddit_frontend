@@ -35,7 +35,16 @@ const threadSlice = createSlice({
     },
     appendLikes(state, action) {
       const findThread = state.threads.find((t) => t.id === action.payload.id);
-      const newThread = { ...findThread, likes: action.payload.likes };
+      const userVoted = findThread.upVotes.find((user) => user === action.payload.user);
+      console.log(action.payload.user);
+      if (userVoted) {
+        return { ...state };
+      }
+      const newThread = {
+        ...findThread,
+        likes: action.payload.likes,
+        upVotes: action.payload.upVotes,
+      };
       const newThreads = state.threads.filter((t) => t.id !== action.payload.id);
       return { ...state, threads: [...newThreads, newThread] };
     },
@@ -98,6 +107,14 @@ export const addReply = (id, comment) => {
 export const updateLikes = (newObj) => {
   return async (dispatch) => {
     const newPost = await threadService.update(newObj);
+    console.log(newPost);
+    dispatch(appendLikes(newPost));
+  };
+};
+
+export const upVote = (newObj) => {
+  return async (dispatch) => {
+    const newPost = await threadService.upVote(newObj);
     console.log(newPost);
     dispatch(appendLikes(newPost));
   };

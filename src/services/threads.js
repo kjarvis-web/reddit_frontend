@@ -25,7 +25,19 @@ const create = async (newObject) => {
 };
 
 const update = async (updatedObj) => {
-  const response = await axios.put(`${baseUrl}/${updatedObj.id}`, updatedObj);
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.put(`${baseUrl}/${updatedObj.id}`, updatedObj, config);
+  return response.data;
+};
+
+// like
+const upVote = async (updatedObj) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.put(`${baseUrl}/${updatedObj.id}/upvote`, updatedObj, config);
   return response.data;
 };
 
@@ -51,4 +63,14 @@ const getComments = async () => {
   return request.data;
 };
 
-export default { getAll, create, setToken, update, addComment, getComments, getThread, addReply };
+export default {
+  getAll,
+  create,
+  setToken,
+  update,
+  addComment,
+  getComments,
+  getThread,
+  addReply,
+  upVote,
+};
