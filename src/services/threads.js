@@ -32,7 +32,7 @@ const update = async (updatedObj) => {
   return response.data;
 };
 
-// upvote
+// upvote post
 const upVote = async (updatedObj) => {
   const config = {
     headers: { Authorization: token },
@@ -41,12 +41,25 @@ const upVote = async (updatedObj) => {
   return response.data;
 };
 
-// downvote
+// downvote post
 const downVote = async (updatedObj) => {
   const config = {
     headers: { Authorization: token },
   };
   const response = await axios.put(`${baseUrl}/${updatedObj.id}/downvote`, updatedObj, config);
+  return response.data;
+};
+
+// upvote comment
+const upVoteComment = async (updatedObj) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.put(
+    `http://localhost:3000/api/comments/${updatedObj.id}/upvote`,
+    updatedObj,
+    config
+  );
   return response.data;
 };
 
@@ -83,4 +96,5 @@ export default {
   addReply,
   upVote,
   downVote,
+  upVoteComment,
 };

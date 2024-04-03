@@ -15,6 +15,7 @@ const Timestamp = ({ c }) => {
   // console.log(comment);
   // console.log('users', users);
   // console.log('c', c);
+  // console.log(user);
 
   useEffect(() => {
     dispatch(getUsers());

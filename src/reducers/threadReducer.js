@@ -25,7 +25,11 @@ const threadSlice = createSlice({
       const findThread = state.threads.find((t) => t.id === action.payload.parentId);
       const newThread = { ...findThread, comments: [...findThread.comments, action.payload] };
       const newThreads = state.threads.filter((t) => t.id !== action.payload.parentId);
-      return { ...state, threads: [...newThreads, newThread] };
+      return {
+        ...state,
+        threads: [...newThreads, newThread],
+        comments: [...state.comments, action.payload],
+      };
     },
     initializeComments(state, action) {
       return { ...state, comments: action.payload };
@@ -89,6 +93,17 @@ const threadSlice = createSlice({
       const newThreads = state.threads.filter((t) => t.id !== action.payload.id);
       return { ...state, threads: [...newThreads, newThread] };
     },
+    appendUpVoteComment(state, action) {
+      const findComment = state.comments.find((comment) => comment.id === action.payload.id);
+      // const upVoted = findComment.upVotes.find((user) => user === action.payload.user.id);
+      const newComment = {
+        ...findComment,
+        likes: action.payload.likes,
+        upVotes: action.payload.upVotes,
+      };
+      const newComments = state.comments.filter((c) => c.id !== action.payload.id);
+      return { ...state, comments: [...newComments, newComment] };
+    },
   },
 });
 
@@ -103,6 +118,7 @@ export const {
   appendReply,
   appendUpVotes,
   appendDownVotes,
+  appendUpVoteComment,
 } = threadSlice.actions;
 
 export const createThread = (object) => {
@@ -167,6 +183,14 @@ export const downVote = (newObj) => {
     const newPost = await threadService.downVote(newObj);
     console.log(newPost);
     dispatch(appendDownVotes(newPost));
+  };
+};
+
+export const upVoteComment = (newObj) => {
+  return async (dispatch) => {
+    const newComment = await threadService.upVoteComment(newObj);
+    console.log(newComment);
+    dispatch(appendUpVoteComment(newComment));
   };
 };
 
