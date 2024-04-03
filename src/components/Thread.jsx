@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getComments, getThreads, upVoteComment } from '../reducers/threadReducer';
+import { downVoteComment, getComments, getThreads, upVoteComment } from '../reducers/threadReducer';
 import { TiArrowUpThick, TiArrowDownThick } from 'react-icons/ti';
 
 import Reply from './Reply';
@@ -36,6 +36,17 @@ const Thread = () => {
     dispatch(upVoteComment(comment));
   };
 
+  const removeLike = (c) => {
+    const comment = {
+      likes: c.likes - 1,
+      id: c.id,
+      upVotes: c.upVotes.find((userId) => userId === user.id)
+        ? c.upVotes.filter((userId) => userId !== user.id)
+        : c.upVotes,
+    };
+    dispatch(downVoteComment(comment));
+  };
+
   const findComments = comments.filter((comment) => comment.parentId === id);
   const sorted = [...findComments].sort((a, b) => a.created - b.created);
 
@@ -56,15 +67,23 @@ const Thread = () => {
               <div className="flex justify-between">{c.text}</div>{' '}
               <div className="flex gap-4">
                 <div className="flex items-center gap-1">
-                  <TiArrowUpThick
-                    className="w-5 h-5 cursor-pointer hover:text-green-500"
-                    onClick={() => addLike(c)}
-                  />
+                  {user.id === c.upVotes.find((id) => id === user.id) ? (
+                    <TiArrowUpThick className="w-5 h-5 cursor-pointer hover:text-green-500" />
+                  ) : (
+                    <TiArrowUpThick
+                      className="w-5 h-5 cursor-pointer hover:text-green-500"
+                      onClick={() => addLike(c)}
+                    />
+                  )}
                   <span className="text-xs">{c.likes}</span>
-                  <TiArrowDownThick
-                    className="w-5 h-5 cursor-pointer hover:text-red-500"
-                    // onClick={() => removeLike(post)}
-                  />
+                  {user.id === c.downVotes.find((id) => id === user.id) ? (
+                    <TiArrowDownThick className="w-5 h-5 cursor-pointer hover:text-red-500" />
+                  ) : (
+                    <TiArrowDownThick
+                      className="w-5 h-5 cursor-pointer hover:text-red-500"
+                      onClick={() => removeLike(c)}
+                    />
+                  )}
                 </div>
                 <ModalReply replyId={c.id} />
               </div>

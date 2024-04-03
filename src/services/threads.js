@@ -63,6 +63,19 @@ const upVoteComment = async (updatedObj) => {
   return response.data;
 };
 
+// downvote comment
+const downVoteComment = async (updatedObj) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.put(
+    `http://localhost:3000/api/comments/${updatedObj.id}/downvote`,
+    updatedObj,
+    config
+  );
+  return response.data;
+};
+
 const addComment = async (id, comment) => {
   const config = {
     headers: { Authorization: token },
@@ -97,4 +110,5 @@ export default {
   upVote,
   downVote,
   upVoteComment,
+  downVoteComment,
 };

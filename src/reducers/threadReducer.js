@@ -41,6 +41,7 @@ const threadSlice = createSlice({
       const findThread = state.threads.find((t) => t.id === action.payload.id);
       const upVoted = findThread.upVotes.find((user) => user === action.payload.user);
       const downVoted = findThread.downVotes.find((user) => user === action.payload.user);
+      const newThreads = state.threads.filter((t) => t.id !== action.payload.id);
       if (upVoted) {
         return { ...state };
       }
@@ -53,7 +54,7 @@ const threadSlice = createSlice({
           likes: action.payload.likes,
           downVotes: removeDownVote,
         };
-        const newThreads = state.threads.filter((t) => t.id !== action.payload.id);
+
         return { ...state, threads: [...newThreads, newThread] };
       }
       const newThread = {
@@ -61,14 +62,14 @@ const threadSlice = createSlice({
         likes: action.payload.likes,
         upVotes: action.payload.upVotes,
       };
-      const newThreads = state.threads.filter((t) => t.id !== action.payload.id);
+
       return { ...state, threads: [...newThreads, newThread] };
     },
     appendDownVotes(state, action) {
       const findThread = state.threads.find((t) => t.id === action.payload.id);
       const upVoted = findThread.upVotes.find((user) => user === action.payload.user);
       const downVoted = findThread.downVotes.find((user) => user === action.payload.user);
-
+      const newThreads = state.threads.filter((t) => t.id !== action.payload.id);
       if (downVoted) {
         console.log('test');
         return { ...state };
@@ -82,7 +83,7 @@ const threadSlice = createSlice({
           likes: action.payload.likes,
           upVotes: removeUpvote,
         };
-        const newThreads = state.threads.filter((t) => t.id !== action.payload.id);
+
         return { ...state, threads: [...newThreads, newThread] };
       }
       const newThread = {
@@ -90,18 +91,62 @@ const threadSlice = createSlice({
         likes: action.payload.likes,
         downVotes: action.payload.downVotes,
       };
-      const newThreads = state.threads.filter((t) => t.id !== action.payload.id);
+
       return { ...state, threads: [...newThreads, newThread] };
     },
     appendUpVoteComment(state, action) {
       const findComment = state.comments.find((comment) => comment.id === action.payload.id);
-      // const upVoted = findComment.upVotes.find((user) => user === action.payload.user.id);
+      const upVoted = findComment.upVotes.find((user) => user === action.payload.user);
+
+      const downVoted = findComment.downVotes.find((user) => user === action.payload.user);
+      const newComments = state.comments.filter((c) => c.id !== action.payload.id);
+
+      if (upVoted) {
+        return state;
+      }
+      if (downVoted) {
+        const removeDownVote = findComment.downVotes.filter((c) => c !== action.payload.user);
+        const newComment = {
+          ...findComment,
+          likes: action.payload.likes,
+          downVotes: removeDownVote,
+        };
+
+        return { ...state, comments: [...newComments, newComment] };
+      }
       const newComment = {
         ...findComment,
         likes: action.payload.likes,
         upVotes: action.payload.upVotes,
       };
+
+      return { ...state, comments: [...newComments, newComment] };
+    },
+    appendDownVoteComment(state, action) {
+      const findComment = state.comments.find((comment) => comment.id === action.payload.id);
+      const upVoted = findComment.upVotes.find((user) => user === action.payload.user);
+      const downVoted = findComment.downVotes.find((user) => user === action.payload.user.id);
       const newComments = state.comments.filter((c) => c.id !== action.payload.id);
+      console.log(downVoted);
+
+      if (downVoted) {
+        return state;
+      }
+      if (upVoted) {
+        const removeUpVote = findComment.upVotes.filter((c) => c !== action.payload.user);
+        const newComment = {
+          ...findComment,
+          likes: action.payload.likes,
+          upVotes: removeUpVote,
+        };
+
+        return { ...state, comments: [...newComments, newComment] };
+      }
+      const newComment = {
+        ...findComment,
+        likes: action.payload.likes,
+        downVotes: action.payload.downVotes,
+      };
       return { ...state, comments: [...newComments, newComment] };
     },
   },
@@ -119,6 +164,7 @@ export const {
   appendUpVotes,
   appendDownVotes,
   appendUpVoteComment,
+  appendDownVoteComment,
 } = threadSlice.actions;
 
 export const createThread = (object) => {
@@ -162,14 +208,6 @@ export const addReply = (id, comment) => {
   };
 };
 
-// export const updateLikes = (newObj) => {
-//   return async (dispatch) => {
-//     const newPost = await threadService.update(newObj);
-//     console.log(newPost);
-//     dispatch(appendUpVotes(newPost));
-//   };
-// };
-
 export const upVote = (newObj) => {
   return async (dispatch) => {
     const newPost = await threadService.upVote(newObj);
@@ -191,6 +229,14 @@ export const upVoteComment = (newObj) => {
     const newComment = await threadService.upVoteComment(newObj);
     console.log(newComment);
     dispatch(appendUpVoteComment(newComment));
+  };
+};
+
+export const downVoteComment = (newObj) => {
+  return async (dispatch) => {
+    const newComment = await threadService.downVoteComment(newObj);
+    console.log(newComment);
+    dispatch(appendDownVoteComment(newComment));
   };
 };
 
