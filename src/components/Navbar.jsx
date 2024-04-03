@@ -10,8 +10,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-10 bg-zinc-800 text-zinc-100">
       <div className="flex justify-around items-center">
-        <Link to="/">
-          <div className="text-3xl font-bold">Reddit</div>
+        <Link to="/" className="items-center">
+          <div className="text-5xl font-bold text-orange-700">reddit</div>
         </Link>
         {!user ? (
           <LoginForm />

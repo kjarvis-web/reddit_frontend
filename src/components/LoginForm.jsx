@@ -19,7 +19,7 @@ const LoginForm = () => {
   if (loading && !error) return <div>logging you in...</div>;
 
   return (
-    <form onSubmit={handleLogin} className="flex flex-col">
+    <form onSubmit={handleLogin} className="flex flex-col py-2">
       {error && <div className="text-red-500">wrong username or password</div>}
       <label>Username: </label>
       <input

@@ -50,18 +50,62 @@ const Thread = () => {
   const findComments = comments.filter((comment) => comment.parentId === id);
   const sorted = [...findComments].sort((a, b) => a.created - b.created);
 
+  if (!user)
+    return threads.length === 0 ? (
+      <div>loading...</div>
+    ) : (
+      <div>
+        <div className="bg-zinc-800 p-4 rounded">
+          <h1 className="font-bold text-3xl">
+            {thread.title} posted by {thread.user.name}
+          </h1>
+          <div className="mb-2 ml-4 p-4 bg-zinc-400 text-zinc-900">{thread.content}</div>
+          <ModalComment />
+          {sorted.map((c, i) => (
+            <div key={i} className="flex text-sm bg-zinc-700 rounded mb-2 px-2">
+              <div>
+                <Timestamp c={c} />
+                <div className="flex justify-between">{c.text}</div>{' '}
+                <div className="flex gap-4">
+                  <div className="flex items-center gap-1">
+                    <TiArrowUpThick className="w-5 h-5" />
+                    <span className="text-xs">{c.likes}</span>
+                    <TiArrowDownThick className="w-5 h-5" />
+                  </div>
+                  <ModalReply replyId={c.id} />
+                </div>
+                {comments.map(
+                  (reply) =>
+                    reply.parentId === c.id && (
+                      <div className="flex flex-col mx-2" key={reply.id}>
+                        <Timestamp c={c} />
+                        <div className="flex justify-between items-center">
+                          <span>{reply.text}</span>
+                          <ModalReply replyId={reply.id} />
+                        </div>
+                        <Reply replyId={reply.id} />
+                      </div>
+                    )
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+
   return threads.length === 0 ? (
     <div>loading...</div>
   ) : (
     <div>
-      <div className="mt-24 bg-zinc-800 p-4">
+      <div className="bg-zinc-800 p-4 rounded">
         <h1 className="font-bold text-3xl">
           {thread.title} posted by {thread.user.name}
         </h1>
         <div className="mb-2 ml-4 p-4 bg-zinc-400 text-zinc-900">{thread.content}</div>
         <ModalComment />
         {sorted.map((c, i) => (
-          <div key={i} className="flex text-sm">
+          <div key={i} className="flex text-sm bg-zinc-700 rounded mb-2 px-2">
             <div>
               <Timestamp c={c} />
               <div className="flex justify-between">{c.text}</div>{' '}

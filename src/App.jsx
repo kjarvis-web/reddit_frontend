@@ -20,7 +20,7 @@ function App() {
     <Router>
       <main className="flex min-h-screen flex-col bg-zinc-500 text-zinc-100">
         <Navbar />
-        <div className="container mx-auto mt-12">
+        <div className="container mx-auto mt-36">
           <Routes>
             <Route path="/" element={<ThreadList />} />
             <Route path="/posts/:id" element={<Thread />} />

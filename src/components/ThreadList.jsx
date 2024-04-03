@@ -44,11 +44,32 @@ const ThreadList = () => {
 
   if (loading) return <div>loading...</div>;
 
+  if (!user)
+    return (
+      <div>
+        {sorted.map((post) => (
+          <div className="bg-zinc-700 my-2 p-2 text-sm flex items-center rounded" key={post.id}>
+            <div className="flex flex-col items-center">
+              <TiArrowUpThick className="w-6 h-6" />
+              <span className="font-bold">{post.likes}</span>
+              <TiArrowDownThick className="w-6 h-6" />
+            </div>
+            <Link to={`/posts/${post.id}`}>
+              <div className="ml-5">
+                <h1 className="font-bold">{post.title}</h1>
+                <div>{post.content}</div>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
+    );
+
   return (
-    <div className="text-zinc-100 mt-24">
+    <div className="text-zinc-100">
       {user && <ThreadForm />}
       {sorted.map((post) => (
-        <div className="bg-zinc-700 my-2 p-2 text-sm flex items-center" key={post.id}>
+        <div className="bg-zinc-700 my-2 p-2 text-sm flex items-center rounded" key={post.id}>
           <div className="flex flex-col items-center">
             {user.id === post.upVotes.find((userId) => userId === user.id) ? (
               <TiArrowUpThick className="w-6 h-6 cursor-pointer text-green-500" />
