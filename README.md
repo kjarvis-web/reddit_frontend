@@ -1,7 +1,7 @@
 # TODO
 
 1. Limit upvote/downvote to one click &#x2705;
-   - add functionality to comments
+   - add functionality to comments &#x2705;
 2. Create different forums?
 3. Add ability to upload images
 4. Style thread/comment components
