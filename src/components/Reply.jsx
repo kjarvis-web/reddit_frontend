@@ -12,7 +12,7 @@ const Reply = ({ replyId }) => {
       <div className="mx-2" key={c.id}>
         <Timestamp c={c} />
         <div className="flex justify-between items-center">
-          <span>{c.text}</span>
+          <span>123{c.text}</span>
           <ModalReply replyId={c.id} />
         </div>
         <Reply replyId={c.id} />
