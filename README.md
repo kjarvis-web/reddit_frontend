@@ -11,6 +11,5 @@
 7. Display window on hover over username
 8. Display error messages to user
 9. Format dates to 'hours ago'?
-10. Add icon for user
-11. User page can upload image for icon?
-12. Toggle visibility of nested comments
+10. Toggle visibility of nested comments
+11. Finish user page

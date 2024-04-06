@@ -16,10 +16,10 @@ const Navbar = () => {
         {!user ? (
           <LoginForm />
         ) : (
-          <div className="flex flex-row gap-2 items-center">
-            <div className="font-bold">logged in as {user.username}</div>
+          <div className="flex flex-row gap-6 items-center">
+            <div className="font-bold text-sm">logged in as {user.username}</div>
             <button
-              className="bg-orange-600 hover:bg-orange-700 font-bold py-2 px-4 rounded-full"
+              className="bg-orange-600 hover:bg-orange-700 font-bold py-2 px-4 rounded-full text-sm"
               onClick={() => dispatch(logout())}
             >
               Log out

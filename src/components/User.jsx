@@ -23,12 +23,12 @@ const User = () => {
   if (users.length === 0) return <div>loading...</div>;
 
   return (
-    <div>
+    <div className="text-zinc-900">
       <h1>{user.username}</h1>
       <div>Comments: {user.comments.length}</div>
       <div>Posts: {user.posts.length}</div>
       {posts.map((p) => (
-        <div key={p.id} className="bg-zinc-700 my-2 p-2 text-sm">
+        <div key={p.id} className="bg-zinc-700 text-zinc-100 my-2 p-2 text-sm">
           <h1 className="font-bold">{p.title}</h1>
           <div>{p.content}</div>
         </div>
