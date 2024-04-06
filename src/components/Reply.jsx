@@ -10,31 +10,6 @@ import VoteReply from './VoteReply';
 const Reply = ({ replyId }) => {
   const comments = useSelector((state) => state.thread.comments);
   const nestedComments = comments.filter((c) => c.parentId === replyId);
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.login.user);
-  console.log(user);
-
-  const addLike = (c) => {
-    const comment = {
-      likes: c.likes + 1,
-      id: c.id,
-      downVotes: c.downVotes.find((userId) => userId === user.id)
-        ? c.downVotes.filter((userId) => userId !== user.id)
-        : c.downVotes,
-    };
-    dispatch(upVoteComment(comment));
-  };
-
-  const removeLike = (c) => {
-    const comment = {
-      likes: c.likes - 1,
-      id: c.id,
-      upVotes: c.upVotes.find((userId) => userId === user.id)
-        ? c.upVotes.filter((userId) => userId !== user.id)
-        : c.upVotes,
-    };
-    dispatch(downVoteComment(comment));
-  };
 
   if (nestedComments.length > 0)
     return nestedComments.map((c) => (

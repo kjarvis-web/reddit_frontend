@@ -44,8 +44,7 @@ const VoteReply = ({ comment }) => {
     );
   }
 
-  console.log('vr up', comment.upVotes);
-  console.log('vr down', comment.downVotes);
+
 
   return (
     <div className="flex gap-4">

@@ -27,13 +27,24 @@ const ThreadForm = () => {
       ref={ref}
       buttonLabel={`Post Thread \u2295`}
       className="bg-green-500 hover:bg-green-600 text-zinc-900 font-bold py-2 px-4 rounded mb-2"
+      h2="New Thread"
     >
-      <form className="flex flex-col text-zinc-900" onSubmit={handleSubmit}>
+      <form className="flex flex-col" onSubmit={handleSubmit}>
         <label>Title: </label>
-        <input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
+          placeholder="Title..."
+        />
         <label>Content: </label>
-        <input value={content} onChange={(e) => setContent(e.target.value)} />
-        <button className="bg-green-600" type="submit">
+        <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          className="text-zinc-900 rounded focus:outline-none text-sm h-36 p-1"
+          placeholder="Type here..."
+        />
+        <button className="bg-green-600 hover:bg-green-700 mt-2 p-2 rounded text-sm" type="submit">
           Submit
         </button>
       </form>
