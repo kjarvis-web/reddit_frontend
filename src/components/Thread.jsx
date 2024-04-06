@@ -34,10 +34,10 @@ const Thread = () => {
   ) : (
     <div>
       <div className="bg-zinc-800 p-4 rounded">
-        <h1 className="font-bold text-3xl">
+        <h1 className="font-bold text-3xl mb-4">
           {thread.title} posted by {thread.user.name}
         </h1>
-        <div className="mb-2 ml-4 p-4 bg-zinc-400 text-zinc-900">{thread.content}</div>
+        <div className="mb-4 ml-4 p-8 bg-zinc-200 text-zinc-900 rounded">{thread.content}</div>
         <ModalComment />
         {sorted.map((c, i) => (
           <div key={i} className="flex text-sm bg-zinc-700 rounded mb-2 px-2">

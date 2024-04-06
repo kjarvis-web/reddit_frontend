@@ -10,25 +10,25 @@ const VoteReply = ({ comment }) => {
   const user = useSelector((state) => state.login.user);
 
   const addLike = (c) => {
-    const comment = {
+    const findDown = c.downVotes.find((userId) => userId === user.id);
+    const post = {
       likes: c.likes + 1,
       id: c.id,
-      downVotes: c.downVotes.find((userId) => userId === user.id)
-        ? c.downVotes.filter((userId) => userId !== user.id)
-        : c.downVotes,
+      downVotes: findDown ? c.downVotes.filter((userId) => userId !== user.id) : c.downVotes,
+      upVotes: !findDown ? c.upVotes.concat(user.id) : c.upVotes,
     };
-    dispatch(upVoteComment(comment));
+    dispatch(upVoteComment(post));
   };
 
   const removeLike = (c) => {
-    const comment = {
+    const findUp = c.upVotes.find((userId) => userId === user.id);
+    const post = {
       likes: c.likes - 1,
       id: c.id,
-      upVotes: c.upVotes.find((userId) => userId === user.id)
-        ? c.upVotes.filter((userId) => userId !== user.id)
-        : c.upVotes,
+      upVotes: findUp ? c.upVotes.filter((userId) => userId !== user.id) : c.upVotes,
+      downVotes: !findUp ? c.downVotes.concat(user.id) : c.downVotes,
     };
-    dispatch(downVoteComment(comment));
+    dispatch(downVoteComment(post));
   };
 
   if (!user) {
@@ -43,6 +43,9 @@ const VoteReply = ({ comment }) => {
       </div>
     );
   }
+
+  console.log('vr up', comment.upVotes);
+  console.log('vr down', comment.downVotes);
 
   return (
     <div className="flex gap-4">

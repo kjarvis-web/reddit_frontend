@@ -13,7 +13,6 @@ const ThreadList = () => {
   const user = useSelector((state) => state.login.user);
 
   const sorted = [...threads].sort((a, b) => a.created - b.created);
-  console.log(sorted);
 
   useEffect(() => {
     dispatch(getThreads());
@@ -21,23 +20,25 @@ const ThreadList = () => {
   }, [dispatch]);
 
   const addLike = (thread) => {
+    const findDown = thread.downVotes.find((userId) => userId === user.id);
     const post = {
       likes: thread.likes + 1,
       id: thread.id,
-      downVotes: thread.downVotes.find((userId) => userId === user.id)
+      downVotes: findDown
         ? thread.downVotes.filter((userId) => userId !== user.id)
         : thread.downVotes,
+      upVotes: !findDown ? thread.upVotes.concat(user.id) : thread.upVotes,
     };
     dispatch(upVote(post));
   };
 
   const removeLike = (thread) => {
+    const findUp = thread.upVotes.find((userId) => userId === user.id);
     const post = {
       likes: thread.likes - 1,
       id: thread.id,
-      upVotes: thread.upVotes.find((userId) => userId === user.id)
-        ? thread.upVotes.filter((userId) => userId !== user.id)
-        : thread.upVotes,
+      upVotes: findUp ? thread.upVotes.filter((userId) => userId !== user.id) : thread.upVotes,
+      downVotes: !findUp ? thread.downVotes.concat(user.id) : thread.downVotes,
     };
     dispatch(downVote(post));
   };
@@ -68,35 +69,39 @@ const ThreadList = () => {
   return (
     <div className="text-zinc-100">
       {user && <ThreadForm />}
-      {sorted.map((post) => (
-        <div className="bg-zinc-700 my-2 p-2 text-sm flex items-center rounded" key={post.id}>
-          <div className="flex flex-col items-center">
-            {user.id === post.upVotes.find((userId) => userId === user.id) ? (
-              <TiArrowUpThick className="w-6 h-6 cursor-pointer text-green-500" />
-            ) : (
-              <TiArrowUpThick
-                className="w-6 h-6 cursor-pointer hover:text-green-500"
-                onClick={() => addLike(post)}
-              />
-            )}
-            <span className="font-bold">{post.likes}</span>
-            {user.id === post.downVotes.find((userId) => userId === user.id) ? (
-              <TiArrowDownThick className="w-6 h-6 cursor-pointer text-red-500" />
-            ) : (
-              <TiArrowDownThick
-                className="w-6 h-6 cursor-pointer hover:text-red-500"
-                onClick={() => removeLike(post)}
-              />
-            )}
-          </div>
-          <Link to={`/posts/${post.id}`}>
-            <div className="ml-5">
-              <h1 className="font-bold">{post.title}</h1>
-              <div>{post.content}</div>
+      {sorted.map((post, i) => {
+        return (
+          <>
+            <div className="bg-zinc-700 my-2 p-2 text-sm flex items-center rounded" key={post.id}>
+              <div className="flex flex-col items-center">
+                {user.id === post.upVotes.find((userId) => userId === user.id) ? (
+                  <TiArrowUpThick className="w-6 h-6 text-green-500" />
+                ) : (
+                  <TiArrowUpThick
+                    className="w-6 h-6 cursor-pointer hover:text-green-500"
+                    onClick={() => addLike(post)}
+                  />
+                )}
+                <span className="font-bold">{post.likes}</span>
+                {user.id === post.downVotes.find((userId) => userId === user.id) ? (
+                  <TiArrowDownThick className="w-6 h-6 text-orange-700" />
+                ) : (
+                  <TiArrowDownThick
+                    className="w-6 h-6 cursor-pointer hover:text-orange-700"
+                    onClick={() => removeLike(post)}
+                  />
+                )}
+              </div>
+              <Link to={`/posts/${post.id}`}>
+                <div className="ml-5">
+                  <h1 className="font-bold">{post.title}</h1>
+                  <div>{post.content}</div>
+                </div>
+              </Link>
             </div>
-          </Link>
-        </div>
-      ))}
+          </>
+        );
+      })}
     </div>
   );
 };
