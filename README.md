@@ -3,7 +3,7 @@
 1. Limit upvote/downvote to one click &#x2705;
    - add functionality to comments &#x2705;
 2. Create different forums?
-3. Add ability to upload images
+3. Add ability to upload images<br>
    ~~4. Style thread/comment components &#x2705;~~
 4. Search and sort features
    - sort posts/comments by date/votes(ascending/descending)
