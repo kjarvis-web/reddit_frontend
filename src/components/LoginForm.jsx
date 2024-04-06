@@ -20,11 +20,7 @@ const LoginForm = () => {
   if (loading && !error) return <div>logging you in...</div>;
 
   return (
-    <Modal
-      buttonLabel="Log In"
-      className="bg-orange-600 hover:bg-orange-700 font-bold py-2 px-4 rounded-full"
-      h2="Login"
-    >
+    <div>
       <form onSubmit={handleLogin} className="flex flex-col py-2">
         {error && <div className="text-red-500">wrong username or password</div>}
         <label>Username: </label>
@@ -49,7 +45,7 @@ const LoginForm = () => {
       </form>
       <hr className="my-2" />
       <div>No account? Click here to sign up.</div>
-    </Modal>
+    </div>
   );
 };
 

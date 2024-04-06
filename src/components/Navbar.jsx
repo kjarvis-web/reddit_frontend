@@ -3,6 +3,7 @@ import LoginForm from './LoginForm';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../reducers/loginReducer';
+import ModalLogin from './ModalLogin';
 
 const Navbar = () => {
   const user = useSelector((state) => state.login.user);
@@ -14,7 +15,7 @@ const Navbar = () => {
           <div className="text-5xl font-bold text-orange-700">reddit</div>
         </Link>
         {!user ? (
-          <LoginForm />
+          <ModalLogin />
         ) : (
           <div className="flex flex-row gap-6 items-center">
             <div className="font-bold text-sm">

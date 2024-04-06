@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { addComment } from '../reducers/threadReducer';
 import { useRef } from 'react';
 import Modal from './Modal';
+import { useSelector } from 'react-redux';
 
 const ModalComment = () => {
   const [comment, setComment] = useState('');
@@ -12,6 +13,7 @@ const ModalComment = () => {
   const id = useParams().id;
   const dispatch = useDispatch();
   const ref = useRef();
+  const user = useSelector((state) => state.login.user);
 
   const handleComment = (e, comment) => {
     e.preventDefault();
@@ -20,6 +22,7 @@ const ModalComment = () => {
     //for toggle visibility of comment modal window after submit
     ref.current.toggleModal();
   };
+  if (!user) return null;
   return (
     <Modal
       ref={ref}
