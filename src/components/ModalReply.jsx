@@ -25,7 +25,7 @@ const ModalReply = ({ replyId }) => {
     <Modal
       ref={ref}
       buttonLabel={
-        <div className="flex flex-row gap-1">
+        <div className="flex flex-row gap-1 hover:text-blue-500">
           <TiMessage className="w-5 h-5" />
           <div>Reply</div>
         </div>

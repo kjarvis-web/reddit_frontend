@@ -17,7 +17,13 @@ const Navbar = () => {
           <LoginForm />
         ) : (
           <div className="flex flex-row gap-6 items-center">
-            <div className="font-bold text-sm">logged in as {user.username}</div>
+            <div className="font-bold text-sm">
+              <span>logged in as</span>
+              <Link to={`/users/${user.id}`}>
+                <span className="hover:text-orange-600">{user.username}</span>
+              </Link>
+            </div>
+
             <button
               className="bg-orange-600 hover:bg-orange-700 font-bold py-2 px-4 rounded-full text-sm"
               onClick={() => dispatch(logout())}

@@ -40,7 +40,7 @@ const Thread = () => {
         <div className="mb-4 ml-4 p-8 bg-zinc-200 text-zinc-900 rounded">{thread.content}</div>
         <ModalComment />
         {sorted.map((c, i) => (
-          <div key={i} className="flex text-sm bg-zinc-700 rounded mb-2 px-2">
+          <div key={i} className="flex text-sm bg-zinc-600 rounded mb-2 px-2">
             <div>
               <Timestamp c={c} />
               <div className="flex justify-between">{c.text}</div>

@@ -44,13 +44,11 @@ const VoteReply = ({ comment }) => {
     );
   }
 
-
-
   return (
     <div className="flex gap-4">
       <div className="flex items-center gap-1">
         {user.id === comment.upVotes.find((id) => id === user.id) ? (
-          <TiArrowUpThick className="w-5 h-5 cursor-pointer hover:text-green-500" />
+          <TiArrowUpThick className="w-5 h-5 text-green-500" />
         ) : (
           <TiArrowUpThick
             className="w-5 h-5 cursor-pointer hover:text-green-500"
@@ -59,10 +57,10 @@ const VoteReply = ({ comment }) => {
         )}
         <span className="text-xs">{comment.likes}</span>
         {user.id === comment.downVotes.find((id) => id === user.id) ? (
-          <TiArrowDownThick className="w-5 h-5 cursor-pointer hover:text-red-500" />
+          <TiArrowDownThick className="w-5 h-5 text-orange-700" />
         ) : (
           <TiArrowDownThick
-            className="w-5 h-5 cursor-pointer hover:text-red-500"
+            className="w-5 h-5 cursor-pointer hover:text-orange-700"
             onClick={() => removeLike(comment)}
           />
         )}
