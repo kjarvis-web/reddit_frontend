@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../reducers/loginReducer';
+import Modal from './Modal';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -19,25 +20,36 @@ const LoginForm = () => {
   if (loading && !error) return <div>logging you in...</div>;
 
   return (
-    <form onSubmit={handleLogin} className="flex flex-col py-2">
-      {error && <div className="text-red-500">wrong username or password</div>}
-      <label>Username: </label>
-      <input
-        className="text-black"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <label>Password: </label>
-      <input
-        className="text-black"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit" className="bg-green-600">
-        Login
-      </button>
-    </form>
+    <Modal
+      buttonLabel="Log In"
+      className="bg-orange-600 hover:bg-orange-700 font-bold py-2 px-4 rounded-full"
+      h2="Login"
+    >
+      <form onSubmit={handleLogin} className="flex flex-col py-2">
+        {error && <div className="text-red-500">wrong username or password</div>}
+        <label>Username: </label>
+        <input
+          className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <label>Password: </label>
+        <input
+          className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button
+          type="submit"
+          className="bg-orange-600 hover:bg-orange-700 mt-2 rounded p-2 text-sm"
+        >
+          Login
+        </button>
+      </form>
+      <hr className="my-2" />
+      <div>No account? Click here to sign up.</div>
+    </Modal>
   );
 };
 
