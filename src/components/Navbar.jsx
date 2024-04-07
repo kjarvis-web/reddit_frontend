@@ -19,7 +19,7 @@ const Navbar = () => {
         ) : (
           <div className="flex flex-row gap-6 items-center">
             <div className="font-bold text-sm">
-              <span>logged in as</span>
+              <span>logged in as </span>
               <Link to={`/users/${user.id}`}>
                 <span className="hover:text-orange-600">{user.username}</span>
               </Link>

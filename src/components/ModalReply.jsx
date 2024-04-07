@@ -39,6 +39,7 @@ const ModalReply = ({ replyId }) => {
           className="text-zinc-900 rounded focus:outline-none text-sm h-36 p-1"
           value={reply}
           onChange={(e) => setReply(e.target.value)}
+          placeholder="Type here..."
         />
         <button
           className="bg-blue-600 hover:bg-blue-700 text-zinc-100 p-2 rounded mt-2"

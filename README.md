@@ -13,3 +13,4 @@
 8. Format dates to 'hours ago'?
 9. Toggle visibility of nested comments
 10. Finish user page
+11. Edit/delete posts/comments

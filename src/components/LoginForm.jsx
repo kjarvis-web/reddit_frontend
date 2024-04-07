@@ -20,31 +20,42 @@ const LoginForm = () => {
   if (loading && !error) return <div>logging you in...</div>;
 
   return (
-    <div>
-      <form onSubmit={handleLogin} className="flex flex-col py-2">
+    <div className="grid auto-rows-min">
+      <form
+        onSubmit={handleLogin}
+        className="grid auto-rows-min place-content-center place-items-end gap-2"
+      >
         {error && <div className="text-red-500">wrong username or password</div>}
-        <label>Username: </label>
-        <input
-          className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label>Password: </label>
-        <input
-          className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="flex flex-col items-start">
+          <label>Username: </label>
+          <input
+            className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        </div>
+        <div className="row-start-2 flex flex-col items-start">
+          <label>Password: </label>
+          <input
+            className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+
         <button
           type="submit"
-          className="bg-orange-600 hover:bg-orange-700 mt-2 rounded p-2 text-sm"
+          className="bg-orange-600 hover:bg-orange-700 rounded p-2 text-sm row-start-3"
         >
           Login
         </button>
       </form>
-      <hr className="my-2" />
-      <div>No account? Click here to sign up.</div>
+
+      <div>
+        <hr className="my-2" />
+        No account? Click here to sign up.
+      </div>
     </div>
   );
 };
