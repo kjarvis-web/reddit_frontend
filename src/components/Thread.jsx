@@ -2,19 +2,16 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { downVoteComment, getComments, getThreads, upVoteComment } from '../reducers/threadReducer';
-import { TiArrowUpThick, TiArrowDownThick } from 'react-icons/ti';
+import { getComments, getThreads } from '../reducers/threadReducer';
 
 import Reply from './Reply';
 import Timestamp from './Timestamp';
 import ModalComment from './ModalComment';
-import ModalReply from './ModalReply';
 import VoteReply from './VoteReply';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
   const comments = useSelector((state) => state.thread.comments);
-  const user = useSelector((state) => state.login.user);
   const id = useParams().id;
   const dispatch = useDispatch();
 
@@ -28,6 +25,7 @@ const Thread = () => {
 
   const findComments = comments.filter((comment) => comment.parentId === id);
   const sorted = [...findComments].sort((a, b) => a.created - b.created);
+  console.log(sorted);
 
   return threads.length === 0 ? (
     <div>loading...</div>
@@ -35,7 +33,7 @@ const Thread = () => {
     <div>
       <div className="bg-zinc-800 p-4 rounded">
         <h1 className="font-bold text-3xl mb-4">
-          {thread.title} posted by {thread.user.name}
+          {thread.title} posted by {thread.user.username}
         </h1>
         <div className="mb-4 ml-4 p-8 bg-zinc-200 text-zinc-900 rounded">{thread.content}</div>
         <ModalComment />
