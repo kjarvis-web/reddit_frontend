@@ -1,20 +1,27 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../reducers/loginReducer';
-import Modal from './Modal';
+import { useNavigate } from 'react-router-dom';
 
-const LoginForm = () => {
+const LoginForm = ({ modalRef }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.login.loading);
   const error = useSelector((state) => state.login.error);
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch(loginUser(username, password));
     setUsername('');
     setPassword('');
+  };
+
+  const handleSignUp = () => {
+    modalRef.current.toggleModal();
+    navigate('/signup');
   };
 
   if (loading && !error) return <div>logging you in...</div>;
@@ -51,10 +58,14 @@ const LoginForm = () => {
           Login
         </button>
       </form>
-
-      <div>
-        <hr className="my-2" />
-        No account? Click here to sign up.
+      <hr className="my-2" />
+      <div className="flex justify-center">
+        <div>
+          No account?{' '}
+          <span to="/signup" className="cursor-pointer hover:text-blue-500" onClick={handleSignUp}>
+            Click here to sign up.
+          </span>
+        </div>
       </div>
     </div>
   );

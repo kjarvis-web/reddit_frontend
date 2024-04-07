@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import LoginForm from './LoginForm';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../reducers/loginReducer';
@@ -15,7 +14,14 @@ const Navbar = () => {
           <div className="text-5xl font-bold text-orange-700">reddit</div>
         </Link>
         {!user ? (
-          <ModalLogin />
+          <div className="flex flex-row gap-4">
+            <ModalLogin />
+            <Link to="/signup">
+              <button className="bg-blue-600 hover:bg-blue-700 font-bold py-2 px-4 rounded-full">
+                Create Account
+              </button>
+            </Link>
+          </div>
         ) : (
           <div className="flex flex-row gap-6 items-center">
             <div className="font-bold text-sm">
@@ -24,7 +30,6 @@ const Navbar = () => {
                 <span className="hover:text-orange-600">{user.username}</span>
               </Link>
             </div>
-
             <button
               className="bg-orange-600 hover:bg-orange-700 font-bold py-2 px-4 rounded-full text-sm"
               onClick={() => dispatch(logout())}

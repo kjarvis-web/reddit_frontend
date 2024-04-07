@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { loggedUser } from './reducers/loginReducer';
 import User from './components/User';
+import SignUpForm from './components/SignUpForm';
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function App() {
             <Route path="/" element={<ThreadList />} />
             <Route path="/posts/:id" element={<Thread />} />
             <Route path="/users/:id" element={<User />} />
+            <Route path="/signup" element={<SignUpForm />} />
           </Routes>
         </div>
       </main>
