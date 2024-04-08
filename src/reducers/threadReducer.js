@@ -141,6 +141,13 @@ const threadSlice = createSlice({
       console.log(action.payload);
       return { ...state, comments: [...newComments, newComment] };
     },
+    deletePost(state, action) {
+      return state.threads.filter((post) => post.id !== action.payload.id);
+    },
+    editPost(state, action) {
+      const newThreads = state.threads.filter((p) => p.id !== action.payload.id);
+      return { ...state, threads: [...newThreads, action.payload] };
+    },
   },
 });
 
@@ -157,6 +164,8 @@ export const {
   appendDownVotes,
   appendUpVoteComment,
   appendDownVoteComment,
+  deletePost,
+  editPost,
 } = threadSlice.actions;
 
 export const createThread = (object) => {
@@ -229,6 +238,22 @@ export const downVoteComment = (newObj) => {
     const newComment = await threadService.downVoteComment(newObj);
     console.log(newComment);
     dispatch(appendDownVoteComment(newComment));
+  };
+};
+
+export const removePost = (id) => {
+  return async (dispatch) => {
+    const newThreads = await threadService.remove(id);
+    console.log(newThreads);
+    dispatch(deletePost(newThreads));
+  };
+};
+
+export const updatePost = (editedPost) => {
+  return async (dispatch) => {
+    const thread = await threadService.update(editedPost);
+    console.log(thread);
+    dispatch(editPost(thread));
   };
 };
 

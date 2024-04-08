@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getComments, getThreads } from '../reducers/threadReducer';
-
 import Reply from './Reply';
 import Timestamp from './Timestamp';
 import ModalComment from './ModalComment';
 import VoteReply from './VoteReply';
+import Dropdown from './Dropdown';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
@@ -32,9 +32,13 @@ const Thread = () => {
   ) : (
     <div>
       <div className="bg-zinc-800 p-4 rounded">
-        <h1 className="font-bold text-3xl mb-4">
-          {thread.title} posted by {thread.user.username}
-        </h1>
+        <div className="flex flex-row justify-between">
+          <h1 className="font-bold text-3xl mb-4">
+            {thread.title} posted by {thread.user.username}
+          </h1>
+          <Dropdown />
+        </div>
+
         <div className="mb-4 ml-4 p-8 bg-zinc-200 text-zinc-900 rounded">{thread.content}</div>
         <ModalComment />
         {sorted.map((c, i) => (

@@ -4,55 +4,76 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getUsers } from '../reducers/userReducer';
 import { filterChange } from '../reducers/filterReducer';
+import { Link } from 'react-router-dom';
+import { getComments, getThreads } from '../reducers/threadReducer';
 
 const User = () => {
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    dispatch(getUsers());
+    dispatch(getComments());
+    dispatch(getThreads());
+    console.log('use effect');
+  }, [dispatch]);
   const id = useParams().id;
   const users = useSelector((state) => state.users);
   const user = users.find((u) => u.id === id);
-  console.log(user);
 
-  const posts = user.posts;
-  const comments = user.comments;
+  const allPosts = useSelector((state) => state.thread.threads);
+  const posts = allPosts.filter((post) => post.user.id === id);
+  const allComments = useSelector((state) => state.thread.comments);
+  const comments = allComments.filter((comment) => comment.user.id === id);
+  const allCommentsAndPosts = allPosts.concat(allComments);
 
   const postsAndComments = posts.concat(comments);
-  const sorted = [...postsAndComments].sort((a, b) => a.created - b.created);
-
-  useEffect(() => {
-    dispatch(getUsers());
-  }, [dispatch]);
+  const sorted = [...postsAndComments].sort((a, b) => b.created - a.created);
+  const commentsSorted = [...comments].sort((a, b) => b.created - a.created);
+  const postsSorted = [...posts].sort((a, b) => b.created - a.created);
+  // const findOp = allPosts.reduce((curr, acc) => curr.concat(acc.comments), []);
 
   const content = useSelector((state) => {
     if (state.filter === 'COMMENTS') {
-      return comments.map((c) => (
+      return commentsSorted.map((c) => (
         <div className="bg-zinc-800 rounded my-1 p-2 text-sm" key={c.id}>
-          {c.text}
+          <div>{c.date}</div>
+          <div>{c.text}</div>
+          <div>
+            {/* replied to {allCommentsAndPosts.find((all) => all.id === c.parentId).user.username} */}
+          </div>
+          {/* <div>{console.log(findOp.find((obj) => obj.id == c.id))}</div> */}
         </div>
       ));
     }
     if (state.filter === 'POSTS') {
-      return posts.map((p) => (
-        <div className="bg-zinc-800 rounded my-1 p-2 text-sm" key={p.id}>
-          {p.title}
-        </div>
+      return postsSorted.map((p) => (
+        <Link to={`/posts/${p.id}`} key={p.id}>
+          <div className="bg-zinc-800 rounded my-1 p-2 text-sm">
+            <h1 className="font-bold text-xl text-green-500">{p.title}</h1>
+            <div>{p.date}</div>
+            <div>{p.content}</div>
+          </div>
+        </Link>
       ));
     }
     return sorted.map((p) =>
       p.title ? (
-        <div className="bg-zinc-800 rounded my-1 p-2 text-sm" key={p.id}>
-          <h1 className="font-bold text-xl text-green-500">{p.title}</h1>
-          {p.content} {p.date}
-        </div>
+        <Link to={`/posts/${p.id}`} key={p.id}>
+          <div className="bg-zinc-800 rounded my-1 p-2 text-sm">
+            <h1 className="font-bold text-xl text-green-500">{p.title}</h1>
+            <div>{p.date}</div>
+            <div>{p.content}</div>
+          </div>
+        </Link>
       ) : (
         <div className="bg-zinc-800 rounded my-1 p-2 text-sm" key={p.id}>
-          {p.text} {p.date}
+          <div>{p.date}</div>
+          <div>{p.text}</div>
         </div>
       )
     );
   });
 
-  if (users.length === 0) return <div>loading...</div>;
+  if (users.length === 0 || !posts || !comments || !user) return <div>loading...</div>;
 
   return (
     <div className="grid grid-cols-4">
