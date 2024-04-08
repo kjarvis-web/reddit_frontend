@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { removePost } from '../reducers/threadReducer';
 import { useNavigate, useParams } from 'react-router-dom';
 import EditForm from './EditForm';
-import ModalReply from './ModalReply';
 
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);

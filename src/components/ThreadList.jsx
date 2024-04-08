@@ -70,7 +70,7 @@ const ThreadList = () => {
   return (
     <div className="text-zinc-100">
       {user && <ThreadForm />}
-      {sorted.map((post, i) => {
+      {sorted.map((post) => {
         return (
           <>
             <div className="bg-zinc-700 my-2 p-2 text-sm flex items-center rounded" key={post.id}>

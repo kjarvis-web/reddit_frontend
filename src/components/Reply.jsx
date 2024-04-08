@@ -1,10 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useSelector } from 'react-redux';
 import Timestamp from './Timestamp';
-import ModalReply from './ModalReply';
-import { TiArrowUpThick, TiArrowDownThick } from 'react-icons/ti';
-import { useDispatch } from 'react-redux';
-import { downVoteComment, upVoteComment } from '../reducers/threadReducer';
 import VoteReply from './VoteReply';
 
 const Reply = ({ replyId }) => {
