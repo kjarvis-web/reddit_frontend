@@ -22,21 +22,21 @@ const Thread = () => {
   }, [dispatch]);
 
   const thread = threads.find((t) => t.id === id);
+  const user = useSelector((state) => state.login.user);
 
   const findComments = comments.filter((comment) => comment.parentId === id);
   const sorted = [...findComments].sort((a, b) => a.created - b.created);
-  console.log(sorted);
 
   return threads.length === 0 ? (
     <div>loading...</div>
   ) : (
     <div>
-      <div className="bg-zinc-800 p-4 rounded">
+      <div className="bg-zinc-800 py-4 px-8 rounded">
         <div className="flex flex-row justify-between">
           <h1 className="font-bold text-3xl mb-4">
             {thread.title} posted by {thread.user.username}
           </h1>
-          <Dropdown />
+          {user && thread.user.id === user.id && <Dropdown />}
         </div>
 
         <div className="mb-4 ml-4 p-8 bg-zinc-200 text-zinc-900 rounded">{thread.content}</div>
