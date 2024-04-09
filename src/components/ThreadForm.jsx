@@ -29,22 +29,22 @@ const ThreadForm = () => {
       className="bg-green-500 hover:bg-green-600 text-zinc-900 font-bold py-2 px-4 rounded-full border border-zinc-900 mb-2"
       h2="New Thread"
     >
-      <form className="flex flex-col" onSubmit={handleSubmit}>
-        <label>Title: </label>
+      <form className="flex flex-col gap-2 mt-4" onSubmit={handleSubmit}>
+        {/* <label>Title: </label> */}
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
           placeholder="Title..."
         />
-        <label>Content: </label>
+        {/* <label>Content: </label> */}
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
           className="text-zinc-900 rounded focus:outline-none text-sm h-36 p-1"
           placeholder="Type here..."
         />
-        <button className="bg-green-600 hover:bg-green-700 mt-2 p-2 rounded text-sm" type="submit">
+        <button className="bg-green-600 hover:bg-green-700 p-2 rounded text-sm" type="submit">
           Submit
         </button>
       </form>

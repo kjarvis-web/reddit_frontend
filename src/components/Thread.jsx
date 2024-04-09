@@ -31,9 +31,9 @@ const Thread = () => {
     <div>loading...</div>
   ) : (
     <div>
-      <div className="bg-zinc-800 py-4 px-8 rounded">
+      <div className="bg-zinc-100 py-4 px-8 rounded shadow-lg border">
         <div className="flex flex-row justify-between">
-          <h1 className="font-bold text-3xl">
+          <h1 className="font-bold text-3xl text-zinc-900">
             {thread.title} posted by {thread.user.username}
           </h1>
           {user && thread.user.id === user.id && <Dropdown />}
@@ -44,7 +44,7 @@ const Thread = () => {
         <div className="my-4 ml-4 p-8 bg-zinc-200 text-zinc-900 rounded">{thread.content}</div>
         <ModalComment />
         {sorted.map((c, i) => (
-          <div key={i} className="flex text-sm bg-zinc-600 rounded my-2 px-2">
+          <div key={i} className="flex text-sm bg-zinc-700 rounded my-2 px-2">
             <div>
               <Timestamp c={c} />
               <div className="flex justify-between">{c.text}</div>

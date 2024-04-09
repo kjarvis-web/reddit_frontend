@@ -8,4 +8,4 @@
 4. Display error messages to user
 5. Toggle visibility of nested comments
 6. Finish user page
-7. Edit/delete posts/comments
+7. Edit/delete posts/comments &#x2705;

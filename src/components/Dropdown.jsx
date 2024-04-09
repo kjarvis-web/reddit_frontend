@@ -28,8 +28,11 @@ const Dropdown = () => {
     <div className="flex flex-col">
       {isOpen ? (
         <div className="absolute">
-          <TiTimes onClick={toggleMenu} className="w-6 h-6 cursor-pointer hover:text-orange-700" />
-          <ul className="absolute bg-white right-0 px-2 rounded shadow-lg text-zinc-900 text-sm">
+          <TiTimes
+            onClick={toggleMenu}
+            className="text-zinc-900 w-6 h-6 cursor-pointer hover:text-orange-700"
+          />
+          <ul className="absolute bg-zinc-100 right-0 px-2 rounded shadow-lg text-zinc-900 text-sm">
             <li className="hover:text-blue-600 cursor-pointer p-4 text-center">
               <EditForm setIsOpen={setIsOpen} />
             </li>
@@ -43,7 +46,10 @@ const Dropdown = () => {
         </div>
       ) : (
         <div className="absolute">
-          <TiEdit onClick={toggleMenu} className="w-6 h-6 cursor-pointer hover:text-orange-700" />
+          <TiEdit
+            onClick={toggleMenu}
+            className="text-zinc-900 w-6 h-6 cursor-pointer hover:text-orange-700"
+          />
         </div>
       )}
     </div>
