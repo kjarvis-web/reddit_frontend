@@ -7,7 +7,7 @@ import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
-const EditCommentForm = ({ comment }) => {
+const EditCommentForm = ({ comment, setIsOpen }) => {
   const dispatch = useDispatch();
   const [content, setContent] = useState('');
   const user = useSelector((state) => state.login.user);
@@ -29,7 +29,7 @@ const EditCommentForm = ({ comment }) => {
     dispatch(updateComment(newComment));
     setContent('');
     ref.current.toggleModal();
-    window.location.reload();
+    setIsOpen(false);
   };
 
   if (!user) return null;

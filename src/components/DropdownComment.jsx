@@ -22,6 +22,7 @@ const DropdownComment = ({ comment }) => {
         removed: true,
       };
       dispatch(updateComment(newComment));
+      setIsOpen(false);
     }
     return null;
   };
@@ -33,7 +34,7 @@ const DropdownComment = ({ comment }) => {
           <TiEdit onClick={toggleMenu} className="w-5 h-5 cursor-pointer hover:text-orange-700" />
           <ul className="absolute bg-white rounded shadow-lg text-zinc-900 text-sm">
             <li className="hover:text-blue-600 cursor-pointer p-4 text-center">
-              <EditCommentForm comment={comment} />
+              <EditCommentForm comment={comment} setIsOpen={setIsOpen} />
             </li>
             <li
               className="hover:text-red-600 cursor-pointer p-4 text-center"
