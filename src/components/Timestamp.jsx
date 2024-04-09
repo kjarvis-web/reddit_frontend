@@ -25,7 +25,7 @@ const Timestamp = ({ c }) => {
   return (
     <div className="font-bold">
       <Link to={`/users/${user.id}`}>
-        <span>{user.username} </span>
+        <span>{c.user.username} </span>
       </Link>
       {'\u2219'} {c.date}
     </div>

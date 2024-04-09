@@ -20,7 +20,6 @@ const Dropdown = () => {
     if (confirm('Delete?')) {
       navigate('/');
       dispatch(removePost(id));
-      window.location.reload();
     }
     return null;
   };
@@ -30,9 +29,9 @@ const Dropdown = () => {
       {isOpen ? (
         <div className="absolute">
           <TiTimes onClick={toggleMenu} className="w-6 h-6 cursor-pointer hover:text-orange-700" />
-          <ul className="absolute bg-white right-0 px-2 rounded shadow-lg text-zinc-900 text-sm font-semibold">
+          <ul className="absolute bg-white right-0 px-2 rounded shadow-lg text-zinc-900 text-sm">
             <li className="hover:text-blue-600 cursor-pointer p-4 text-center">
-              <EditForm />
+              <EditForm setIsOpen={setIsOpen} />
             </li>
             <li
               className="hover:text-red-600 cursor-pointer p-4 text-center"

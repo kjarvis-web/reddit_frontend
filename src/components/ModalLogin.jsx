@@ -8,7 +8,7 @@ const ModalLogin = () => {
   return (
     <Modal
       buttonLabel="Login"
-      className="bg-orange-600 hover:bg-orange-700 font-bold py-2 px-4 rounded-full"
+      className="bg-orange-600 hover:bg-orange-700 font-bold py-2 px-4 rounded-full text-sm"
       ref={ref}
     >
       <LoginForm modalRef={ref} />

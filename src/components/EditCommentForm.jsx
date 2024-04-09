@@ -1,38 +1,35 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getThreads, updatePost } from '../reducers/threadReducer';
+import { getThreads, updateComment, updatePost } from '../reducers/threadReducer';
 import Modal from './Modal';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 
-const EditForm = ({ setIsOpen }) => {
+const EditCommentForm = ({ comment }) => {
   const dispatch = useDispatch();
   const [content, setContent] = useState('');
   const user = useSelector((state) => state.login.user);
-  const id = useParams().id;
   const ref = useRef();
-  const posts = useSelector((state) => state.thread.threads);
-  const post = posts.find((p) => p.id === id);
+  const comments = useSelector((state) => state.thread.comments);
+  const findComment = comments.find((c) => c.id === comment.id);
   useEffect(() => {
     dispatch(getThreads());
-    setContent(post.content);
-  }, [dispatch, post.content]);
+    setContent(findComment.text);
+  }, [dispatch, findComment.text]);
 
   const handleEdit = (e) => {
     e.preventDefault();
-    const editedPost = {
-      content,
+    const newComment = {
+      text: content,
+      id: comment.id,
       edited: true,
-      user,
-      id,
     };
-    dispatch(updatePost(editedPost));
+    dispatch(updateComment(newComment));
     setContent('');
     ref.current.toggleModal();
-    setIsOpen(false);
+    window.location.reload();
   };
 
   if (!user) return null;
@@ -57,4 +54,4 @@ const EditForm = ({ setIsOpen }) => {
   );
 };
 
-export default EditForm;
+export default EditCommentForm;

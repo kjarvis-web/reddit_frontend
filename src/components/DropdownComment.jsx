@@ -1,15 +1,13 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { TiEdit } from 'react-icons/ti';
 import { useDispatch } from 'react-redux';
-import { removePost } from '../reducers/threadReducer';
-import { useNavigate, useParams } from 'react-router-dom';
-import EditForm from './EditForm';
+import { updateComment } from '../reducers/threadReducer';
+import EditCommentForm from './EditCommentForm';
 
-const DropdownComment = () => {
+const DropdownComment = ({ comment }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-  const id = useParams().id;
-  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -17,9 +15,13 @@ const DropdownComment = () => {
 
   const handleDelete = () => {
     if (confirm('Delete?')) {
-      navigate('/');
-      dispatch(removePost(id));
-      window.location.reload();
+      const newComment = {
+        text: `[This user deleted their comment]`,
+        id: comment.id,
+        // user: comment.user,
+        removed: true,
+      };
+      dispatch(updateComment(newComment));
     }
     return null;
   };
@@ -29,9 +31,9 @@ const DropdownComment = () => {
       {isOpen ? (
         <div>
           <TiEdit onClick={toggleMenu} className="w-5 h-5 cursor-pointer hover:text-orange-700" />
-          <ul className="absolute bg-white rounded shadow-lg text-zinc-900 text-sm font-semibold">
+          <ul className="absolute bg-white rounded shadow-lg text-zinc-900 text-sm">
             <li className="hover:text-blue-600 cursor-pointer p-4 text-center">
-              <EditForm />
+              <EditCommentForm comment={comment} />
             </li>
             <li
               className="hover:text-red-600 cursor-pointer p-4 text-center"

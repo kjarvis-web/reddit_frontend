@@ -17,7 +17,7 @@ const Navbar = () => {
           <div className="flex flex-row gap-4">
             <ModalLogin />
             <Link to="/signup">
-              <button className="bg-blue-600 hover:bg-blue-700 font-bold py-2 px-4 rounded-full">
+              <button className="bg-blue-600 hover:bg-blue-700 font-bold py-2 px-4 rounded-full text-sm">
                 Create Account
               </button>
             </Link>

@@ -32,7 +32,7 @@ const LoginForm = ({ modalRef }) => {
         onSubmit={handleLogin}
         className="grid auto-rows-min place-content-center place-items-end gap-2"
       >
-        {error && <div className="text-red-500">wrong username or password</div>}
+        {/* {error && <div className="text-red-500">wrong username or password</div>} */}
         <div className="flex flex-col items-start">
           <label>Username: </label>
           <input
@@ -57,6 +57,7 @@ const LoginForm = ({ modalRef }) => {
         >
           Login
         </button>
+        {error && <div className="text-red-500">wrong username or password</div>}
       </form>
       <hr className="my-2" />
       <div className="flex justify-center">

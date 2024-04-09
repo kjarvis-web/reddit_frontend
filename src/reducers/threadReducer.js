@@ -142,11 +142,19 @@ const threadSlice = createSlice({
       return { ...state, comments: [...newComments, newComment] };
     },
     deletePost(state, action) {
-      return state.threads.filter((post) => post.id !== action.payload.id);
+      return state;
     },
     editPost(state, action) {
       const newThreads = state.threads.filter((p) => p.id !== action.payload.id);
       return { ...state, threads: [...newThreads, action.payload] };
+    },
+    // deleteComment(state, action) {
+    //   const newComments = state.comments.filter((comment) => comment.id !== action.payload.id);
+    //   return { ...state, comments: [...newComments, action.payload] };
+    // },
+    editComment(state, action) {
+      const newComments = state.comments.filter((comment) => comment.id !== action.payload.id);
+      return { ...state, comments: [...newComments, action.payload] };
     },
   },
 });
@@ -166,6 +174,8 @@ export const {
   appendDownVoteComment,
   deletePost,
   editPost,
+  deleteComment,
+  editComment,
 } = threadSlice.actions;
 
 export const createThread = (object) => {
@@ -254,6 +264,21 @@ export const updatePost = (editedPost) => {
     const thread = await threadService.update(editedPost);
     console.log(thread);
     dispatch(editPost(thread));
+  };
+};
+
+// export const removeComment = (updatedComment) => {
+//   return async (dispatch) => {
+//     const comment = await threadService.updateComment(updatedComment);
+//     console.log(comment);
+//     dispatch(deleteComment(comment));
+//   };
+// };
+
+export const updateComment = (newComment) => {
+  return async (dispatch) => {
+    const comment = await threadService.updateComment(newComment);
+    dispatch(editComment(comment));
   };
 };
 

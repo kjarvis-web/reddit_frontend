@@ -106,6 +106,26 @@ const remove = async (id) => {
   return response.data;
 };
 
+const removeComment = async (id) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.delete(`http://localhost:3000/api/comments/${id}`, config);
+  return response.data;
+};
+
+const updateComment = async (updatedComment) => {
+  const config = {
+    headers: { Authorization: token },
+  };
+  const response = await axios.put(
+    `http://localhost:3000/api/comments/${updatedComment.id}`,
+    updatedComment,
+    config
+  );
+  return response.data;
+};
+
 export default {
   getAll,
   create,
@@ -120,4 +140,6 @@ export default {
   upVoteComment,
   downVoteComment,
   remove,
+  removeComment,
+  updateComment,
 };

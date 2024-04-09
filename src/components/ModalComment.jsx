@@ -27,7 +27,7 @@ const ModalComment = () => {
     <Modal
       ref={ref}
       buttonLabel={`Add Comment \u2295`}
-      className="bg-blue-600 hover:bg-blue-700 font-bold py-2 px-4 rounded mb-2"
+      className="bg-blue-600 hover:bg-blue-700 font-bold py-2 px-4 rounded-full mb-2"
       h2={`Replying to...`}
     >
       <form

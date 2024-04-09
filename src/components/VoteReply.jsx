@@ -32,7 +32,7 @@ const VoteReply = ({ comment }) => {
     dispatch(downVoteComment(post));
   };
 
-  if (!user) {
+  if (!user || comment.removed === true) {
     return (
       <div className="flex gap-4">
         <div className="flex items-center gap-1">
@@ -41,6 +41,9 @@ const VoteReply = ({ comment }) => {
           <TiArrowDownThick className="w-5 h-5" />
         </div>
         <ModalReply replyId={comment.id} />
+        {comment.edited && (
+          <div className="text-xs text-green-500 flex items-center">this post has been edited</div>
+        )}
       </div>
     );
   }
@@ -67,7 +70,10 @@ const VoteReply = ({ comment }) => {
         )}
       </div>
       <ModalReply replyId={comment.id} />
-      <DropdownComment />
+      {user.id === comment.user.id && <DropdownComment comment={comment} />}
+      {comment.edited && (
+        <div className="text-xs text-green-500 flex items-center">this post has been edited</div>
+      )}
     </div>
   );
 };
