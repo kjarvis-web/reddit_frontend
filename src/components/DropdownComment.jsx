@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { TiEdit } from 'react-icons/ti';
-import { TiTimes } from 'react-icons/ti';
 import { useDispatch } from 'react-redux';
 import { removePost } from '../reducers/threadReducer';
 import { useNavigate, useParams } from 'react-router-dom';
 import EditForm from './EditForm';
 
-const Dropdown = () => {
+const DropdownComment = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const id = useParams().id;
@@ -26,11 +25,11 @@ const Dropdown = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div>
       {isOpen ? (
-        <div className="absolute">
-          <TiTimes onClick={toggleMenu} className="w-6 h-6 cursor-pointer hover:text-orange-700" />
-          <ul className="absolute bg-white right-0 px-2 rounded shadow-lg text-zinc-900 text-sm font-semibold">
+        <div>
+          <TiEdit onClick={toggleMenu} className="w-5 h-5 cursor-pointer hover:text-orange-700" />
+          <ul className="absolute bg-white rounded shadow-lg text-zinc-900 text-sm font-semibold">
             <li className="hover:text-blue-600 cursor-pointer p-4 text-center">
               <EditForm />
             </li>
@@ -43,12 +42,10 @@ const Dropdown = () => {
           </ul>
         </div>
       ) : (
-        <div className="absolute">
-          <TiEdit onClick={toggleMenu} className="w-6 h-6 cursor-pointer hover:text-orange-700" />
-        </div>
+        <TiEdit onClick={toggleMenu} className="w-5 h-5 cursor-pointer hover:text-orange-700" />
       )}
     </div>
   );
 };
 
-export default Dropdown;
+export default DropdownComment;

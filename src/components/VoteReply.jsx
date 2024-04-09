@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { downVoteComment, upVoteComment } from '../reducers/threadReducer';
 import { TiArrowUpThick, TiArrowDownThick } from 'react-icons/ti';
 import ModalReply from './ModalReply';
+import DropdownComment from './DropdownComment';
 
 const VoteReply = ({ comment }) => {
   const dispatch = useDispatch();
@@ -66,6 +67,7 @@ const VoteReply = ({ comment }) => {
         )}
       </div>
       <ModalReply replyId={comment.id} />
+      <DropdownComment />
     </div>
   );
 };

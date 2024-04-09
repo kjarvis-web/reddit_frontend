@@ -38,7 +38,6 @@ const Thread = () => {
           </h1>
           {user && thread.user.id === user.id && <Dropdown />}
         </div>
-
         <div className="mb-4 ml-4 p-8 bg-zinc-200 text-zinc-900 rounded">{thread.content}</div>
         <ModalComment />
         {sorted.map((c, i) => (
