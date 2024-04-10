@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { loggedUser } from './reducers/loginReducer';
 import User from './components/User';
 import SignUpForm from './components/SignUpForm';
+import Footer from './components/Footer';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
             <Route path="/signup" element={<SignUpForm />} />
           </Routes>
         </div>
+        <Footer />
       </main>
     </Router>
   );
