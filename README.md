@@ -7,5 +7,7 @@
    - sort posts/comments by date/votes(ascending/descending)
 4. Display error messages to user
 5. Toggle visibility of nested comments
-6. Finish user page
+6. Finish user page &#x2705;
 7. Edit/delete posts/comments &#x2705;
+8. Comment/post karma user page? &#x2705;
+9. Suggested content?

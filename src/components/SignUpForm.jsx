@@ -43,7 +43,7 @@ const SignUpForm = () => {
         <div className="flex flex-col items-start">
           {/* <label>Username: </label> */}
           <input
-            className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
+            className="text-zinc-900 rounded focus:outline-none p-1 text-sm border"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Username"
@@ -52,7 +52,7 @@ const SignUpForm = () => {
         <div className="row-start-2 flex flex-col items-start">
           {/* <label>Password: </label> */}
           <input
-            className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
+            className="text-zinc-900 rounded focus:outline-none p-1 text-sm border"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

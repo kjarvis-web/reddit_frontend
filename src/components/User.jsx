@@ -23,13 +23,11 @@ const User = () => {
   const posts = allPosts.filter((post) => post.user.id === id);
   const allComments = useSelector((state) => state.thread.comments);
   const comments = allComments.filter((comment) => comment.user.id === id);
-  const allCommentsAndPosts = allPosts.concat(allComments);
 
   const postsAndComments = posts.concat(comments);
   const sorted = [...postsAndComments].sort((a, b) => b.created - a.created);
   const commentsSorted = [...comments].sort((a, b) => b.created - a.created);
   const postsSorted = [...posts].sort((a, b) => b.created - a.created);
-  // const findOp = allPosts.reduce((curr, acc) => curr.concat(acc.comments), []);
 
   const content = useSelector((state) => {
     if (state.filter === 'COMMENTS') {
@@ -73,13 +71,29 @@ const User = () => {
     );
   });
 
-  if (users.length === 0 || !posts || !comments || !user) return <div>loading...</div>;
+  if (users.length === 0 || !posts || !comments || !user) {
+    return <div className="text-zinc-800">loading...</div>;
+  }
+
+  const commentUpvotes = user.comments.map((c) => c.upVotes.length);
+  const commentDownvotes = user.comments.map((c) => c.downVotes.length);
+  const commentKarma =
+    commentUpvotes.reduce((acc, curr) => acc + curr, 0) -
+    commentDownvotes.reduce((acc, curr) => acc + curr, 0);
+
+  const postUpvotes = user.posts.map((p) => p.upVotes.length);
+  const postDownvotes = user.posts.map((p) => p.downVotes.length);
+  const postKarma =
+    postUpvotes.reduce((acc, curr) => acc + curr, 0) -
+    postDownvotes.reduce((acc, curr) => acc + curr, 0);
 
   return (
     <div className="grid grid-cols-4">
-      <div className="col-start-2">
+      <div className="col-start-2 col-span-2">
         <h1 className="font-bold text-3xl text-zinc-800">{user.username}</h1>
         <p className="text-zinc-800 text-sm">Member since {user.date.split(',')[0]}</p>
+        <p className="text-zinc-800 text-xl">Post Karma: {postKarma}</p>
+        <p className="text-zinc-800 text-xl">Comment Karma: {commentKarma}</p>
       </div>
       <div className="flex flex-row justify-center gap-4 my-4 col-start-2 col-span-2">
         <button
