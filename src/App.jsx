@@ -22,7 +22,7 @@ function App() {
     <Router>
       <main className="flex min-h-screen flex-col bg-zinc-100 text-zinc-100">
         <Navbar />
-        <div className="container mx-auto mt-36">
+        <div className="container mx-auto mt-24">
           <Routes>
             <Route path="/" element={<ThreadList />} />
             <Route path="/posts/:id" element={<Thread />} />
@@ -30,7 +30,9 @@ function App() {
             <Route path="/signup" element={<SignUpForm />} />
           </Routes>
         </div>
-        <Footer />
+        <div className="mt-auto">
+          <Footer />
+        </div>
       </main>
     </Router>
   );
