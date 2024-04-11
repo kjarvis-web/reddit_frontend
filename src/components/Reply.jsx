@@ -9,9 +9,9 @@ const Reply = ({ replyId }) => {
 
   if (nestedComments.length > 0)
     return nestedComments.map((c) => (
-      <div className="mx-2" key={c.id}>
+      <div className="mx-2 border-l px-2" key={c.id}>
         <Timestamp c={c} />
-        <div className="flex justify-between whitespace-pre-wrap">{c.text}</div>
+        <div className="whitespace-pre-wrap">{c.text}</div>
         <VoteReply comment={c} />
         <Reply replyId={c.id} />
       </div>

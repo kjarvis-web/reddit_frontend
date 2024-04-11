@@ -39,24 +39,24 @@ const Thread = () => {
           {user && thread.user.id === user.id && <Dropdown />}
         </div>
         {thread.edited && (
-          <div className="ml-4 mt-2 text-xs text-green-500">this post has been edited</div>
+          <div className="ml-4 mt-2 text-xs text-orange-700">this post has been edited</div>
         )}
         <div className="my-4 ml-4 p-8 bg-zinc-300 text-zinc-900 rounded whitespace-pre-wrap">
           {thread.content}
         </div>
         <ModalComment />
         {sorted.map((c, i) => (
-          <div key={i} className="flex text-sm bg-zinc-700 rounded my-2 px-4 py-2">
-            <div>
+          <div key={i} className="text-sm bg-zinc-700 my-2 pb-2 rounded">
+            <div className="px-2">
               <Timestamp c={c} />
-              <div className="flex justify-between whitespace-pre-wrap">{c.text}</div>
+              <div className="whitespace-pre-wrap">{c.text}</div>
               <VoteReply comment={c} />
               {comments.map(
                 (reply) =>
                   reply.parentId === c.id && (
-                    <div className="flex flex-col mx-2" key={reply.id}>
+                    <div className="flex flex-col mx-2 border-l px-2" key={reply.id}>
                       <Timestamp c={reply} />
-                      <div className="flex justify-between whitespace-pre-wrap">{reply.text}</div>
+                      <div className="whitespace-pre-wrap">{reply.text}</div>
                       <VoteReply comment={reply} />
                       <Reply replyId={reply.id} />
                     </div>
