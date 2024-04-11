@@ -58,7 +58,7 @@ const ThreadList = () => {
             <Link to={`/posts/${post.id}`}>
               <div className="ml-5">
                 <h1 className="font-bold">{post.title}</h1>
-                <div>{post.content}</div>
+                <div className="whitespace-pre">{post.content}</div>
                 <div>{post.comments.length} comments</div>
               </div>
             </Link>
@@ -95,8 +95,8 @@ const ThreadList = () => {
             <Link to={`/posts/${post.id}`}>
               <div className="ml-5">
                 <h1 className="font-bold text-base">{post.title}</h1>
-                <div>{post.content}</div>
-                <div className="text-xs">{post.comments.length} comments</div>
+                <div className="whitespace-pre-wrap">{post.content}</div>
+                <div className="text-xs mt-2">{post.comments.length} comments</div>
               </div>
             </Link>
           </div>

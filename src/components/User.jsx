@@ -34,7 +34,7 @@ const User = () => {
       return commentsSorted.map((c) => (
         <div className="bg-zinc-800 rounded my-1 p-2 text-sm" key={c.id}>
           <div>{c.date}</div>
-          <div>{c.text}</div>
+          <div className="whitespace-pre-wrap">{c.text}</div>
           <div>
             {/* replied to {allCommentsAndPosts.find((all) => all.id === c.parentId).user.username} */}
           </div>
@@ -48,7 +48,7 @@ const User = () => {
           <div className="bg-zinc-800 rounded my-1 p-2 text-sm">
             <h1 className="font-bold text-xl text-green-500">{p.title}</h1>
             <div>{p.date}</div>
-            <div>{p.content}</div>
+            <div className="whitespace-pre-wrap">{p.content}</div>
           </div>
         </Link>
       ));
@@ -59,13 +59,13 @@ const User = () => {
           <div className="bg-zinc-800 rounded my-1 p-2 text-sm">
             <h1 className="font-bold text-xl text-green-500">{p.title}</h1>
             <div>{p.date}</div>
-            <div>{p.content}</div>
+            <div className="whitespace-pre-wrap">{p.content}</div>
           </div>
         </Link>
       ) : (
         <div className="bg-zinc-800 rounded my-1 p-2 text-sm" key={p.id}>
           <div>{p.date}</div>
-          <div>{p.text}</div>
+          <div className="whitespace-pre-wrap">{p.text}</div>
         </div>
       )
     );

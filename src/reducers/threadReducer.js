@@ -180,10 +180,14 @@ export const {
 
 export const createThread = (object) => {
   return async (dispatch) => {
-    dispatch(setLoading(true));
-    const newThread = await threadService.create(object);
-    dispatch(appendThread(newThread));
-    dispatch(setLoading(false));
+    try {
+      dispatch(setLoading(true));
+      const newThread = await threadService.create(object);
+      dispatch(appendThread(newThread));
+      dispatch(setLoading(false));
+    } catch (error) {
+      console.log(error);
+    }
   };
 };
 

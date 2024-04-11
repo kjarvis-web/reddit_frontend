@@ -41,7 +41,8 @@ const ThreadForm = () => {
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="text-zinc-900 rounded focus:outline-none text-sm h-36 p-1"
+          className="text-zinc-900 rounded focus:outline-none text-sm p-1"
+          rows={10}
           placeholder="Type here..."
         />
         <button className="bg-green-600 hover:bg-green-700 p-2 rounded text-sm" type="submit">

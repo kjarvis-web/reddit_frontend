@@ -11,7 +11,7 @@ const Reply = ({ replyId }) => {
     return nestedComments.map((c) => (
       <div className="mx-2" key={c.id}>
         <Timestamp c={c} />
-        <div className="flex justify-between">{c.text}</div>
+        <div className="flex justify-between whitespace-pre-wrap">{c.text}</div>
         <VoteReply comment={c} />
         <Reply replyId={c.id} />
       </div>

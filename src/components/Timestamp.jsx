@@ -24,9 +24,9 @@ const Timestamp = ({ c }) => {
   if (!user) return <div>loading...</div>;
   return (
     <div className="font-bold">
-      <Link to={`/users/${user.id}`}>
-        <span>{c.user.username} </span>
-      </Link>
+      <Link to={`/users/${user.id}`} className="hover:underline">
+        <span>{c.user.username}</span>
+      </Link>{' '}
       {'\u2219'} {c.date}
     </div>
   );
