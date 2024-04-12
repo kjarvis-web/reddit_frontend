@@ -43,15 +43,16 @@ const ModalReply = ({ replyId }) => {
       className="flex items-center"
     >
       <p className="text-zinc-100">{findAuthor.text}</p>
-      <form onSubmit={handleReply} className="flex flex-col mt-4 text-zinc-800">
+      <form onSubmit={handleReply} className="flex flex-col mt-2 text-zinc-800">
         <textarea
-          className="text-zinc-900 rounded focus:outline-none text-sm h-36 p-1"
+          className="text-zinc-900 rounded focus:outline-none text-sm  w-full p-1"
           value={reply}
           onChange={(e) => setReply(e.target.value)}
           placeholder="Type here..."
+          rows={10}
         />
         <button
-          className="bg-blue-600 hover:bg-blue-700 text-zinc-100 p-2 rounded mt-2"
+          className="bg-blue-600 hover:bg-blue-700 text-zinc-100 p-2 rounded mt-2 w-full md:w-1/4"
           type="submit"
         >
           Reply
