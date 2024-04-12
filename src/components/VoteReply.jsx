@@ -49,7 +49,7 @@ const VoteReply = ({ comment }) => {
   }
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 items-center">
       <div className="flex items-center gap-1">
         {user.id === comment.upVotes.find((id) => id === user.id) ? (
           <TiArrowUpThick className="w-5 h-5 text-green-500" />

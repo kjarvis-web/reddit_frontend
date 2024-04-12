@@ -61,7 +61,7 @@ const SignUpForm = () => {
         </div>
         <button
           type="submit"
-          className="bg-orange-600 hover:bg-orange-700 rounded p-2 text-sm row-start-3"
+          className="bg-orange-600 hover:bg-orange-700 rounded p-2 text-sm row-start-3 text-zinc-100"
         >
           Sign Up
         </button>

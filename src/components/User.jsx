@@ -9,12 +9,14 @@ import { getComments, getThreads } from '../reducers/threadReducer';
 
 const User = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(getUsers());
     dispatch(getComments());
     dispatch(getThreads());
     console.log('use effect');
   }, [dispatch]);
+
   const id = useParams().id;
   const users = useSelector((state) => state.users);
   const user = users.find((u) => u.id === id);

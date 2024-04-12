@@ -46,7 +46,10 @@ const ThreadForm = () => {
           rows={10}
           placeholder="Type here..."
         />
-        <button className="bg-green-600 hover:bg-green-700 p-2 rounded text-sm" type="submit">
+        <button
+          className="bg-green-600 hover:bg-green-700 p-2 rounded text-sm text-zinc-100"
+          type="submit"
+        >
           Submit
         </button>
       </form>

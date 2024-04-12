@@ -28,7 +28,7 @@ const DropdownComment = ({ comment }) => {
   };
 
   return (
-    <div>
+    <div className="edit">
       {isOpen ? (
         <div>
           <TiEdit onClick={toggleMenu} className="w-5 h-5 cursor-pointer hover:text-orange-700" />
