@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { downVote, getThreads, upVote } from '../reducers/threadReducer';
+import { downVote, getComments, getThreads, upVote } from '../reducers/threadReducer';
 import { Link } from 'react-router-dom';
 import ThreadForm from './ThreadForm';
 import { getUsers } from '../reducers/userReducer';
@@ -18,6 +18,7 @@ const ThreadList = () => {
   useEffect(() => {
     dispatch(getThreads());
     dispatch(getUsers());
+    dispatch(getComments());
   }, [dispatch]);
 
   const addLike = (thread) => {
@@ -62,7 +63,7 @@ const ThreadList = () => {
             <Link to={`/posts/${post.id}`}>
               <div className="ml-5">
                 <h1 className="font-bold">{post.title}</h1>
-                <div className="whitespace-pre-wrap">{post.content}</div>
+                {/* <div className="whitespace-pre-wrap">{post.content}</div> */}
                 <div>{post.comments.length} comments</div>
               </div>
             </Link>
@@ -103,7 +104,7 @@ const ThreadList = () => {
             <Link to={`/posts/${post.id}`}>
               <div className="ml-5">
                 <h1 className="font-bold text-base">{post.title}</h1>
-                <div className="whitespace-pre-wrap">{post.content}</div>
+                {/* <div className="whitespace-pre-wrap">{post.content}</div> */}
                 <div className="text-xs mt-2">{numberOfComments.length} comments</div>
               </div>
             </Link>

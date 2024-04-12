@@ -25,14 +25,14 @@ const Dropdown = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col mr-6">
       {isOpen ? (
         <div className="absolute">
           <TiTimes
             onClick={toggleMenu}
-            className="text-zinc-900 w-6 h-6 cursor-pointer hover:text-orange-700"
+            className="md:text-zinc-900 w-6 h-6 cursor-pointer hover:text-orange-700"
           />
-          <ul className="absolute bg-zinc-100 right-0 px-2 rounded shadow-lg text-zinc-900 text-sm">
+          <ul className="absolute bg-zinc-800 right-0 px-2 rounded shadow-lg text-zinc-100 text-sm">
             <li className="hover:text-blue-600 cursor-pointer p-4 text-center">
               <EditForm setIsOpen={setIsOpen} />
             </li>

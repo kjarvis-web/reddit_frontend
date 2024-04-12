@@ -32,9 +32,9 @@ const Thread = () => {
     <div>loading...</div>
   ) : (
     <div>
-      <div className="md:bg-zinc-200 py-4 px-8 rounded md:shadow-lg md:border text-sm md:text-base">
+      <div className="md:bg-zinc-200 py-4 md:px-8 rounded md:shadow-lg md:border text-sm md:text-base">
         <div className="flex flex-row justify-between">
-          <h1 className="font-bold md:text-3xl text-xl text-zinc-900">
+          <h1 className="px-2 font-bold md:text-3xl text-xl text-zinc-900">
             {thread.title} posted by {thread.user.username}
           </h1>
           {user && thread.user.id === user.id && <Dropdown />}
@@ -42,12 +42,14 @@ const Thread = () => {
         {thread.edited && (
           <div className="ml-4 mt-2 text-xs text-orange-700">this post has been edited</div>
         )}
-        <div className="my-4 ml-4 p-8 bg-zinc-300 text-zinc-900 rounded whitespace-pre-wrap">
+        <div className="my-4 md:ml-0 p-2 md:p-8 bg-zinc-300 text-zinc-900 rounded whitespace-pre-wrap">
           {thread.content}
         </div>
-        <ModalComment />
+        <div className="flex justify-center md:justify-start">
+          <ModalComment />
+        </div>
         {sorted.map((c, i) => (
-          <div key={i} className="md:text-zinc-100 text-sm md:bg-zinc-700 my-2 pb-2 rounded">
+          <div key={i} className="md:text-zinc-100 text-sm md:bg-zinc-700 my-2 md:pb-2 rounded">
             <div className="px-2">
               <Timestamp c={c} />
               <div className="whitespace-pre-wrap">{c.text}</div>

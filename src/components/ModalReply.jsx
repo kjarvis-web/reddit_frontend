@@ -45,7 +45,7 @@ const ModalReply = ({ replyId }) => {
       <p className="text-zinc-100">{findAuthor.text}</p>
       <form onSubmit={handleReply} className="flex flex-col mt-2 text-zinc-800">
         <textarea
-          className="text-zinc-900 rounded focus:outline-none text-sm  w-full p-1"
+          className="text-zinc-900 rounded focus:outline-none text-sm w-full p-1"
           value={reply}
           onChange={(e) => setReply(e.target.value)}
           placeholder="Type here..."

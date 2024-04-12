@@ -32,18 +32,19 @@ const ModalComment = () => {
     <Modal
       ref={ref}
       buttonLabel={`Add Comment \u2295`}
-      className="bg-zinc-100 hover:bg-zinc-200 font-bold py-2 px-4 rounded-full mb-2 text-zinc-800 border-zinc-900 border"
+      className="bg-zinc-200 hover:bg-zinc-100 font-bold py-2 px-4 rounded-full mb-2 text-zinc-800 border-zinc-900 border"
       h2={`Post a comment`}
     >
       <form className="flex flex-col mt-4 text-zinc-800" onSubmit={handleComment}>
         <textarea
-          className="text-zinc-900 rounded focus:outline-none text-sm h-36 p-1"
+          className="text-zinc-900 rounded focus:outline-none text-sm p-1"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
           placeholder="Type your comment here..."
+          rows={10}
         />
         <button
-          className="bg-blue-600 hover:bg-blue-700 text-zinc-100 p-2 rounded mt-2 text-sm"
+          className="bg-blue-600 hover:bg-blue-700 text-zinc-100 p-2 rounded mt-2 text-sm md:w-1/4"
           type="submit"
         >
           Reply
