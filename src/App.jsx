@@ -20,7 +20,7 @@ function App() {
   }, [dispatch]);
   return (
     <Router>
-      <main className="flex min-h-screen flex-col bg-zinc-100 text-zinc-100">
+      <main className="flex min-h-screen flex-col bg-zinc-100 text-zinc-800">
         <Navbar />
         <div className="container mx-auto mt-24">
           <Routes>

@@ -26,7 +26,7 @@ const ThreadForm = () => {
     <Modal
       ref={ref}
       buttonLabel={`Post Thread \u2295`}
-      className="bg-green-500 hover:bg-green-600 text-zinc-900 font-bold py-2 px-4 rounded-full border border-zinc-900 mb-2"
+      className="ml-2 md:ml-0 bg-green-500 hover:bg-green-600 text-zinc-900 font-bold py-2 px-4 rounded-full border border-zinc-900 mb-2"
       h2="New Thread"
     >
       <form className="flex flex-col gap-2 mt-4" onSubmit={handleSubmit}>
@@ -36,6 +36,7 @@ const ThreadForm = () => {
           onChange={(e) => setTitle(e.target.value)}
           className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
           placeholder="Title..."
+          required={true}
         />
         {/* <label>Content: </label> */}
         <textarea

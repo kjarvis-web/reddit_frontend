@@ -31,9 +31,9 @@ const Thread = () => {
     <div>loading...</div>
   ) : (
     <div>
-      <div className="bg-zinc-200 py-4 px-8 rounded shadow-lg border">
+      <div className="md:bg-zinc-200 py-4 px-8 rounded md:shadow-lg md:border text-sm md:text-base">
         <div className="flex flex-row justify-between">
-          <h1 className="font-bold text-3xl text-zinc-900">
+          <h1 className="font-bold md:text-3xl text-xl text-zinc-900">
             {thread.title} posted by {thread.user.username}
           </h1>
           {user && thread.user.id === user.id && <Dropdown />}
@@ -46,7 +46,7 @@ const Thread = () => {
         </div>
         <ModalComment />
         {sorted.map((c, i) => (
-          <div key={i} className="text-sm bg-zinc-700 my-2 pb-2 rounded">
+          <div key={i} className="md:text-zinc-100 text-sm md:bg-zinc-700 my-2 pb-2 rounded">
             <div className="px-2">
               <Timestamp c={c} />
               <div className="whitespace-pre-wrap">{c.text}</div>
@@ -54,7 +54,10 @@ const Thread = () => {
               {comments.map(
                 (reply) =>
                   reply.parentId === c.id && (
-                    <div className="flex flex-col mx-2 border-l px-2" key={reply.id}>
+                    <div
+                      className="flex flex-col mx-2 border-l border-orange-600 px-2"
+                      key={reply.id}
+                    >
                       <Timestamp c={reply} />
                       <div className="whitespace-pre-wrap">{reply.text}</div>
                       <VoteReply comment={reply} />

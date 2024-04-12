@@ -7,19 +7,21 @@ import { useRef } from 'react';
 import ReplyLabel from './ReplyLabel';
 import { useSelector } from 'react-redux';
 import LoginForm from './LoginForm';
+import { useParams } from 'react-router-dom';
 
 const ModalReply = ({ replyId }) => {
   const dispatch = useDispatch();
   const [reply, setReply] = useState('');
   const [visible, setVisible] = useState(false);
   const user = useSelector((state) => state.login.user);
+  const id = useParams().id;
 
   const ref = useRef();
 
   const handleReply = (e) => {
     e.preventDefault();
     setVisible(!visible);
-    dispatch(addReply(replyId, { comment: reply }));
+    dispatch(addReply(replyId, { comment: reply, thread: id }));
     setReply('');
     ref.current.toggleModal();
   };
