@@ -66,7 +66,6 @@ const ThreadList = () => {
             <Link to={`/posts/${post.id}`}>
               <div className="ml-5">
                 <h1 className="font-bold">{post.title}</h1>
-                {/* <div className="whitespace-pre-wrap">{post.content}</div> */}
                 <div>{post.comments.length} comments</div>
               </div>
             </Link>

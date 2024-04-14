@@ -17,7 +17,7 @@ const ThreadForm = () => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append('file', file);
+    file ? formData.append('file', file) : null;
     formData.append('title', title);
     formData.append('content', content);
 

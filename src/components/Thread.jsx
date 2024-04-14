@@ -29,7 +29,6 @@ const Thread = () => {
   const findComments = comments.filter((comment) => comment.parentId === id);
   const sorted = [...findComments].sort((a, b) => a.created - b.created);
   const image = images.find((image) => image.threadId === thread.id);
-  const url = `http://localhost:3000/${image.filename}`;
 
   return threads.length === 0 ? (
     <div>loading...</div>
@@ -47,7 +46,9 @@ const Thread = () => {
         )}
         <div className="my-4 md:ml-0 p-2 md:p-8 bg-zinc-300 text-zinc-900 md:rounded whitespace-pre-wrap">
           <div>{thread.content}</div>
-          {thread.file && <img src={url} className="rounded" alt="alt" />}
+          {image && (
+            <img src={`http://localhost:3000/${image.filename}`} className="rounded" alt="alt" />
+          )}
         </div>
         <div className="flex justify-center md:justify-start">
           <ModalComment />
