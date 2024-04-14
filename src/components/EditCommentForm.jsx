@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getThreads, updateComment, updatePost } from '../reducers/threadReducer';
+import { getThreads, updateComment } from '../reducers/threadReducer';
 import Modal from './Modal';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';

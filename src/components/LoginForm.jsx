@@ -27,13 +27,13 @@ const LoginForm = ({ modalRef }) => {
   if (loading && !error) return <div>logging you in...</div>;
 
   return (
-    <div className="grid auto-rows-min">
+    <div className="login">
       <form
         onSubmit={handleLogin}
         className="grid auto-rows-min place-content-center place-items-end gap-2"
       >
         <div className="flex flex-col items-start">
-          {/* <label>Username: </label> */}
+          <h1 className="font-bold text-xl mb-2">Login</h1>
           <input
             className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
             value={username}
@@ -42,7 +42,6 @@ const LoginForm = ({ modalRef }) => {
           />
         </div>
         <div className="row-start-2 flex flex-col items-start">
-          {/* <label>Password: </label> */}
           <input
             className="text-zinc-900 rounded focus:outline-none p-1 text-sm"
             type="password"
@@ -51,12 +50,11 @@ const LoginForm = ({ modalRef }) => {
             placeholder="Password"
           />
         </div>
-
         <button
           type="submit"
-          className="bg-orange-600 hover:bg-orange-700 rounded p-2 text-sm row-start-3"
+          className="bg-orange-600 hover:bg-orange-700 rounded p-2 text-sm row-start-3 mb-2"
         >
-          Login
+          Sign In
         </button>
         {error && <div className="text-red-500">wrong username or password</div>}
       </form>

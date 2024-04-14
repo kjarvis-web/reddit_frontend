@@ -59,23 +59,6 @@ const Thread = () => {
               <div className="whitespace-pre-wrap">{c.text}</div>
               <VoteReply comment={c} />
               {comments.map((reply) => {
-                // const nest = comments.filter((c) => c.parentId === reply.id);
-                // console.log(nest);
-                // if (nest.length > 0) {
-                //   return (
-                //     <div
-                //       className="flex flex-col mx-2 border-l border-orange-600 px-2"
-                //       key={reply.id}
-                //     >
-                //       <Toggle buttonLabel={`${nest.length} replies`}>
-                //         <Timestamp c={reply} />
-                //         <div className="whitespace-pre-wrap">{reply.text}</div>
-                //         <VoteReply comment={reply} />
-                //         <Reply replyId={reply.id} />
-                //       </Toggle>
-                //     </div>
-                //   );
-                // }
                 return (
                   reply.parentId === c.id && (
                     <div

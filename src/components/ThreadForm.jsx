@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { createThread } from '../reducers/threadReducer';
 import Modal from './Modal';
 import { useRef } from 'react';
-import { Convert } from 'mongo-image-converter';
 import { getImages } from '../reducers/imageReducer';
 import { useEffect } from 'react';
 
@@ -22,12 +21,6 @@ const ThreadForm = () => {
     formData.append('title', title);
     formData.append('content', content);
 
-    // const newThread = {
-    //   title,
-    //   content,
-    //   file,
-    // };
-    console.log(formData);
     dispatch(createThread(formData));
     setTitle('');
     setContent('');

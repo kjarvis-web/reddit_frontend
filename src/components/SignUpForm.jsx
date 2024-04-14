@@ -10,13 +10,11 @@ const SignUpForm = () => {
   const navigate = useNavigate();
   const [success, setSuccess] = useState(false);
 
-  const handleSignUp = (e) => {
-    // e.preventDefault();
+  const handleSignUp = () => {
     const user = {
       username,
       password,
     };
-    console.log(user);
     dispatch(addUser(user));
     setSuccess(true);
     setTimeout(() => {
@@ -26,22 +24,20 @@ const SignUpForm = () => {
   };
   if (success)
     return (
-      <div className="flex justify-center text-xl font-bold text-zinc-800">
+      <div className="flex justify-center text-xl font-bold text-zinc-100">
         <span>Success! Your are now being redirected back to the homepage...</span>
       </div>
     );
   return (
     <div className="flex flex-col items-center">
-      <h1 className="font-bold mb-2 text-zinc-800 text-xl">
+      <h1 className="font-bold mb-2 text-zinc-100 text-xl">
         Enter a username and password to create an account.
       </h1>
       <form
         onSubmit={handleSignUp}
         className="grid auto-rows-min place-content-center place-items-end gap-2"
       >
-        {/* {error && <div className="text-red-500">wrong username or password</div>} */}
         <div className="flex flex-col items-start">
-          {/* <label>Username: </label> */}
           <input
             className="text-zinc-900 rounded focus:outline-none p-1 text-sm border"
             value={username}
@@ -50,7 +46,6 @@ const SignUpForm = () => {
           />
         </div>
         <div className="row-start-2 flex flex-col items-start">
-          {/* <label>Password: </label> */}
           <input
             className="text-zinc-900 rounded focus:outline-none p-1 text-sm border"
             type="password"

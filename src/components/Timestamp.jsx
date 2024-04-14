@@ -11,12 +11,6 @@ const Timestamp = ({ c }) => {
   const users = useSelector((state) => state.users);
   const user = users.find((user) => user.id === c.user.id);
 
-  // console.log('c id', c.user.id);
-  // console.log(comment);
-  // console.log('users', users);
-  // console.log('c', c);
-  // console.log(user);
-
   useEffect(() => {
     dispatch(getUsers());
   }, [dispatch]);
@@ -32,5 +26,3 @@ const Timestamp = ({ c }) => {
   );
 };
 export default Timestamp;
-
-// need to get user id nested

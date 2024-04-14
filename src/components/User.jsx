@@ -37,10 +37,6 @@ const User = () => {
         <div className="bg-zinc-800 md:my-1 p-2 text-sm border-b border-zinc-100" key={c.id}>
           <div>{c.date}</div>
           <div className="whitespace-pre-wrap">{c.text}</div>
-          <div>
-            {/* replied to {allCommentsAndPosts.find((all) => all.id === c.parentId).user.username} */}
-          </div>
-          {/* <div>{console.log(findOp.find((obj) => obj.id == c.id))}</div> */}
         </div>
       ));
     }
@@ -99,7 +95,7 @@ const User = () => {
       </div>
       <div className="flex flex-row justify-center gap-4 my-4 col-start-2 col-span-2">
         <button
-          className="bg-zinc-700 hover:bg-zinc-800 font-bold py-2 px-4 rounded-full text-sm border border-zinc-100"
+          className="bg-zinc-800 hover:bg-zinc-900 font-bold py-2 px-4 rounded-full text-sm border border-zinc-100"
           onClick={() => dispatch(filterChange('ALL'))}
         >
           All

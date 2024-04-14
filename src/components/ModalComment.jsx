@@ -6,7 +6,6 @@ import { addComment } from '../reducers/threadReducer';
 import { useRef } from 'react';
 import Modal from './Modal';
 import { useSelector } from 'react-redux';
-import { GoPlusCircle } from 'react-icons/go';
 
 const ModalComment = () => {
   const [comment, setComment] = useState('');

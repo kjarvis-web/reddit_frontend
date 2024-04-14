@@ -18,7 +18,6 @@ const DropdownComment = ({ comment }) => {
       const newComment = {
         text: `[This user deleted their comment]`,
         id: comment.id,
-        // user: comment.user,
         removed: true,
       };
       dispatch(updateComment(newComment));
