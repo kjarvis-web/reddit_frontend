@@ -4,6 +4,8 @@ import { createThread } from '../reducers/threadReducer';
 import Modal from './Modal';
 import { useRef } from 'react';
 import { Convert } from 'mongo-image-converter';
+import { getImages } from '../reducers/imageReducer';
+import { useEffect } from 'react';
 
 const ThreadForm = () => {
   const [title, setTitle] = useState('');
@@ -32,6 +34,10 @@ const ThreadForm = () => {
     setFile(null);
     ref.current.toggleModal();
   };
+
+  useEffect(() => {
+    dispatch(getImages());
+  }, [dispatch]);
 
   return (
     <Modal

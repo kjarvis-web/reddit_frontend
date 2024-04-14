@@ -34,10 +34,7 @@ const User = () => {
   const content = useSelector((state) => {
     if (state.filter === 'COMMENTS') {
       return commentsSorted.map((c) => (
-        <div
-          className="bg-zinc-800 md:rounded md:my-1 p-2 text-sm border-b border-zinc-100"
-          key={c.id}
-        >
+        <div className="bg-zinc-800 md:my-1 p-2 text-sm border-b border-zinc-100" key={c.id}>
           <div>{c.date}</div>
           <div className="whitespace-pre-wrap">{c.text}</div>
           <div>
@@ -50,7 +47,7 @@ const User = () => {
     if (state.filter === 'POSTS') {
       return postsSorted.map((p) => (
         <Link to={`/posts/${p.id}`} key={p.id}>
-          <div className="bg-zinc-800 md:rounded md:my-1 p-2 text-sm border-b border-zinc-100">
+          <div className="bg-zinc-800 md:my-1 p-2 text-sm border-b border-zinc-100">
             <h1 className="font-bold text-xl text-green-500">{p.title}</h1>
             <div>{p.date}</div>
             <div className="whitespace-pre-wrap">{p.content}</div>
@@ -61,17 +58,14 @@ const User = () => {
     return sorted.map((p) =>
       p.title ? (
         <Link to={`/posts/${p.id}`} key={p.id}>
-          <div className="bg-zinc-800 md:rounded md:my-1 p-2 text-sm border-b border-zinc-100">
+          <div className="bg-zinc-800 md:my-1 p-2 text-sm border-b border-zinc-100">
             <h1 className="font-bold text-xl text-green-500">{p.title}</h1>
             <div>{p.date}</div>
             <div className="whitespace-pre-wrap">{p.content}</div>
           </div>
         </Link>
       ) : (
-        <div
-          className="bg-zinc-800 md:rounded md:my-1 p-2 text-sm border-b border-zinc-100"
-          key={p.id}
-        >
+        <div className="bg-zinc-800 md:my-1 p-2 text-sm border-b border-zinc-100" key={p.id}>
           <div>{p.date}</div>
           <div className="whitespace-pre-wrap">{p.text}</div>
         </div>
@@ -98,14 +92,14 @@ const User = () => {
   return (
     <div className="md:grid grid-cols-4 text-zinc-100">
       <div className="col-start-2 col-span-2">
-        <h1 className="font-bold text-3xl text-zinc-800">{user.username}</h1>
-        <p className="text-zinc-800 text-sm">Member since {user.date.split(',')[0]}</p>
-        <p className="text-zinc-800 text-xl">Post Karma: {postKarma}</p>
-        <p className="text-zinc-800 text-xl">Comment Karma: {commentKarma}</p>
+        <h1 className="font-bold text-3xl">{user.username}</h1>
+        <p className=" text-sm">Member since {user.date.split(',')[0]}</p>
+        <p className=" text-xl">Post Karma: {postKarma}</p>
+        <p className=" text-xl">Comment Karma: {commentKarma}</p>
       </div>
       <div className="flex flex-row justify-center gap-4 my-4 col-start-2 col-span-2">
         <button
-          className="bg-zinc-800 hover:bg-zinc-800 font-bold py-2 px-4 rounded-full text-sm"
+          className="bg-zinc-700 hover:bg-zinc-800 font-bold py-2 px-4 rounded-full text-sm border border-zinc-100"
           onClick={() => dispatch(filterChange('ALL'))}
         >
           All
