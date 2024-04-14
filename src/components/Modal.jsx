@@ -18,7 +18,7 @@ const Modal = forwardRef((props, refs) => {
   });
 
   return (
-    <div>
+    <div className="flex">
       <button onClick={toggleModal} className={props.className}>
         {props.buttonLabel}
       </button>
