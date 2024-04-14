@@ -75,9 +75,9 @@ const ThreadList = () => {
     );
 
   return (
-    <div className="">
+    <div className="grid grid-cols-1 md:grid-cols-8 gap-y-2">
       {user && (
-        <div className="flex justify-center md:justify-start">
+        <div className="flex justify-center md:col-start-2 md:col-span-2 place-self-start">
           <ThreadForm />
         </div>
       )}
@@ -87,7 +87,7 @@ const ThreadList = () => {
 
         return (
           <div
-            className="flex items-center gap-2 bg-zinc-200 md:text-zinc-800 md:my-2 p-2 text-sm md:rounded border-b border-zinc-800"
+            className="md:col-start-2 md:col-span-6 flex items-center gap-2 bg-zinc-200 md:text-zinc-800 p-2 text-sm md:rounded border-b border-zinc-800"
             key={post.id}
           >
             <div className="flex flex-col items-center">

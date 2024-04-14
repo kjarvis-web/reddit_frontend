@@ -16,7 +16,6 @@ const Thread = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log('thread use effect');
     dispatch(getThreads());
     dispatch(getComments());
   }, [dispatch]);

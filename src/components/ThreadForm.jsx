@@ -36,7 +36,7 @@ const ThreadForm = () => {
     <Modal
       ref={ref}
       buttonLabel={`Post Thread \u2295`}
-      className="ml-2 md:ml-0 bg-green-500 hover:bg-green-600 text-zinc-900 font-bold py-2 px-4 rounded-full border border-zinc-900 mb-2"
+      className="bg-green-500 hover:bg-green-600 text-zinc-900 font-bold py-2 px-4 rounded-full border border-zinc-900"
       h2="New Thread"
     >
       <form
