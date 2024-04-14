@@ -148,10 +148,6 @@ const threadSlice = createSlice({
       const newThreads = state.threads.filter((p) => p.id !== action.payload.id);
       return { ...state, threads: [...newThreads, action.payload] };
     },
-    // deleteComment(state, action) {
-    //   const newComments = state.comments.filter((comment) => comment.id !== action.payload.id);
-    //   return { ...state, comments: [...newComments, action.payload] };
-    // },
     editComment(state, action) {
       const newComments = state.comments.filter((comment) => comment.id !== action.payload.id);
       return { ...state, comments: [...newComments, action.payload] };
@@ -183,7 +179,7 @@ export const createThread = (object) => {
     try {
       dispatch(setLoading(true));
       const newThread = await threadService.create(object);
-      console.log('reducer', newThread);
+
       dispatch(appendThread(newThread));
       dispatch(setLoading(false));
     } catch (error) {
@@ -211,7 +207,7 @@ export const getComments = () => {
 export const addComment = (id, comment) => {
   return async (dispatch) => {
     const newComment = await threadService.addComment(id, comment);
-    console.log('addcomment', newComment);
+
     dispatch(appendComment(newComment));
   };
 };
@@ -219,7 +215,7 @@ export const addComment = (id, comment) => {
 export const addReply = (id, comment) => {
   return async (dispatch) => {
     const newReply = await threadService.addReply(id, comment);
-    console.log('reply', newReply);
+
     dispatch(appendReply(newReply));
   };
 };
@@ -227,7 +223,7 @@ export const addReply = (id, comment) => {
 export const upVote = (newObj) => {
   return async (dispatch) => {
     const newPost = await threadService.upVote(newObj);
-    console.log(newPost);
+
     dispatch(appendUpVotes(newPost));
   };
 };
@@ -235,7 +231,7 @@ export const upVote = (newObj) => {
 export const downVote = (newObj) => {
   return async (dispatch) => {
     const newPost = await threadService.downVote(newObj);
-    console.log(newPost);
+
     dispatch(appendDownVotes(newPost));
   };
 };
@@ -243,7 +239,7 @@ export const downVote = (newObj) => {
 export const upVoteComment = (newObj) => {
   return async (dispatch) => {
     const newComment = await threadService.upVoteComment(newObj);
-    console.log(newComment);
+
     dispatch(appendUpVoteComment(newComment));
   };
 };
@@ -251,7 +247,7 @@ export const upVoteComment = (newObj) => {
 export const downVoteComment = (newObj) => {
   return async (dispatch) => {
     const newComment = await threadService.downVoteComment(newObj);
-    console.log(newComment);
+
     dispatch(appendDownVoteComment(newComment));
   };
 };
@@ -259,7 +255,7 @@ export const downVoteComment = (newObj) => {
 export const removePost = (id) => {
   return async (dispatch) => {
     const newThreads = await threadService.remove(id);
-    console.log(newThreads);
+
     dispatch(deletePost(newThreads));
   };
 };
@@ -267,18 +263,10 @@ export const removePost = (id) => {
 export const updatePost = (editedPost) => {
   return async (dispatch) => {
     const thread = await threadService.update(editedPost);
-    console.log(thread);
+
     dispatch(editPost(thread));
   };
 };
-
-// export const removeComment = (updatedComment) => {
-//   return async (dispatch) => {
-//     const comment = await threadService.updateComment(updatedComment);
-//     console.log(comment);
-//     dispatch(deleteComment(comment));
-//   };
-// };
 
 export const updateComment = (newComment) => {
   return async (dispatch) => {

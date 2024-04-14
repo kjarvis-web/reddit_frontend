@@ -16,7 +16,6 @@ export const { initializeImages } = imageSlice.actions;
 export const getImages = () => {
   return async (dispatch) => {
     const images = await imageService.getImages();
-    console.log(images);
     dispatch(initializeImages(images));
   };
 };
