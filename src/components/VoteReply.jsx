@@ -61,10 +61,10 @@ const VoteReply = ({ comment }) => {
         )}
         <span className="text-xs">{comment.likes}</span>
         {user.id === comment.downVotes.find((id) => id === user.id) ? (
-          <TiArrowDownThick className="w-5 h-5 text-orange-700" />
+          <TiArrowDownThick className="w-5 h-5 text-orange-600" />
         ) : (
           <TiArrowDownThick
-            className="w-5 h-5 cursor-pointer hover:text-orange-700"
+            className="w-5 h-5 cursor-pointer hover:text-orange-600"
             onClick={() => removeLike(comment)}
           />
         )}

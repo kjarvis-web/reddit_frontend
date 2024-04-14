@@ -112,17 +112,17 @@ const ThreadList = () => {
               )}
               <span className="font-bold">{post.likes}</span>
               {user.id === post.downVotes.find((userId) => userId === user.id) ? (
-                <TiArrowDownThick className="w-6 h-6 text-orange-700" />
+                <TiArrowDownThick className="w-6 h-6 text-orange-600" />
               ) : (
                 <TiArrowDownThick
-                  className="w-6 h-6 cursor-pointer hover:text-orange-700"
+                  className="w-6 h-6 cursor-pointer hover:text-orange-600"
                   onClick={() => removeLike(post)}
                 />
               )}
             </div>
 
-            <Link to={`/posts/${post.id}`}>
-              <div className="grid">
+            <Link to={`/posts/${post.id}`} className="grow">
+              <div className="">
                 <h1 className="font-bold text-base">{post.title}</h1>
                 {image && (
                   <img
