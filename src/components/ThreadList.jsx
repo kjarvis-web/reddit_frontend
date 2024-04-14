@@ -58,7 +58,7 @@ const ThreadList = () => {
           const image = images.find((image) => image.threadId === post.id);
           return (
             <div
-              className="md:col-start-2 md:col-span-6 md:bg-zinc-800 md:text-zinc-100 p-2 text-sm flex items-center md:rounded border border-zinc-100"
+              className="md:col-start-2 md:col-span-6 md:bg-zinc-800 text-zinc-100 p-2 text-sm flex items-center md:rounded border border-zinc-700"
               key={post.id}
             >
               <div className="flex flex-col items-center">
@@ -98,7 +98,7 @@ const ThreadList = () => {
 
         return (
           <div
-            className="md:col-start-2 md:col-span-6 flex items-center gap-2 bg-zinc-200 md:text-zinc-800 p-2 text-sm md:rounded border-b border-zinc-800"
+            className="md:col-start-2 md:col-span-6 flex items-center gap-2 bg-zinc-200 md:text-zinc-800 p-2 text-sm md:rounded"
             key={post.id}
           >
             <div className="flex flex-col items-center">
