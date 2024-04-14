@@ -1,6 +1,6 @@
 import Navbar from './components/Navbar';
 import ThreadList from './components/ThreadList';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Thread from './components/Thread';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
