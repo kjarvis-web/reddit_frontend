@@ -30,7 +30,7 @@ const DropdownComment = ({ comment }) => {
     <div className="edit">
       {isOpen ? (
         <div>
-          <TiEdit onClick={toggleMenu} className="w-5 h-5 cursor-pointer hover:text-orange-700" />
+          <TiEdit onClick={toggleMenu} className="w-5 h-5 cursor-pointer hover:text-orange-600" />
           <ul className="absolute bg-zinc-200 text-zinc-800 rounded shadow-lg text-sm">
             <li className="hover:text-blue-600 cursor-pointer p-4 text-center">
               <EditCommentForm comment={comment} setIsOpen={setIsOpen} />
@@ -44,7 +44,7 @@ const DropdownComment = ({ comment }) => {
           </ul>
         </div>
       ) : (
-        <TiEdit onClick={toggleMenu} className="w-5 h-5 cursor-pointer hover:text-orange-700" />
+        <TiEdit onClick={toggleMenu} className="w-5 h-5 cursor-pointer hover:text-orange-600" />
       )}
     </div>
   );
