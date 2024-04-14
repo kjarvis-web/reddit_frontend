@@ -8,6 +8,7 @@ import Timestamp from './Timestamp';
 import ModalComment from './ModalComment';
 import VoteReply from './VoteReply';
 import Dropdown from './Dropdown';
+import { getImages } from '../reducers/imageReducer';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
@@ -18,6 +19,7 @@ const Thread = () => {
   useEffect(() => {
     dispatch(getThreads());
     dispatch(getComments());
+    dispatch(getImages());
   }, [dispatch]);
   const user = useSelector((state) => state.login.user);
   const images = useSelector((state) => state.images);
