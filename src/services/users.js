@@ -1,5 +1,6 @@
 import axios from 'axios';
-const baseUrl = 'http://localhost:3000/api/users';
+import config from '../utils/config';
+const baseUrl = `${config.baseUrl}/api/users`;
 
 const getUsers = async () => {
   const request = await axios.get(baseUrl);

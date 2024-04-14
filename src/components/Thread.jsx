@@ -9,6 +9,7 @@ import ModalComment from './ModalComment';
 import VoteReply from './VoteReply';
 import Dropdown from './Dropdown';
 import { getImages } from '../reducers/imageReducer';
+import config from '../utils/config';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
@@ -47,7 +48,7 @@ const Thread = () => {
         <div className="my-4 md:ml-0 p-2 md:p-8 bg-zinc-300 text-zinc-900 md:rounded whitespace-pre-wrap">
           <div>{thread.content}</div>
           {image && (
-            <img src={`http://localhost:3000/${image.filename}`} className="rounded" alt="alt" />
+            <img src={`${config.baseUrl}/${image.filename}`} className="rounded" alt="alt" />
           )}
         </div>
         <div className="flex justify-center md:justify-start">

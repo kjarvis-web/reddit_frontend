@@ -6,6 +6,7 @@ import ThreadForm from './ThreadForm';
 import { getUsers } from '../reducers/userReducer';
 import { TiArrowUpThick, TiArrowDownThick } from 'react-icons/ti';
 import { getImages } from '../reducers/imageReducer';
+import config from '../utils/config';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
@@ -71,7 +72,7 @@ const ThreadList = () => {
                   <h1 className="font-bold text-base">{post.title}</h1>
                   {image && (
                     <img
-                      src={`http://localhost:3000/${image.filename}`}
+                      src={`${config.baseUrl}/${image.filename}`}
                       className="rounded w-1/2"
                       alt="alt"
                     />
@@ -126,7 +127,7 @@ const ThreadList = () => {
                 <h1 className="font-bold text-base">{post.title}</h1>
                 {image && (
                   <img
-                    src={`http://localhost:3000/${image.filename}`}
+                    src={`${config.baseUrl}/${image.filename}`}
                     className="rounded w-1/2"
                     alt="alt"
                   />
