@@ -52,25 +52,36 @@ const ThreadList = () => {
 
   if (!user)
     return (
-      <div>
-        {sorted.map((post) => (
-          <div
-            className="md:bg-zinc-700 md:text-zinc-100 md:my-2 p-2 text-sm flex items-center md:rounded border-b border-zinc-800"
-            key={post.id}
-          >
-            <div className="flex flex-col items-center">
-              <TiArrowUpThick className="w-6 h-6" />
-              <span className="font-bold">{post.likes}</span>
-              <TiArrowDownThick className="w-6 h-6" />
-            </div>
-            <Link to={`/posts/${post.id}`}>
-              <div className="ml-5">
-                <h1 className="font-bold">{post.title}</h1>
-                <div>{post.comments.length} comments</div>
+      <div className="grid grid-cols-1 md:grid-cols-8 gap-y-2">
+        {sorted.map((post) => {
+          const numberOfComments = comments.filter((c) => c.thread === post.id);
+          const image = images.find((image) => image.threadId === post.id);
+          return (
+            <div
+              className="md:col-start-2 md:col-span-6 md:bg-zinc-800 md:text-zinc-100 p-2 text-sm flex items-center md:rounded border border-zinc-100"
+              key={post.id}
+            >
+              <div className="flex flex-col items-center">
+                <TiArrowUpThick className="w-6 h-6" />
+                <span className="font-bold">{post.likes}</span>
+                <TiArrowDownThick className="w-6 h-6" />
               </div>
-            </Link>
-          </div>
-        ))}
+              <Link to={`/posts/${post.id}`}>
+                <div className="grid">
+                  <h1 className="font-bold text-base">{post.title}</h1>
+                  {image && (
+                    <img
+                      src={`http://localhost:3000/${image.filename}`}
+                      className="rounded w-1/2"
+                      alt="alt"
+                    />
+                  )}{' '}
+                  <div className="text-xs mt-2 col-start-1">{numberOfComments.length} comments</div>
+                </div>
+              </Link>
+            </div>
+          );
+        })}
       </div>
     );
 
