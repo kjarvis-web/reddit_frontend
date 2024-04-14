@@ -21,12 +21,15 @@ const Thread = () => {
     dispatch(getThreads());
     dispatch(getComments());
   }, [dispatch]);
-
-  const thread = threads.find((t) => t.id === id);
   const user = useSelector((state) => state.login.user);
+  const images = useSelector((state) => state.images);
+  const thread = threads.find((t) => t.id === id);
+  if (!thread) return null;
 
   const findComments = comments.filter((comment) => comment.parentId === id);
   const sorted = [...findComments].sort((a, b) => a.created - b.created);
+  const image = images.find((image) => image.threadId === thread.id);
+  const url = `http://localhost:3000/${image.filename}`;
 
   return threads.length === 0 ? (
     <div>loading...</div>
@@ -34,7 +37,7 @@ const Thread = () => {
     <div>
       <div className="md:bg-zinc-200 py-4 md:px-8 rounded md:shadow-lg md:border text-sm md:text-base">
         <div className="flex flex-row justify-between">
-          <h1 className="px-2 font-bold md:text-3xl text-xl text-zinc-900">
+          <h1 className="px-2 font-bold md:text-3xl text-xl text-zinc-100 md:text-zinc-900">
             {thread.title} posted by {thread.user.username}
           </h1>
           {user && thread.user.id === user.id && <Dropdown />}
@@ -42,14 +45,15 @@ const Thread = () => {
         {thread.edited && (
           <div className="ml-4 mt-2 text-xs text-orange-700">this post has been edited</div>
         )}
-        <div className="my-4 md:ml-0 p-2 md:p-8 bg-zinc-300 text-zinc-900 rounded whitespace-pre-wrap">
-          {thread.content}
+        <div className="my-4 md:ml-0 p-2 md:p-8 bg-zinc-300 text-zinc-900 md:rounded whitespace-pre-wrap">
+          <div>{thread.content}</div>
+          {thread.file && <img src={url} className="rounded" alt="alt" />}
         </div>
         <div className="flex justify-center md:justify-start">
           <ModalComment />
         </div>
         {sorted.map((c, i) => (
-          <div key={i} className="md:text-zinc-100 text-sm md:bg-zinc-700 my-2 md:pb-2 rounded">
+          <div key={i} className="text-zinc-100 text-sm bg-zinc-800 my-2 md:pb-2 rounded">
             <div className="px-2">
               <Timestamp c={c} />
               <div className="whitespace-pre-wrap">{c.text}</div>

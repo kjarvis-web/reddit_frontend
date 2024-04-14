@@ -183,6 +183,7 @@ export const createThread = (object) => {
     try {
       dispatch(setLoading(true));
       const newThread = await threadService.create(object);
+      console.log('reducer', newThread);
       dispatch(appendThread(newThread));
       dispatch(setLoading(false));
     } catch (error) {

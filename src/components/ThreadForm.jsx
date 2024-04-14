@@ -3,22 +3,33 @@ import { useDispatch } from 'react-redux';
 import { createThread } from '../reducers/threadReducer';
 import Modal from './Modal';
 import { useRef } from 'react';
+import { Convert } from 'mongo-image-converter';
 
 const ThreadForm = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [file, setFile] = useState(null);
   const dispatch = useDispatch();
   const ref = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newThread = {
-      title,
-      content,
-    };
-    dispatch(createThread(newThread));
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('title', title);
+    formData.append('content', content);
+
+    // const newThread = {
+    //   title,
+    //   content,
+    //   file,
+    // };
+    console.log(formData);
+    dispatch(createThread(formData));
     setTitle('');
     setContent('');
+    setFile(null);
     ref.current.toggleModal();
   };
 
@@ -29,7 +40,11 @@ const ThreadForm = () => {
       className="ml-2 md:ml-0 bg-green-500 hover:bg-green-600 text-zinc-900 font-bold py-2 px-4 rounded-full border border-zinc-900 mb-2"
       h2="New Thread"
     >
-      <form className="flex flex-col gap-2 mt-4" onSubmit={handleSubmit}>
+      <form
+        className="flex flex-col gap-2 mt-4"
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+      >
         {/* <label>Title: </label> */}
         <input
           value={title}
@@ -45,6 +60,13 @@ const ThreadForm = () => {
           className="text-zinc-900 rounded focus:outline-none text-sm p-1"
           rows={10}
           placeholder="Type here..."
+        />
+        <label className="text-zinc-100">Upload image: </label>
+        <input
+          type="file"
+          accept="image/*"
+          name="file"
+          onChange={(e) => setFile(e.target.files[0])}
         />
         <button
           className="bg-green-600 hover:bg-green-700 p-2 rounded text-sm text-zinc-100 md:w-1/4"

@@ -8,6 +8,7 @@ import threadReducer from './reducers/threadReducer.js';
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers/userReducer.js';
 import filterReducer from './reducers/filterReducer.js';
+import imageReducer from './reducers/imageReducer.js';
 
 //redux toolkit
 const store = configureStore({
@@ -16,6 +17,7 @@ const store = configureStore({
     thread: threadReducer,
     users: userReducer,
     filter: filterReducer,
+    images: imageReducer,
   },
 });
 

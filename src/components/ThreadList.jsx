@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import ThreadForm from './ThreadForm';
 import { getUsers } from '../reducers/userReducer';
 import { TiArrowUpThick, TiArrowDownThick } from 'react-icons/ti';
+import { getImages } from '../reducers/imageReducer';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ const ThreadList = () => {
   const loading = useSelector((state) => state.thread.loading);
   const user = useSelector((state) => state.login.user);
   const comments = useSelector((state) => state.thread.comments);
+  const images = useSelector((state) => state.images);
 
   const sorted = [...threads].sort((a, b) => a.created - b.created);
 
@@ -19,6 +21,7 @@ const ThreadList = () => {
     dispatch(getThreads());
     dispatch(getUsers());
     dispatch(getComments());
+    dispatch(getImages());
   }, [dispatch]);
 
   const addLike = (thread) => {
@@ -45,7 +48,7 @@ const ThreadList = () => {
     dispatch(downVote(post));
   };
 
-  if (loading) return <div className="text-zinc-800">loading...</div>;
+  if (loading || !images) return <div className="text-zinc-800">loading...</div>;
 
   if (!user)
     return (
@@ -73,13 +76,19 @@ const ThreadList = () => {
     );
 
   return (
-    <div className="thread-btn">
-      {user && <ThreadForm />}
+    <div className="">
+      {user && (
+        <div className="flex justify-center md:justify-start">
+          <ThreadForm />
+        </div>
+      )}
       {sorted.map((post) => {
         const numberOfComments = comments.filter((c) => c.thread === post.id);
+        const image = images.find((image) => image.threadId === post.id);
+
         return (
           <div
-            className="md:bg-zinc-700 md:text-zinc-100 md:my-2 p-2 text-sm flex items-center md:rounded border-b border-zinc-800"
+            className="flex items-center gap-2 bg-zinc-200 md:text-zinc-800 md:my-2 p-2 text-sm md:rounded border-b border-zinc-800"
             key={post.id}
           >
             <div className="flex flex-col items-center">
@@ -101,11 +110,18 @@ const ThreadList = () => {
                 />
               )}
             </div>
+
             <Link to={`/posts/${post.id}`}>
-              <div className="ml-5">
+              <div className="grid">
                 <h1 className="font-bold text-base">{post.title}</h1>
-                {/* <div className="whitespace-pre-wrap">{post.content}</div> */}
-                <div className="text-xs mt-2">{numberOfComments.length} comments</div>
+                {image && (
+                  <img
+                    src={`http://localhost:3000/${image.filename}`}
+                    className="rounded w-1/2"
+                    alt="alt"
+                  />
+                )}{' '}
+                <div className="text-xs mt-2 col-start-1">{numberOfComments.length} comments</div>
               </div>
             </Link>
           </div>

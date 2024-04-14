@@ -72,7 +72,7 @@ const VoteReply = ({ comment }) => {
       <ModalReply replyId={comment.id} />
       {user.id === comment.user.id && <DropdownComment comment={comment} />}
       {comment.edited && (
-        <div className="text-xs text-green-500 flex items-center">this post has been edited</div>
+        <div className="text-xs text-orange-600 flex items-center">this post has been edited</div>
       )}
     </div>
   );

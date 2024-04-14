@@ -30,7 +30,7 @@ const Dropdown = () => {
         <div className="absolute">
           <TiTimes
             onClick={toggleMenu}
-            className="md:text-zinc-900 w-6 h-6 cursor-pointer hover:text-orange-700"
+            className="text-zinc-100 md:text-zinc-900 w-6 h-6 cursor-pointer hover:text-orange-700"
           />
           <ul className="absolute bg-zinc-800 right-0 px-2 rounded shadow-lg text-zinc-100 text-sm">
             <li className="hover:text-blue-600 cursor-pointer p-4 text-center">
@@ -48,7 +48,7 @@ const Dropdown = () => {
         <div className="absolute">
           <TiEdit
             onClick={toggleMenu}
-            className="text-zinc-900 w-6 h-6 cursor-pointer hover:text-orange-700"
+            className="text-zinc-100 md:text-zinc-900 w-6 h-6 cursor-pointer hover:text-orange-700"
           />
         </div>
       )}
