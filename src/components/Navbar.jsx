@@ -15,7 +15,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-10 p-2 bg-zinc-800 text-zinc-100">
       <div className="flex flex-row justify-between md:justify-around items-center">
         <Link to="/">
-          <div className="text-5xl font-bold text-orange-700">reddit</div>
+          <div className="text-5xl font-bold text-orange-600">reddit</div>
         </Link>
         <div className="md:hidden">
           {isOpen ? (
