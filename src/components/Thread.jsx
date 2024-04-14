@@ -8,7 +8,6 @@ import Timestamp from './Timestamp';
 import ModalComment from './ModalComment';
 import VoteReply from './VoteReply';
 import Dropdown from './Dropdown';
-import Toggle from './Toggle';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
@@ -53,6 +52,9 @@ const Thread = () => {
         <div className="flex justify-center md:justify-start">
           <ModalComment />
         </div>
+        {sorted.length === 0 && (
+          <div className="text-zinc-100 md:text-zinc-800  m-2">Nothing seems to be here yet...</div>
+        )}
         {sorted.map((c, i) => (
           <div key={i} className="text-zinc-100 text-sm bg-zinc-800 my-2 md:pb-2 rounded">
             <div className="px-2">

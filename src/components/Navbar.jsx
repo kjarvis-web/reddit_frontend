@@ -52,7 +52,7 @@ const Navbar = () => {
         )}
       </div>
       {isOpen && user ? (
-        <ul className="flex flex-col items-end">
+        <ul className="flex flex-col items-end md:hidden">
           <li className="flex gap-2 items-center">
             <TiUserOutline className="h-5 w-5" />
             <Link to={`/users/${user.id}`}>
