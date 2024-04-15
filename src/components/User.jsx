@@ -87,7 +87,7 @@ const User = () => {
 
   return (
     <div className="md:grid grid-cols-4 text-zinc-100">
-      <div className="col-start-2 col-span-2">
+      <div className="ml-2 col-start-2 col-span-2">
         <h1 className="font-bold text-3xl">{user.username}</h1>
         <p className=" text-sm">Member since {user.date.split(',')[0]}</p>
         <p className=" text-xl">Post Karma: {postKarma}</p>
