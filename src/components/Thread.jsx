@@ -47,9 +47,7 @@ const Thread = () => {
         )}
         <div className="my-4 md:ml-0 p-2 md:p-8 bg-zinc-300 text-zinc-900 md:rounded whitespace-pre-wrap">
           <div>{thread.content}</div>
-          {image && (
-            <img src={`${config.baseUrl}/${image.filename}`} className="rounded" alt="alt" />
-          )}
+          {image && <img src={image.url} className="rounded" alt="alt" />}
         </div>
         <div className="flex justify-center md:justify-start">
           <ModalComment />

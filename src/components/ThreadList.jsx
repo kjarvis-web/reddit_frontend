@@ -70,13 +70,7 @@ const ThreadList = () => {
               <Link to={`/posts/${post.id}`}>
                 <div className="grid">
                   <h1 className="font-bold text-base">{post.title}</h1>
-                  {image && (
-                    <img
-                      src={`${config.baseUrl}/${image.filename}`}
-                      className="rounded w-1/2"
-                      alt="alt"
-                    />
-                  )}{' '}
+                  {image && <img src={image.url} className="rounded w-1/2" alt="alt" />}{' '}
                   <div className="text-xs mt-2 col-start-1">{numberOfComments.length} comments</div>
                 </div>
               </Link>
@@ -127,7 +121,7 @@ const ThreadList = () => {
                 <h1 className="font-bold text-base">{post.title}</h1>
                 {image && (
                   <img
-                    src={`${config.baseUrl}/${image.filename}`}
+                    src={image.url}
                     className="rounded w-1/2"
                     alt="alt"
                   />
