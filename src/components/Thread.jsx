@@ -62,6 +62,7 @@ const Thread = () => {
               <div className="whitespace-pre-wrap">{c.text}</div>
               <VoteReply comment={c} />
               {comments.map((reply) => {
+                console.log(reply);
                 return (
                   reply.parentId === c.id && (
                     <div

@@ -23,7 +23,7 @@ const ModalReply = ({ replyId }) => {
   const handleReply = (e) => {
     e.preventDefault();
     setVisible(!visible);
-    dispatch(addReply(replyId, { comment: reply, thread: id }));
+    dispatch(addReply(replyId, { comment: reply, thread: id, author: user.id }));
     setReply('');
     ref.current.toggleModal();
   };

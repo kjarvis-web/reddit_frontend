@@ -17,7 +17,7 @@ const VoteReply = ({ comment }) => {
       id: c.id,
       downVotes: findDown ? c.downVotes.filter((userId) => userId !== user.id) : c.downVotes,
       upVotes: !findDown ? c.upVotes.concat(user.id) : c.upVotes,
-      author: c.author.id,
+      author: c.author,
     };
     dispatch(upVoteComment(post));
   };
@@ -29,7 +29,7 @@ const VoteReply = ({ comment }) => {
       id: c.id,
       upVotes: findUp ? c.upVotes.filter((userId) => userId !== user.id) : c.upVotes,
       downVotes: !findUp ? c.downVotes.concat(user.id) : c.downVotes,
-      author: c.author.id,
+      author: c.author,
     };
     dispatch(downVoteComment(post));
   };
@@ -72,7 +72,7 @@ const VoteReply = ({ comment }) => {
         )}
       </div>
       <ModalReply replyId={comment.id} />
-      {user.id === comment.user.id && <DropdownComment comment={comment} />}
+      {user.id === comment.author && <DropdownComment comment={comment} />}
       {comment.edited && (
         <div className="text-xs text-orange-600 flex items-center">this post has been edited</div>
       )}
