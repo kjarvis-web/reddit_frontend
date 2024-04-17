@@ -18,8 +18,10 @@ const VotePost = ({ thread }) => {
         ? thread.downVotes.filter((userId) => userId !== user.id)
         : thread.downVotes,
       upVotes: !findDown ? thread.upVotes.concat(user.id) : thread.upVotes,
-      author: thread.author.id,
+      author: thread.author,
     };
+    console.log(post);
+    console.log(thread.author);
 
     dispatch(upVote(post));
   };
@@ -32,7 +34,7 @@ const VotePost = ({ thread }) => {
       id: thread.id,
       upVotes: findUp ? thread.upVotes.filter((userId) => userId !== user.id) : thread.upVotes,
       downVotes: !findUp ? thread.downVotes.concat(user.id) : thread.downVotes,
-      author: thread.author.id,
+      author: thread.author,
     };
 
     dispatch(downVote(post));

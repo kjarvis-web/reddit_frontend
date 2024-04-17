@@ -32,7 +32,8 @@ const Thread = () => {
   const findComments = comments.filter((comment) => comment.parentId === id);
   const sorted = [...findComments].sort((a, b) => a.created - b.created);
   const image = images.find((image) => image.threadId === thread.id);
-
+  const users = useSelector((state) => state.users);
+  const author = users.find((user) => user.id === thread.author);
   return threads.length === 0 ? (
     <div>loading...</div>
   ) : (
@@ -42,10 +43,10 @@ const Thread = () => {
           <h1 className="px-2 font-bold md:text-3xl text-xl text-zinc-100 md:text-zinc-900">
             {thread.title} posted by{' '}
             <Link to={`/users/${thread.author.id}`} className="hover:underline">
-              {thread.author.username}
+              {author.username}
             </Link>
           </h1>
-          {user && thread.author.id === user.id && <Dropdown />}
+          {user && thread.author === user.id && <Dropdown />}
         </div>
         {thread.edited && (
           <div className="ml-4 mt-2 text-xs text-red-700">this post has been edited</div>

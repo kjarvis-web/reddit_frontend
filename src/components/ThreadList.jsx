@@ -22,6 +22,7 @@ const ThreadList = () => {
     dispatch(getUsers());
     dispatch(getComments());
     dispatch(getImages());
+    console.log('use effect');
   }, [dispatch]);
 
   const addLike = (thread) => {
@@ -50,6 +51,8 @@ const ThreadList = () => {
       downVotes: !findUp ? thread.downVotes.concat(user.id) : thread.downVotes,
       author: thread.author.id,
     };
+
+    console.log('author.id', thread.author);
 
     dispatch(downVote(post));
   };
