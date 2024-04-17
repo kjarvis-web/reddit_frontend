@@ -51,6 +51,7 @@ const threadSlice = createSlice({
           ...findThread,
           likes: action.payload.likes,
           downVotes: removeDownVote,
+          author: action.payload.author,
         };
 
         return { ...state, threads: [...newThreads, newThread] };
@@ -60,6 +61,8 @@ const threadSlice = createSlice({
         ...findThread,
         likes: action.payload.likes,
         upVotes: action.payload.upVotes,
+        user: action.payload.user,
+        author: action.payload.author,
       };
 
       return { ...state, threads: [...newThreads, newThread] };
@@ -76,6 +79,8 @@ const threadSlice = createSlice({
           ...findThread,
           likes: action.payload.likes,
           upVotes: removeUpvote,
+          user: action.payload.user,
+          author: action.payload.author,
         };
 
         return { ...state, threads: [...newThreads, newThread] };
@@ -84,6 +89,7 @@ const threadSlice = createSlice({
         ...findThread,
         likes: action.payload.likes,
         downVotes: findThread.downVotes.concat(action.payload.downVotes),
+        author: action.payload.author,
       };
 
       return { ...state, threads: [...newThreads, newThread] };
@@ -101,6 +107,7 @@ const threadSlice = createSlice({
           ...findComment,
           likes: action.payload.likes,
           downVotes: removeDownVote,
+          author: action.payload.author,
         };
 
         return { ...state, comments: [...newComments, newComment] };
@@ -109,6 +116,7 @@ const threadSlice = createSlice({
         ...findComment,
         likes: action.payload.likes,
         upVotes: action.payload.upVotes,
+        author: action.payload.author,
       };
       console.log('append upvote', newComment);
       console.log(action.payload.upVotes);
@@ -127,6 +135,7 @@ const threadSlice = createSlice({
           ...findComment,
           likes: action.payload.likes,
           upVotes: removeUpVote,
+          author: action.payload.author,
         };
 
         return { ...state, comments: [...newComments, newComment] };
@@ -136,6 +145,7 @@ const threadSlice = createSlice({
         ...findComment,
         likes: action.payload.likes,
         downVotes: action.payload.downVotes,
+        author: action.payload.author,
       };
       console.log('appendDownVote');
       console.log(action.payload);
@@ -207,7 +217,7 @@ export const getComments = () => {
 export const addComment = (id, comment) => {
   return async (dispatch) => {
     const newComment = await threadService.addComment(id, comment);
-
+    console.log(newComment);
     dispatch(appendComment(newComment));
   };
 };

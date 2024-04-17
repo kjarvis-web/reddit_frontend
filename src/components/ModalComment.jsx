@@ -20,7 +20,9 @@ const ModalComment = () => {
     const newComment = {
       comment,
       thread: id,
+      author: user.id,
     };
+    console.log(newComment);
     dispatch(addComment(id, newComment));
     setComment('');
     //for toggle visibility of comment modal window after submit

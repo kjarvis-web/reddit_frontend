@@ -27,6 +27,7 @@ const ThreadList = () => {
 
   const addLike = (thread) => {
     const findDown = thread.downVotes.find((userId) => userId === user.id);
+    console.log('finddown', findDown);
     const post = {
       likes: thread.likes + 1,
       id: thread.id,
@@ -34,18 +35,23 @@ const ThreadList = () => {
         ? thread.downVotes.filter((userId) => userId !== user.id)
         : thread.downVotes,
       upVotes: !findDown ? thread.upVotes.concat(user.id) : thread.upVotes,
+      author: thread.author.id,
     };
+    console.log('addlike', post);
     dispatch(upVote(post));
   };
 
   const removeLike = (thread) => {
     const findUp = thread.upVotes.find((userId) => userId === user.id);
+    console.log('findup', findUp);
     const post = {
       likes: thread.likes - 1,
       id: thread.id,
       upVotes: findUp ? thread.upVotes.filter((userId) => userId !== user.id) : thread.upVotes,
       downVotes: !findUp ? thread.downVotes.concat(user.id) : thread.downVotes,
+      author: thread.author.id,
     };
+    console.log('removelike', post);
     dispatch(downVote(post));
   };
 

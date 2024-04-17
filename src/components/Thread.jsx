@@ -38,9 +38,9 @@ const Thread = () => {
       <div className="md:bg-zinc-200 py-4 md:px-8 rounded md:shadow-lg md:border text-sm md:text-base">
         <div className="flex flex-row justify-between">
           <h1 className="px-2 font-bold md:text-3xl text-xl text-zinc-100 md:text-zinc-900">
-            {thread.title} posted by {thread.user.username}
+            {thread.title} posted by {thread.author.username}
           </h1>
-          {user && thread.user.id === user.id && <Dropdown />}
+          {user && thread.author.id === user.id && <Dropdown />}
         </div>
         {thread.edited && (
           <div className="ml-4 mt-2 text-xs text-orange-700">this post has been edited</div>
