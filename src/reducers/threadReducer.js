@@ -217,7 +217,7 @@ export const getComments = () => {
 export const addComment = (id, comment) => {
   return async (dispatch) => {
     const newComment = await threadService.addComment(id, comment);
-    console.log(newComment);
+
     dispatch(appendComment(newComment));
   };
 };
@@ -225,7 +225,7 @@ export const addComment = (id, comment) => {
 export const addReply = (id, comment) => {
   return async (dispatch) => {
     const newReply = await threadService.addReply(id, comment);
-    console.log('addReply', newReply);
+
     dispatch(appendReply(newReply));
   };
 };

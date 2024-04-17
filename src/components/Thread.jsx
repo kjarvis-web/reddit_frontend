@@ -11,6 +11,7 @@ import Dropdown from './Dropdown';
 import { getImages } from '../reducers/imageReducer';
 import Toggle from './Toggle';
 import { Link } from 'react-router-dom';
+import VotePost from './VotePost';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
@@ -57,7 +58,7 @@ const Thread = () => {
             </Toggle>
           )}
         </div>
-
+        <VotePost thread={thread} />
         <div className="flex justify-center md:justify-start">
           <ModalComment />
         </div>
