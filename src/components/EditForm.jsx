@@ -28,6 +28,7 @@ const EditForm = ({ setIsOpen }) => {
       edited: true,
       user,
       id,
+      author: user,
     };
     dispatch(updatePost(editedPost));
     setContent('');

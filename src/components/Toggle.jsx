@@ -1,23 +1,23 @@
+/* eslint-disable react/prop-types */
 import { useState } from 'react';
 
 const Toggle = (props) => {
   const [visible, setVisible] = useState(false);
 
-  const hide = visible ? 'hidden' : '';
-  const show = visible ? '' : 'hidden';
+  const small = visible ? 'hidden' : 'md:w-1/4';
+  const original = visible ? '' : 'hidden';
 
   const toggleVisibility = () => {
     setVisible(!visible);
   };
 
   return (
-    <div>
-      <div className={hide}>
-        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
-      </div>
-      <div className={show}>
+    <div className="image-container">
+      <div className={small} onClick={toggleVisibility}>
         {props.children}
-        <button onClick={toggleVisibility}>hide</button>
+      </div>
+      <div className={original} onClick={toggleVisibility}>
+        {props.children}
       </div>
     </div>
   );

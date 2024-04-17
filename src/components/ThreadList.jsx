@@ -6,7 +6,6 @@ import ThreadForm from './ThreadForm';
 import { getUsers } from '../reducers/userReducer';
 import { TiArrowUpThick, TiArrowDownThick } from 'react-icons/ti';
 import { getImages } from '../reducers/imageReducer';
-import config from '../utils/config';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
@@ -27,7 +26,7 @@ const ThreadList = () => {
 
   const addLike = (thread) => {
     const findDown = thread.downVotes.find((userId) => userId === user.id);
-    console.log('finddown', findDown);
+
     const post = {
       likes: thread.likes + 1,
       id: thread.id,
@@ -37,7 +36,7 @@ const ThreadList = () => {
       upVotes: !findDown ? thread.upVotes.concat(user.id) : thread.upVotes,
       author: thread.author.id,
     };
-    console.log('addlike', post);
+
     dispatch(upVote(post));
   };
 
@@ -51,7 +50,7 @@ const ThreadList = () => {
       downVotes: !findUp ? thread.downVotes.concat(user.id) : thread.downVotes,
       author: thread.author.id,
     };
-    console.log('removelike', post);
+
     dispatch(downVote(post));
   };
 
@@ -125,7 +124,7 @@ const ThreadList = () => {
             <Link to={`/posts/${post.id}`} className="grow">
               <div className="">
                 <h1 className="font-bold text-base">{post.title}</h1>
-                {image && <img src={image.url} className="rounded w-1/2" alt="alt" />}{' '}
+                {image && <img src={image.url} className="rounded w-1/4" alt="alt" />}{' '}
                 <div className="text-xs mt-2 col-start-1">{numberOfComments.length} comments</div>
               </div>
             </Link>

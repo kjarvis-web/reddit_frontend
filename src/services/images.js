@@ -5,7 +5,6 @@ const baseUrl = `${config.baseUrl}/api/images`;
 
 const getImages = async () => {
   const request = await axios.get(baseUrl);
-  console.log(baseUrl);
   return request.data;
 };
 

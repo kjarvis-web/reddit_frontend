@@ -42,7 +42,7 @@ const Navbar = () => {
               </Link>
             </div>
             <button
-              className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 font-bold py-2 px-2 rounded-full text-sm"
+              className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-100 hover:text-zinc-800 font-bold py-2 px-2 rounded-full text-sm border border-zinc-100"
               onClick={() => dispatch(logout())}
             >
               <TbLogout2 className="h-5 w-5" />

@@ -42,7 +42,7 @@ const ModalReply = ({ replyId }) => {
       h2={`Replying to ${findAuthor.user.username}`}
       className="flex items-center"
     >
-      <p className="text-zinc-100">{findAuthor.text}</p>
+      <p className="text-zinc-100 p-4 rounded border-zinc-500 border">{findAuthor.text}</p>
       <form onSubmit={handleReply} className="flex flex-col mt-2 text-zinc-800">
         <textarea
           className="text-zinc-900 rounded focus:outline-none text-sm w-full p-1"

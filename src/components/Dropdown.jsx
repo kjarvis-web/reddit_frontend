@@ -25,7 +25,7 @@ const Dropdown = () => {
   };
 
   return (
-    <div className="flex flex-col mr-6">
+    <div className="flex flex-col mr-7">
       {isOpen ? (
         <div className="absolute">
           <TiTimes
