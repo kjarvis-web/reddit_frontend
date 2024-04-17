@@ -42,7 +42,7 @@ const Thread = () => {
         <div className="flex flex-row justify-between">
           <h1 className="px-2 font-bold md:text-3xl text-xl text-zinc-100 md:text-zinc-900">
             {thread.title} posted by{' '}
-            <Link to={`/users/${thread.author.id}`} className="hover:underline">
+            <Link to={`/users/${thread.author}`} className="hover:underline">
               {author.username}
             </Link>
           </h1>

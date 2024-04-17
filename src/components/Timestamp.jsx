@@ -19,7 +19,7 @@ const Timestamp = ({ c }) => {
   if (!user) return <div>loading...</div>;
   return (
     <div>
-      <Link to={`/users/${user.id}`}>
+      <Link to={`/users/${c.author}`}>
         <span className="font-bold hover:underline">{user.username}</span>
       </Link>{' '}
       {'\u2219'} {c.date}

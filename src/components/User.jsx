@@ -22,10 +22,10 @@ const User = () => {
   const user = users.find((u) => u.id === id);
 
   const allPosts = useSelector((state) => state.thread.threads);
-  const posts = allPosts.filter((post) => post.user.id === id);
+  const posts = allPosts.filter((post) => post.author === id);
   const allComments = useSelector((state) => state.thread.comments);
-  const comments = allComments.filter((comment) => comment.user.id === id);
-
+  const comments = allComments.filter((comment) => comment.author === id);
+  console.log(allPosts);
   const postsAndComments = posts.concat(comments);
   const sorted = [...postsAndComments].sort((a, b) => b.created - a.created);
   const commentsSorted = [...comments].sort((a, b) => b.created - a.created);
