@@ -33,7 +33,7 @@ const ModalComment = () => {
     <Modal
       ref={ref}
       buttonLabel={`Add Comment \u2295`}
-      className="bg-zinc-200 hover:bg-zinc-100 font-bold py-2 px-4 rounded-full mb-2 text-zinc-800 border-zinc-900 border"
+      className="bg-zinc-200 hover:bg-zinc-100 font-bold p-2 rounded-full text-zinc-800 border-zinc-900 border"
       h2={`Post a comment`}
     >
       <form className="flex flex-col mt-4 text-zinc-800" onSubmit={handleComment}>

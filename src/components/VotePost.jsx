@@ -43,7 +43,7 @@ const VotePost = ({ thread }) => {
       <div className="flex gap-4">
         <div className="flex items-center gap-1">
           <TiArrowUpThick className="w-10 h-10" />
-          <span className="text-xs">{thread.likes}</span>
+          <span className="text-base font-bold">{thread.likes}</span>
           <TiArrowDownThick className="w-10 h-10" />
         </div>
       </div>
@@ -51,13 +51,13 @@ const VotePost = ({ thread }) => {
   }
 
   return (
-    <div className="flex gap-4 mb-2">
-      <div className="flex items-center gap-1 bg-zinc-800 rounded-full text-zinc-100">
+    <div className="flex gap-4">
+      <div className="flex items-center gap-1 bg-zinc-800 rounded-full text-zinc-100 border border-zinc-800">
         {user.id === thread.upVotes.find((id) => id === user.id) ? (
           <TiArrowUpThick className="w-10 h-10 text-green-500" />
         ) : (
           <TiArrowUpThick
-            className="w-5 h-5 cursor-pointer hover:text-green-500"
+            className="w-10 h-10 cursor-pointer hover:text-green-500"
             onClick={addLike}
           />
         )}

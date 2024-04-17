@@ -58,8 +58,8 @@ const Thread = () => {
             </Toggle>
           )}
         </div>
-        <VotePost thread={thread} />
-        <div className="flex justify-center md:justify-start">
+        <div className="flex justify-center items-center md:justify-start gap-4">
+          <VotePost thread={thread} />
           <ModalComment />
         </div>
         {sorted.length === 0 && (
