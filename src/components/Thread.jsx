@@ -72,7 +72,7 @@ const Thread = () => {
           <div key={i} className="text-zinc-100 text-sm bg-zinc-800 my-2 md:pb-2 rounded">
             <div className="px-2">
               <Timestamp c={c} />
-              <div className="whitespace-pre-wrap">{c.text}</div>
+              <div className="whitespace-pre-wrap p-1">{c.text}</div>
               <VoteReply comment={c} />
               {comments.map((reply) => {
                 return (
@@ -82,7 +82,7 @@ const Thread = () => {
                       key={reply.id}
                     >
                       <Timestamp c={reply} />
-                      <div className="whitespace-pre-wrap">{reply.text}</div>
+                      <div className="whitespace-pre-wrap p-1">{reply.text}</div>
                       <VoteReply comment={reply} />
                       <Reply replyId={reply.id} />
                     </div>
