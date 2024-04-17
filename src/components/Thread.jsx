@@ -18,22 +18,23 @@ const Thread = () => {
   const comments = useSelector((state) => state.thread.comments);
   const id = useParams().id;
   const dispatch = useDispatch();
-
+  const thread = threads.find((t) => t.id === id);
   useEffect(() => {
     dispatch(getThreads());
     dispatch(getComments());
     dispatch(getImages());
   }, [dispatch]);
   const user = useSelector((state) => state.login.user);
+  const users = useSelector((state) => state.users);
+  const author = users.find((user) => user.id === thread.author);
   const images = useSelector((state) => state.images);
-  const thread = threads.find((t) => t.id === id);
+
   if (!thread) return null;
 
   const findComments = comments.filter((comment) => comment.parentId === id);
   const sorted = [...findComments].sort((a, b) => a.created - b.created);
   const image = images.find((image) => image.threadId === thread.id);
-  const users = useSelector((state) => state.users);
-  const author = users.find((user) => user.id === thread.author);
+
   return threads.length === 0 ? (
     <div>loading...</div>
   ) : (
@@ -43,7 +44,7 @@ const Thread = () => {
           <h1 className="px-2 font-bold md:text-3xl text-xl text-zinc-100 md:text-zinc-900">
             {thread.title} posted by{' '}
             <Link to={`/users/${thread.author}`} className="hover:underline">
-              {author.username}
+              {!author ? <span>loading</span> : <span>{author.username}</span>}
             </Link>
           </h1>
           {user && thread.author === user.id && <Dropdown />}
