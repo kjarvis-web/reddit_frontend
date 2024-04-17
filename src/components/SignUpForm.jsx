@@ -29,8 +29,8 @@ const SignUpForm = () => {
       </div>
     );
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="font-bold mb-2 text-zinc-100 text-xl">
+    <div className="sign-up flex flex-col gap-4">
+      <h1 className="font-bold mb-2 text-zinc-100 text-xl text-center">
         Enter a username and password to create an account.
       </h1>
       <form

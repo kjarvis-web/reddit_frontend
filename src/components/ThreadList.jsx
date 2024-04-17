@@ -49,7 +49,7 @@ const ThreadList = () => {
     dispatch(downVote(post));
   };
 
-  if (loading || !images) return <div className="text-zinc-800">loading...</div>;
+  if (loading || !images) return <div className="text-zinc-100">loading...</div>;
 
   if (!user)
     return (
@@ -119,13 +119,7 @@ const ThreadList = () => {
             <Link to={`/posts/${post.id}`} className="grow">
               <div className="">
                 <h1 className="font-bold text-base">{post.title}</h1>
-                {image && (
-                  <img
-                    src={image.url}
-                    className="rounded w-1/2"
-                    alt="alt"
-                  />
-                )}{' '}
+                {image && <img src={image.url} className="rounded w-1/2" alt="alt" />}{' '}
                 <div className="text-xs mt-2 col-start-1">{numberOfComments.length} comments</div>
               </div>
             </Link>

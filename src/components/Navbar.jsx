@@ -71,7 +71,7 @@ const Navbar = () => {
         </ul>
       ) : null}
       {isOpen && !user ? (
-        <ul className="flex flex-col items-center gap-4 p-4">
+        <ul className="flex flex-col items-center gap-4 p-4 md:hidden">
           <li>
             <ModalLogin className="font-bold text-sm" />
           </li>
