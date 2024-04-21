@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../reducers/loginReducer';
 import { useNavigate } from 'react-router-dom';
+import { ColorRing } from 'react-loader-spinner';
 
 const LoginForm = ({ modalRef }) => {
   const [username, setUsername] = useState('');
@@ -24,7 +25,13 @@ const LoginForm = ({ modalRef }) => {
     navigate('/signup');
   };
 
-  if (loading && !error) return <div>logging you in...</div>;
+  if (loading && !error)
+    return (
+      <div className="flex justify-center">
+        <p>Logging you in...</p>
+        <ColorRing colors={['#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5']} />
+      </div>
+    );
 
   return (
     <div className="login">

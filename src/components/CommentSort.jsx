@@ -11,7 +11,7 @@ const CommentSort = () => {
       <label>Sort by: </label>
       <select
         value={filter}
-        className="rounded bg-zinc-200 group-hover:bg-zinc-100 cursor-pointer"
+        className="rounded bg-zinc-200 group-hover:bg-zinc-100 cursor-pointer focus:outline-none"
         onChange={(e) => dispatch(filterChange(e.target.value))}
       >
         <option value="OLD">Old</option>

@@ -28,7 +28,6 @@ const EditForm = ({ setIsOpen }) => {
       edited: true,
       user,
       id,
-      author: user,
     };
     dispatch(updatePost(editedPost));
     setContent('');
@@ -48,7 +47,7 @@ const EditForm = ({ setIsOpen }) => {
           placeholder="Type here..."
         />
         <button
-          className="bg-blue-600 hover:bg-blue-700 text-zinc-100 p-2 rounded mt-2"
+          className="bg-blue-600 hover:bg-blue-700 text-zinc-100 p-2 rounded mt-2 md:w-1/4"
           type="submit"
         >
           Submit
