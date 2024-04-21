@@ -6,6 +6,7 @@ import ThreadForm from './ThreadForm';
 import { getUsers } from '../reducers/userReducer';
 import { TiArrowUpThick, TiArrowDownThick } from 'react-icons/ti';
 import { getImages } from '../reducers/imageReducer';
+import { ColorRing } from 'react-loader-spinner';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,12 @@ const ThreadList = () => {
     dispatch(downVote(post));
   };
 
-  if (loading || !images) return <div className="text-zinc-100">loading...</div>;
+  if (loading || !images)
+    return (
+      <div className="flex justify-center">
+        <ColorRing colors={['#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5']} />
+      </div>
+    );
 
   if (!user)
     return (

@@ -10,8 +10,8 @@ import VoteReply from './VoteReply';
 import Dropdown from './Dropdown';
 import { getImages } from '../reducers/imageReducer';
 import Toggle from './Toggle';
-import { Link } from 'react-router-dom';
 import VotePost from './VotePost';
+import { ColorRing } from 'react-loader-spinner';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
