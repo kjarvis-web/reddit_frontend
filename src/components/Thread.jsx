@@ -12,6 +12,7 @@ import { getImages } from '../reducers/imageReducer';
 import Toggle from './Toggle';
 import VotePost from './VotePost';
 import { ColorRing } from 'react-loader-spinner';
+import CommentSort from './CommentSort';
 
 const Thread = () => {
   const threads = useSelector((state) => state.thread.threads);
@@ -25,17 +26,28 @@ const Thread = () => {
     dispatch(getImages());
   }, [dispatch]);
   const user = useSelector((state) => state.login.user);
-  const users = useSelector((state) => state.users);
   const images = useSelector((state) => state.images);
+  const findComments = comments.filter((comment) => comment.parentId === id);
+  const sorted = useSelector((state) => {
+    if (state.filter === 'NEW') {
+      return [...findComments].sort((a, b) => b.created - a.created);
+    }
+    if (state.filter === 'TOP') {
+      return [...findComments].sort((a, b) => b.likes - a.likes);
+    }
+    return [...findComments].sort((a, b) => a.created - b.created);
+  });
 
   if (!thread) return null;
 
-  const findComments = comments.filter((comment) => comment.parentId === id);
-  const sorted = [...findComments].sort((a, b) => a.created - b.created);
+  // const findComments = comments.filter((comment) => comment.parentId === id);
+  // const sorted = [...findComments].sort((a, b) => a.created - b.created);
   const image = images.find((image) => image.threadId === thread.id);
 
   return threads.length === 0 ? (
-    <div>loading...</div>
+    <div className="flex justify-center">
+      <ColorRing colors={['#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5']} />
+    </div>
   ) : (
     <div>
       <div className="md:bg-zinc-200 py-4 md:px-8 rounded md:shadow-lg md:border text-sm md:text-base">
@@ -48,11 +60,10 @@ const Thread = () => {
         <div className="text-zinc-100 md:text-zinc-800 px-2 md:px-0">
           <Timestamp c={thread} />
         </div>
-
         {thread.edited && (
           <div className="ml-4 mt-2 text-xs text-red-700">this post has been edited</div>
         )}
-        <div className="my-4 md:ml-0 p-2 md:p-8 bg-zinc-300 text-zinc-900 md:rounded whitespace-pre-wrap">
+        <div className="my-4 md:ml-0 p-2 md:p-8 md:bg-zinc-300 md:text-zinc-900 md:rounded whitespace-pre-wrap">
           <div>{thread.content}</div>
           {image && (
             <Toggle>
@@ -63,6 +74,7 @@ const Thread = () => {
         <div className="flex justify-center items-center md:justify-start gap-4">
           <VotePost thread={thread} />
           <ModalComment />
+          <CommentSort />
         </div>
         {sorted.length === 0 && (
           <div className="text-zinc-100 md:text-zinc-800 mt-2 mr-2">

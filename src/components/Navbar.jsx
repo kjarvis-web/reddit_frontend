@@ -52,8 +52,8 @@ const Navbar = () => {
         )}
       </div>
       {isOpen && user ? (
-        <ul className="flex flex-col items-end md:hidden">
-          <li className="flex gap-2 items-center">
+        <ul className="flex flex-col items-start md:hidden gap-4">
+          <li className="flex gap-2 items-center mt-4">
             <TiUserOutline className="h-5 w-5" />
             <Link to={`/users/${user.id}`}>
               <span className="hover:text-orange-600 font-bold">{user.username}</span>

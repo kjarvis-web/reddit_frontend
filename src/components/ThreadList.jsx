@@ -7,6 +7,8 @@ import { getUsers } from '../reducers/userReducer';
 import { TiArrowUpThick, TiArrowDownThick } from 'react-icons/ti';
 import { getImages } from '../reducers/imageReducer';
 import { ColorRing } from 'react-loader-spinner';
+import { filterChange } from '../reducers/filterReducer';
+import CommentSort from './CommentSort';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
@@ -16,13 +18,22 @@ const ThreadList = () => {
   const comments = useSelector((state) => state.thread.comments);
   const images = useSelector((state) => state.images);
 
-  const sorted = [...threads].sort((a, b) => a.created - b.created);
-
+  // const sorted = [...threads].sort((a, b) => a.created - b.created);
+  const sorted = useSelector((state) => {
+    if (state.filter === 'NEW') {
+      return [...threads].sort((a, b) => b.created - a.created);
+    }
+    if (state.filter === 'TOP') {
+      return [...threads].sort((a, b) => b.likes - a.likes);
+    }
+    return [...threads].sort((a, b) => a.created - b.created);
+  });
   useEffect(() => {
     dispatch(getThreads());
     dispatch(getUsers());
     dispatch(getComments());
     dispatch(getImages());
+    dispatch(filterChange('ALL'));
     console.log('use effect');
   }, [dispatch]);
 
@@ -105,8 +116,9 @@ const ThreadList = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-8 gap-y-2">
       {user && (
-        <div className="flex justify-center md:col-start-2 md:col-span-2 place-self-start">
+        <div className="flex justify-center md:justify-start md:col-start-2 md:col-span-2 gap-2">
           <ThreadForm />
+          <CommentSort />
         </div>
       )}
       {sorted.map((post) => {
@@ -115,7 +127,7 @@ const ThreadList = () => {
 
         return (
           <div
-            className="md:col-start-2 md:col-span-6 flex items-center gap-2 bg-zinc-200 md:text-zinc-800 p-2 text-sm md:rounded"
+            className="md:col-start-2 md:col-span-6 flex items-center gap-2 md:bg-zinc-200 md:text-zinc-800 p-2 text-sm md:rounded border-b border-zinc-700"
             key={post.id}
           >
             <div className="flex flex-col items-center">

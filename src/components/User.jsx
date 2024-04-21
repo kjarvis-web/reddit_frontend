@@ -25,7 +25,6 @@ const User = () => {
   const posts = allPosts.filter((post) => post.author === id);
   const allComments = useSelector((state) => state.thread.comments);
   const comments = allComments.filter((comment) => comment.author === id);
-  console.log(allPosts);
   const postsAndComments = posts.concat(comments);
   const sorted = [...postsAndComments].sort((a, b) => b.created - a.created);
   const commentsSorted = [...comments].sort((a, b) => b.created - a.created);
