@@ -26,7 +26,6 @@ const Thread = () => {
   }, [dispatch]);
   const user = useSelector((state) => state.login.user);
   const users = useSelector((state) => state.users);
-  const author = users.find((user) => user.id === thread.author);
   const images = useSelector((state) => state.images);
 
   if (!thread) return null;
@@ -41,14 +40,15 @@ const Thread = () => {
     <div>
       <div className="md:bg-zinc-200 py-4 md:px-8 rounded md:shadow-lg md:border text-sm md:text-base">
         <div className="flex flex-row justify-between">
-          <h1 className="px-2 font-bold md:text-3xl text-xl text-zinc-100 md:text-zinc-900">
-            {thread.title} posted by{' '}
-            <Link to={`/users/${thread.author}`} className="hover:underline">
-              {!author ? <span>loading</span> : <span>{author.username}</span>}
-            </Link>
+          <h1 className="px-2 md:px-0 font-bold md:text-3xl text-xl text-zinc-100 md:text-zinc-900">
+            {thread.title}
           </h1>
           {user && thread.author === user.id && <Dropdown />}
         </div>
+        <div className="text-zinc-100 md:text-zinc-800 px-2 md:px-0">
+          <Timestamp c={thread} />
+        </div>
+
         {thread.edited && (
           <div className="ml-4 mt-2 text-xs text-red-700">this post has been edited</div>
         )}
@@ -56,7 +56,7 @@ const Thread = () => {
           <div>{thread.content}</div>
           {image && (
             <Toggle>
-              <img src={image.url} className="rounded" alt="alt" />
+              <img src={image.url} className="rounded cursor-pointer" alt="alt" />
             </Toggle>
           )}
         </div>

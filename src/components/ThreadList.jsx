@@ -75,11 +75,19 @@ const ThreadList = () => {
                 <span className="font-bold">{post.likes}</span>
                 <TiArrowDownThick className="w-6 h-6" />
               </div>
-              <Link to={`/posts/${post.id}`}>
-                <div className="grid">
-                  <h1 className="font-bold text-base">{post.title}</h1>
-                  {image && <img src={image.url} className="rounded w-1/2" alt="alt" />}{' '}
-                  <div className="text-xs mt-2 col-start-1">{numberOfComments.length} comments</div>
+              <Link to={`/posts/${post.id}`} className="grow">
+                <div className="grid grid-cols-4">
+                  <h1 className="font-bold text-base col-span-2">{post.title}</h1>
+                  {image && (
+                    <img
+                      src={image.url}
+                      className="rounded col-start-4 row-span-2 place-self-end"
+                      alt="alt"
+                    />
+                  )}{' '}
+                  <div className="text-xs mt-2 col-start-1 self-end">
+                    {numberOfComments.length} comments
+                  </div>
                 </div>
               </Link>
             </div>
@@ -123,12 +131,19 @@ const ThreadList = () => {
                 />
               )}
             </div>
-
             <Link to={`/posts/${post.id}`} className="grow">
-              <div className="">
-                <h1 className="font-bold text-base">{post.title}</h1>
-                {image && <img src={image.url} className="rounded w-1/4" alt="alt" />}{' '}
-                <div className="text-xs mt-2 col-start-1">{numberOfComments.length} comments</div>
+              <div className="grid grid-cols-4">
+                <h1 className="font-bold text-base col-span-2">{post.title}</h1>
+                {image && (
+                  <img
+                    src={image.url}
+                    className="rounded col-start-4 row-span-2 place-self-end"
+                    alt="alt"
+                  />
+                )}{' '}
+                <div className="text-xs mt-2 col-start-1 self-end">
+                  {numberOfComments.length} comments
+                </div>
               </div>
             </Link>
           </div>

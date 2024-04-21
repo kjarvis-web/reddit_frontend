@@ -18,7 +18,7 @@ const Timestamp = ({ c }) => {
 
   if (!user) return <div>loading...</div>;
   return (
-    <div>
+    <div className="author">
       <Link to={`/users/${c.author}`}>
         <span className="font-bold hover:underline">{user.username}</span>
       </Link>{' '}
