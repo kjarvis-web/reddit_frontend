@@ -5,6 +5,7 @@ const initialState = {
   threads: [],
   loading: false,
   comments: [],
+  post: null,
 };
 
 //toolkit
@@ -155,12 +156,14 @@ const threadSlice = createSlice({
       return state;
     },
     editPost(state, action) {
-      const newThreads = state.threads.filter((p) => p.id !== action.payload.id);
-      return { ...state, threads: [...newThreads, action.payload] };
+      return { ...state, post: action.payload };
     },
     editComment(state, action) {
       const newComments = state.comments.filter((comment) => comment.id !== action.payload.id);
       return { ...state, comments: [...newComments, action.payload] };
+    },
+    setPost(state, action) {
+      return { ...state, post: action.payload };
     },
   },
 });
@@ -182,6 +185,7 @@ export const {
   editPost,
   deleteComment,
   editComment,
+  setPost,
 } = threadSlice.actions;
 
 export const createThread = (object) => {
@@ -189,9 +193,10 @@ export const createThread = (object) => {
     try {
       dispatch(setLoading(true));
       const newThread = await threadService.create(object);
-
+      console.log(newThread);
       dispatch(appendThread(newThread));
       dispatch(setLoading(false));
+      return newThread;
     } catch (error) {
       console.log(error);
     }
@@ -204,6 +209,13 @@ export const getThreads = (page) => {
     const threads = await threadService.getAll(page);
     dispatch(initializeThreads(threads));
     dispatch(setLoading(false));
+  };
+};
+
+export const getPost = (id) => {
+  return async (dispatch) => {
+    const post = await threadService.getThread(id);
+    dispatch(setPost(post));
   };
 };
 

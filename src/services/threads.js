@@ -10,8 +10,13 @@ const setToken = (newToken) => {
 
 const getAll = async (page) => {
   const request = await axios.get(`${postUrl}?page=${page}`);
-  return request.data.posts;
+  return request.data;
 };
+
+// const getAll = async () => {
+//   const request = await axios.get(`${postUrl}`);
+//   return request.data;
+// };
 
 const getTotalPages = async () => {
   const request = await axios.get(`${postUrl}/total`);
@@ -21,6 +26,7 @@ const getTotalPages = async () => {
 
 const getThread = async (id) => {
   const request = await axios.get(`${postUrl}/${id}`);
+  console.log(request.data);
   return request.data;
 };
 

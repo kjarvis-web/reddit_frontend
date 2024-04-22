@@ -30,7 +30,7 @@ function App() {
             <Route path="/users/:id" element={<User />} />
             <Route path="/signup" element={<SignUpForm />} />
           </Routes>
-          <Pager />
+          {/* <Pager /> */}
         </div>
         <div className="mt-auto">
           <Footer />

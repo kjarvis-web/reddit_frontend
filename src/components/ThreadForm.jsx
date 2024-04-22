@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createThread } from '../reducers/threadReducer';
+import { createThread, getThreads } from '../reducers/threadReducer';
 import Modal from './Modal';
 import { useRef } from 'react';
 import { getImages } from '../reducers/imageReducer';
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const ThreadForm = () => {
   const [title, setTitle] = useState('');
@@ -13,6 +14,7 @@ const ThreadForm = () => {
   const dispatch = useDispatch();
   const ref = useRef();
 
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -21,7 +23,14 @@ const ThreadForm = () => {
     formData.append('title', title);
     formData.append('content', content);
 
-    dispatch(createThread(formData));
+    dispatch(createThread(formData))
+      .then((data) => {
+        if (data) {
+          navigate(`/posts/${data.id}`);
+        }
+      })
+      .catch((error) => console.log(error));
+
     setTitle('');
     setContent('');
     setFile(null);
@@ -30,6 +39,7 @@ const ThreadForm = () => {
 
   useEffect(() => {
     dispatch(getImages());
+    // dispatch(getThreads(page));
   }, [dispatch]);
 
   return (

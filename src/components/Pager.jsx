@@ -1,7 +1,13 @@
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { next, previous } from '../reducers/pageReducer';
+import { firstPage, lastPage, next, previous } from '../reducers/pageReducer';
 import { TiArrowLeft, TiArrowRight } from 'react-icons/ti';
+import {
+  MdOutlineKeyboardDoubleArrowLeft,
+  MdOutlineKeyboardDoubleArrowRight,
+  MdOutlineKeyboardArrowLeft,
+  MdOutlineKeyboardArrowRight,
+} from 'react-icons/md';
 
 const Pager = () => {
   const dispatch = useDispatch();
@@ -12,9 +18,17 @@ const Pager = () => {
       <button
         className="flex items-center justify-center"
         disabled={page === 0}
+        onClick={() => dispatch(firstPage())}
+      >
+        <MdOutlineKeyboardDoubleArrowLeft />
+        First
+      </button>
+      <button
+        className="flex items-center justify-center"
+        disabled={page === 0}
         onClick={() => dispatch(previous())}
       >
-        <TiArrowLeft />
+        <MdOutlineKeyboardArrowLeft />
         Previous
       </button>
       <button
@@ -23,7 +37,15 @@ const Pager = () => {
         onClick={() => dispatch(next())}
       >
         Next
-        <TiArrowRight />
+        <MdOutlineKeyboardArrowRight />
+      </button>
+      <button
+        disabled={page === total - 1}
+        className="flex items-center justify-center"
+        onClick={() => dispatch(lastPage())}
+      >
+        Last
+        <MdOutlineKeyboardDoubleArrowRight />
       </button>
     </div>
   );

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getComments, getThreads } from '../reducers/threadReducer';
+import { getComments, getPost } from '../reducers/threadReducer';
 import Reply from './Reply';
 import Timestamp from './Timestamp';
 import ModalComment from './ModalComment';
@@ -15,17 +15,17 @@ import { ColorRing } from 'react-loader-spinner';
 import CommentSort from './CommentSort';
 
 const Thread = () => {
-  const threads = useSelector((state) => state.thread.threads);
   const comments = useSelector((state) => state.thread.comments);
   const id = useParams().id;
   const dispatch = useDispatch();
-  const thread = threads.find((t) => t.id === id);
-  const page = useSelector((state) => state.page.number);
+  const thread = useSelector((state) => state.thread.post);
+
   useEffect(() => {
-    dispatch(getThreads(page));
+    dispatch(getPost(id));
     dispatch(getComments());
     dispatch(getImages());
-  }, [dispatch, page]);
+  }, [dispatch, id]);
+
   const user = useSelector((state) => state.login.user);
   const images = useSelector((state) => state.images);
   const findComments = comments.filter((comment) => comment.parentId === id);
@@ -39,17 +39,17 @@ const Thread = () => {
     return [...findComments].sort((a, b) => a.created - b.created);
   });
 
-  if (!thread) return null;
+  if (!thread) {
+    return (
+      <div className="flex justify-center">
+        <ColorRing colors={['#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5']} />
+      </div>
+    );
+  }
 
-  // const findComments = comments.filter((comment) => comment.parentId === id);
-  // const sorted = [...findComments].sort((a, b) => a.created - b.created);
   const image = images.find((image) => image.threadId === thread.id);
 
-  return threads.length === 0 ? (
-    <div className="flex justify-center">
-      <ColorRing colors={['#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5']} />
-    </div>
-  ) : (
+  return (
     <div>
       <div className="md:bg-zinc-200 py-4 md:px-8 rounded md:shadow-lg md:border text-sm md:text-base">
         <div className="flex flex-row justify-between">

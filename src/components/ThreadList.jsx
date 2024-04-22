@@ -10,6 +10,7 @@ import { ColorRing } from 'react-loader-spinner';
 import { filterChange } from '../reducers/filterReducer';
 import CommentSort from './CommentSort';
 import { totalPages } from '../reducers/pageReducer';
+import Pager from './Pager';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
@@ -37,7 +38,8 @@ const ThreadList = () => {
     dispatch(getImages());
     dispatch(filterChange(''));
     dispatch(totalPages());
-    console.log('use effect');
+    console.log('use effect', page);
+    console.log(page);
   }, [dispatch, page]);
 
   const addLike = (thread) => {
@@ -81,19 +83,79 @@ const ThreadList = () => {
 
   if (!user)
     return (
+      <div>
+        <div className="grid grid-cols-1 md:grid-cols-8 gap-y-2">
+          {sorted.map((post) => {
+            const numberOfComments = comments.filter((c) => c.thread === post.id);
+            const image = images.find((image) => image.threadId === post.id);
+            return (
+              <div
+                className="md:col-start-2 md:col-span-6 flex items-center gap-2 md:bg-zinc-200 md:text-zinc-800 p-2 text-sm md:rounded border-b border-zinc-700"
+                key={post.id}
+              >
+                <div className="flex flex-col items-center">
+                  <TiArrowUpThick className="w-6 h-6" />
+                  <span className="font-bold">{post.likes}</span>
+                  <TiArrowDownThick className="w-6 h-6" />
+                </div>
+                <Link to={`/posts/${post.id}`} className="grow">
+                  <div className="grid grid-cols-4">
+                    <h1 className="font-bold text-base col-span-2">{post.title}</h1>
+                    {image && (
+                      <img
+                        src={image.url}
+                        className="rounded col-start-4 row-span-2 place-self-end"
+                        alt="alt"
+                      />
+                    )}{' '}
+                    <div className="text-xs mt-2 col-start-1 self-end">
+                      {numberOfComments.length} comments
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+        <Pager />
+      </div>
+    );
+
+  return (
+    <div>
       <div className="grid grid-cols-1 md:grid-cols-8 gap-y-2">
+        {user && (
+          <div className="flex justify-center md:justify-start md:col-start-2 gap-2 md:col-span-4">
+            <ThreadForm />
+            <CommentSort />
+          </div>
+        )}
         {sorted.map((post) => {
           const numberOfComments = comments.filter((c) => c.thread === post.id);
           const image = images.find((image) => image.threadId === post.id);
           return (
             <div
-              className="md:col-start-2 md:col-span-6 md:bg-zinc-800 text-zinc-100 p-2 text-sm flex items-center md:rounded border border-zinc-700"
+              className="md:col-start-2 md:col-span-6 flex items-center gap-2 md:bg-zinc-200 md:text-zinc-800 p-2 text-sm md:rounded border-b border-zinc-700"
               key={post.id}
             >
               <div className="flex flex-col items-center">
-                <TiArrowUpThick className="w-6 h-6" />
+                {user.id === post.upVotes.find((userId) => userId === user.id) ? (
+                  <TiArrowUpThick className="w-6 h-6 text-green-500" />
+                ) : (
+                  <TiArrowUpThick
+                    className="w-6 h-6 cursor-pointer hover:text-green-500"
+                    onClick={() => addLike(post)}
+                  />
+                )}
                 <span className="font-bold">{post.likes}</span>
-                <TiArrowDownThick className="w-6 h-6" />
+                {user.id === post.downVotes.find((userId) => userId === user.id) ? (
+                  <TiArrowDownThick className="w-6 h-6 text-orange-600" />
+                ) : (
+                  <TiArrowDownThick
+                    className="w-6 h-6 cursor-pointer hover:text-orange-600"
+                    onClick={() => removeLike(post)}
+                  />
+                )}
               </div>
               <Link to={`/posts/${post.id}`} className="grow">
                 <div className="grid grid-cols-4">
@@ -114,62 +176,7 @@ const ThreadList = () => {
           );
         })}
       </div>
-    );
-
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-8 gap-y-2">
-      {user && (
-        <div className="flex justify-center md:justify-start md:col-start-2 gap-2 md:col-span-4">
-          <ThreadForm />
-          <CommentSort />
-        </div>
-      )}
-      {sorted.map((post) => {
-        const numberOfComments = comments.filter((c) => c.thread === post.id);
-        const image = images.find((image) => image.threadId === post.id);
-
-        return (
-          <div
-            className="md:col-start-2 md:col-span-6 flex items-center gap-2 md:bg-zinc-200 md:text-zinc-800 p-2 text-sm md:rounded border-b border-zinc-700"
-            key={post.id}
-          >
-            <div className="flex flex-col items-center">
-              {user.id === post.upVotes.find((userId) => userId === user.id) ? (
-                <TiArrowUpThick className="w-6 h-6 text-green-500" />
-              ) : (
-                <TiArrowUpThick
-                  className="w-6 h-6 cursor-pointer hover:text-green-500"
-                  onClick={() => addLike(post)}
-                />
-              )}
-              <span className="font-bold">{post.likes}</span>
-              {user.id === post.downVotes.find((userId) => userId === user.id) ? (
-                <TiArrowDownThick className="w-6 h-6 text-orange-600" />
-              ) : (
-                <TiArrowDownThick
-                  className="w-6 h-6 cursor-pointer hover:text-orange-600"
-                  onClick={() => removeLike(post)}
-                />
-              )}
-            </div>
-            <Link to={`/posts/${post.id}`} className="grow">
-              <div className="grid grid-cols-4">
-                <h1 className="font-bold text-base col-span-2">{post.title}</h1>
-                {image && (
-                  <img
-                    src={image.url}
-                    className="rounded col-start-4 row-span-2 place-self-end"
-                    alt="alt"
-                  />
-                )}{' '}
-                <div className="text-xs mt-2 col-start-1 self-end">
-                  {numberOfComments.length} comments
-                </div>
-              </div>
-            </Link>
-          </div>
-        );
-      })}
+      <Pager />
     </div>
   );
 };

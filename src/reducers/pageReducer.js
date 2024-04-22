@@ -13,10 +13,16 @@ const pageSlice = createSlice({
     setTotal(state, action) {
       return { ...state, total: action.payload };
     },
+    setPage(state) {
+      return { ...state, number: 0 };
+    },
+    setLast(state) {
+      return { ...state, number: state.total - 1 };
+    },
   },
 });
 
-export const { nextPage, previousPage, setTotal } = pageSlice.actions;
+export const { nextPage, previousPage, setTotal, setPage, setLast } = pageSlice.actions;
 
 export const next = () => {
   return nextPage();
@@ -32,6 +38,14 @@ export const totalPages = () => {
 
     dispatch(setTotal(total));
   };
+};
+
+export const firstPage = () => {
+  return setPage();
+};
+
+export const lastPage = () => {
+  return setLast();
 };
 
 export default pageSlice.reducer;

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getThreads, updatePost } from '../reducers/threadReducer';
+import { getPost, getThreads, updatePost } from '../reducers/threadReducer';
 import Modal from './Modal';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
@@ -14,12 +14,13 @@ const EditForm = ({ setIsOpen }) => {
   const user = useSelector((state) => state.login.user);
   const id = useParams().id;
   const ref = useRef();
-  const posts = useSelector((state) => state.thread.threads);
-  const post = posts.find((p) => p.id === id);
+
+  const post = useSelector((state) => state.thread.post);
+
   useEffect(() => {
-    dispatch(getThreads());
+    dispatch(getPost(id));
     setContent(post.content);
-  }, [dispatch, post.content]);
+  }, [dispatch, post.content, id]);
 
   const handleEdit = (e) => {
     e.preventDefault();
