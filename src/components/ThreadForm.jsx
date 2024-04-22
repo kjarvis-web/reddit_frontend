@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { getImages } from '../reducers/imageReducer';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { lastPage } from '../reducers/pageReducer';
 
 const ThreadForm = () => {
   const [title, setTitle] = useState('');
@@ -27,6 +28,7 @@ const ThreadForm = () => {
       .then((data) => {
         if (data) {
           console.log(data);
+          dispatch(lastPage());
           navigate(`/posts/${data.id}`);
         }
       })

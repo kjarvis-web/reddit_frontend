@@ -21,13 +21,13 @@ const Thread = () => {
   const thread = useSelector((state) => state.thread.post);
   const post = useSelector((state) => state.thread.threads);
   const findPost = post.find((p) => p.id === id);
-  const page = useSelector((state) => state.page.total);
+  const page = useSelector((state) => state.page.number);
 
   useEffect(() => {
     dispatch(getPost(id));
     dispatch(getComments());
     dispatch(getImages());
-    dispatch(getThreads(page - 1));
+    dispatch(getThreads(page));
   }, [dispatch, id, page]);
 
   const user = useSelector((state) => state.login.user);
@@ -43,7 +43,7 @@ const Thread = () => {
     return [...findComments].sort((a, b) => a.created - b.created);
   });
 
-  if (!thread) {
+  if (!thread || !findPost) {
     return (
       <div className="flex justify-center">
         <ColorRing colors={['#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5']} />
