@@ -26,6 +26,7 @@ const ThreadForm = () => {
     dispatch(createThread(formData))
       .then((data) => {
         if (data) {
+          console.log(data);
           navigate(`/posts/${data.id}`);
         }
       })

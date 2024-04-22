@@ -20,8 +20,6 @@ const VotePost = ({ thread }) => {
       upVotes: !findDown ? thread.upVotes.concat(user.id) : thread.upVotes,
       author: thread.author,
     };
-    console.log(post);
-    console.log(thread.author);
 
     dispatch(upVote(post));
   };

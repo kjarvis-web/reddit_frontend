@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getComments, getPost } from '../reducers/threadReducer';
+import { getComments, getPost, getThreads } from '../reducers/threadReducer';
 import Reply from './Reply';
 import Timestamp from './Timestamp';
 import ModalComment from './ModalComment';
@@ -19,12 +19,16 @@ const Thread = () => {
   const id = useParams().id;
   const dispatch = useDispatch();
   const thread = useSelector((state) => state.thread.post);
+  const post = useSelector((state) => state.thread.threads);
+  const findPost = post.find((p) => p.id === id);
+  const page = useSelector((state) => state.page.total);
 
   useEffect(() => {
     dispatch(getPost(id));
     dispatch(getComments());
     dispatch(getImages());
-  }, [dispatch, id]);
+    dispatch(getThreads(page - 1));
+  }, [dispatch, id, page]);
 
   const user = useSelector((state) => state.login.user);
   const images = useSelector((state) => state.images);
@@ -73,7 +77,7 @@ const Thread = () => {
           )}
         </div>
         <div className="flex justify-center items-center md:justify-start gap-4">
-          <VotePost thread={thread} />
+          <VotePost thread={findPost} />
           <ModalComment />
           <CommentSort />
         </div>
