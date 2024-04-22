@@ -13,7 +13,7 @@ const Pager = () => {
   const page = useSelector((state) => state.page.number);
   const total = useSelector((state) => state.page.total);
   return (
-    <div className="flex gap-12 justify-center mt-4">
+    <div className="flex gap-8 justify-center mt-4">
       <button
         className="flex items-center justify-center"
         disabled={page === 0}
