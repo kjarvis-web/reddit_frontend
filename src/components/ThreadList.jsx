@@ -38,8 +38,6 @@ const ThreadList = () => {
     dispatch(getImages());
     dispatch(filterChange(''));
     dispatch(totalPages());
-    console.log('use effect', page);
-    console.log(page);
   }, [dispatch, page]);
 
   const addLike = (thread) => {

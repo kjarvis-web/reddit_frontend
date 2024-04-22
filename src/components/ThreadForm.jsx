@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { createThread, getThreads } from '../reducers/threadReducer';
+import { createThread } from '../reducers/threadReducer';
 import Modal from './Modal';
 import { useRef } from 'react';
 import { getImages } from '../reducers/imageReducer';

@@ -13,20 +13,15 @@ const getAll = async (page) => {
   return request.data;
 };
 
-// const getAll = async () => {
-//   const request = await axios.get(`${postUrl}`);
-//   return request.data;
-// };
-
 const getTotalPages = async () => {
   const request = await axios.get(`${postUrl}/total`);
-  console.log('getTotal', request.data);
+
   return request.data;
 };
 
 const getThread = async (id) => {
   const request = await axios.get(`${postUrl}/${id}`);
-  console.log(request.data);
+
   return request.data;
 };
 

@@ -19,7 +19,7 @@ const VoteReply = ({ comment }) => {
       upVotes: !findDown ? c.upVotes.concat(user.id) : c.upVotes,
       author: c.author,
     };
-    console.log(c.author);
+
     dispatch(upVoteComment(post));
   };
 

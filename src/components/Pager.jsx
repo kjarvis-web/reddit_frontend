@@ -1,7 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { firstPage, lastPage, next, previous } from '../reducers/pageReducer';
-import { TiArrowLeft, TiArrowRight } from 'react-icons/ti';
 import {
   MdOutlineKeyboardDoubleArrowLeft,
   MdOutlineKeyboardDoubleArrowRight,

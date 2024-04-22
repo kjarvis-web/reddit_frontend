@@ -44,7 +44,6 @@ const threadSlice = createSlice({
       const newThreads = state.threads.filter((t) => t.id !== action.payload.id);
 
       if (downVoted) {
-        console.log('if downvoted');
         const removeDownVote = findThread.downVotes.filter(
           (userId) => userId !== action.payload.user
         );
@@ -57,7 +56,7 @@ const threadSlice = createSlice({
 
         return { ...state, threads: [...newThreads, newThread] };
       }
-      console.log('upvote no like');
+
       const newThread = {
         ...findThread,
         likes: action.payload.likes,
@@ -74,7 +73,6 @@ const threadSlice = createSlice({
       const newThreads = state.threads.filter((t) => t.id !== action.payload.id);
 
       if (upVoted) {
-        console.log('here', upVoted);
         const removeUpvote = findThread.upVotes.filter((userId) => userId !== action.payload.user);
         const newThread = {
           ...findThread,
@@ -102,7 +100,6 @@ const threadSlice = createSlice({
       const newComments = state.comments.filter((c) => c.id !== action.payload.id);
 
       if (downVoted) {
-        console.log('appendUpVote if', downVoted);
         const removeDownVote = findComment.downVotes.filter((c) => c !== action.payload.user);
         const newComment = {
           ...findComment,
@@ -119,8 +116,6 @@ const threadSlice = createSlice({
         upVotes: action.payload.upVotes,
         author: action.payload.author,
       };
-      console.log('append upvote', newComment);
-      console.log(action.payload.upVotes);
 
       return { ...state, comments: [...newComments, newComment] };
     },
@@ -130,7 +125,6 @@ const threadSlice = createSlice({
       const newComments = state.comments.filter((c) => c.id !== action.payload.id);
 
       if (upVoted) {
-        console.log('if appendDownvote', upVoted);
         const removeUpVote = findComment.upVotes.filter((c) => c !== action.payload.user);
         const newComment = {
           ...findComment,
@@ -148,11 +142,10 @@ const threadSlice = createSlice({
         downVotes: action.payload.downVotes,
         author: action.payload.author,
       };
-      console.log('appendDownVote');
-      console.log(action.payload);
+
       return { ...state, comments: [...newComments, newComment] };
     },
-    deletePost(state, action) {
+    deletePost(state) {
       return state;
     },
     editPost(state, action) {
@@ -193,7 +186,6 @@ export const createThread = (object) => {
     try {
       dispatch(setLoading(true));
       const newThread = await threadService.create(object);
-      console.log(newThread);
       dispatch(appendThread(newThread));
       dispatch(setLoading(false));
       return newThread;
