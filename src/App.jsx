@@ -8,7 +8,6 @@ import { loggedUser } from './reducers/loginReducer';
 import User from './components/User';
 import SignUpForm from './components/SignUpForm';
 import Footer from './components/Footer';
-import Pager from './components/Pager';
 
 function App() {
   const dispatch = useDispatch();
@@ -30,7 +29,6 @@ function App() {
             <Route path="/users/:id" element={<User />} />
             <Route path="/signup" element={<SignUpForm />} />
           </Routes>
-          {/* <Pager /> */}
         </div>
         <div className="mt-auto">
           <Footer />
