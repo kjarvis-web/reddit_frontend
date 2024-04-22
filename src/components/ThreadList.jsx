@@ -119,7 +119,7 @@ const ThreadList = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-8 gap-y-2">
       {user && (
-        <div className="flex justify-center md:justify-start md:col-start-2 md:col-span-2 gap-2">
+        <div className="flex justify-center md:justify-start md:col-start-2 gap-2 md:col-span-4">
           <ThreadForm />
           <CommentSort />
         </div>
