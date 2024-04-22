@@ -20,11 +20,12 @@ const Thread = () => {
   const id = useParams().id;
   const dispatch = useDispatch();
   const thread = threads.find((t) => t.id === id);
+  const page = useSelector((state) => state.page.number);
   useEffect(() => {
-    dispatch(getThreads());
+    dispatch(getThreads(page));
     dispatch(getComments());
     dispatch(getImages());
-  }, [dispatch]);
+  }, [dispatch, page]);
   const user = useSelector((state) => state.login.user);
   const images = useSelector((state) => state.images);
   const findComments = comments.filter((comment) => comment.parentId === id);

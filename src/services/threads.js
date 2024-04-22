@@ -8,8 +8,14 @@ const setToken = (newToken) => {
   token = `Bearer ${newToken}`;
 };
 
-const getAll = async () => {
-  const request = await axios.get(postUrl);
+const getAll = async (page) => {
+  const request = await axios.get(`${postUrl}?page=${page}`);
+  return request.data.posts;
+};
+
+const getTotalPages = async () => {
+  const request = await axios.get(`${postUrl}/total`);
+  console.log('getTotal', request.data);
   return request.data;
 };
 
@@ -118,6 +124,7 @@ const updateComment = async (updatedComment) => {
 
 export default {
   getAll,
+  getTotalPages,
   create,
   setToken,
   update,

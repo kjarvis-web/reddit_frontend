@@ -9,6 +9,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './reducers/userReducer.js';
 import filterReducer from './reducers/filterReducer.js';
 import imageReducer from './reducers/imageReducer.js';
+import pageReducer from './reducers/pageReducer.js';
 
 //redux toolkit
 const store = configureStore({
@@ -18,6 +19,7 @@ const store = configureStore({
     users: userReducer,
     filter: filterReducer,
     images: imageReducer,
+    page: pageReducer,
   },
 });
 

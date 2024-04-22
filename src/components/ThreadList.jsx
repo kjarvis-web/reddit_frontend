@@ -9,6 +9,7 @@ import { getImages } from '../reducers/imageReducer';
 import { ColorRing } from 'react-loader-spinner';
 import { filterChange } from '../reducers/filterReducer';
 import CommentSort from './CommentSort';
+import { totalPages } from '../reducers/pageReducer';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
@@ -17,8 +18,8 @@ const ThreadList = () => {
   const user = useSelector((state) => state.login.user);
   const comments = useSelector((state) => state.thread.comments);
   const images = useSelector((state) => state.images);
+  const page = useSelector((state) => state.page.number);
 
-  // const sorted = [...threads].sort((a, b) => a.created - b.created);
   const sorted = useSelector((state) => {
     if (state.filter === 'NEW') {
       return [...threads].sort((a, b) => b.created - a.created);
@@ -28,14 +29,16 @@ const ThreadList = () => {
     }
     return [...threads].sort((a, b) => a.created - b.created);
   });
+
   useEffect(() => {
-    dispatch(getThreads());
+    dispatch(getThreads(page));
     dispatch(getUsers());
     dispatch(getComments());
     dispatch(getImages());
-    dispatch(filterChange('ALL'));
+    dispatch(filterChange(''));
+    dispatch(totalPages());
     console.log('use effect');
-  }, [dispatch]);
+  }, [dispatch, page]);
 
   const addLike = (thread) => {
     const findDown = thread.downVotes.find((userId) => userId === user.id);
