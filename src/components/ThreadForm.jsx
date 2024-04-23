@@ -7,6 +7,7 @@ import { getImages } from '../reducers/imageReducer';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { lastPage } from '../reducers/pageReducer';
+import AddPostLabel from './AddPostLabel';
 
 const ThreadForm = () => {
   const [title, setTitle] = useState('');
@@ -48,7 +49,7 @@ const ThreadForm = () => {
   return (
     <Modal
       ref={ref}
-      buttonLabel={`Post Thread \u2295`}
+      buttonLabel={<AddPostLabel />}
       className="bg-green-500 hover:bg-green-600 text-zinc-900 font-bold py-2 px-4 rounded-full border border-zinc-900"
       h2="New Thread"
     >
@@ -57,7 +58,6 @@ const ThreadForm = () => {
         onSubmit={handleSubmit}
         encType="multipart/form-data"
       >
-        {/* <label>Title: </label> */}
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
@@ -65,7 +65,6 @@ const ThreadForm = () => {
           placeholder="Title..."
           required={true}
         />
-        {/* <label>Content: </label> */}
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}

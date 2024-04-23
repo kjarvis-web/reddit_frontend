@@ -6,6 +6,7 @@ import { addComment } from '../reducers/threadReducer';
 import { useRef } from 'react';
 import Modal from './Modal';
 import { useSelector } from 'react-redux';
+import AddCommentLabel from './AddCommentLabel';
 
 const ModalComment = () => {
   const [comment, setComment] = useState('');
@@ -32,7 +33,7 @@ const ModalComment = () => {
   return (
     <Modal
       ref={ref}
-      buttonLabel={`Add Comment \u2295`}
+      buttonLabel={<AddCommentLabel />}
       className="bg-zinc-200 hover:bg-zinc-100 font-bold p-2 rounded-full text-zinc-800 border-zinc-900 border"
       h2={`Post a comment`}
     >

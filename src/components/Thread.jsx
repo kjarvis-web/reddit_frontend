@@ -94,6 +94,8 @@ const Thread = () => {
               <div className="whitespace-pre-wrap p-1">{c.text}</div>
               <VoteReply comment={c} />
               {comments.map((reply) => {
+                const nestedComments = comments.filter((c) => c.parentId === reply.id);
+                console.log(nestedComments);
                 return (
                   reply.parentId === c.id && (
                     <div
