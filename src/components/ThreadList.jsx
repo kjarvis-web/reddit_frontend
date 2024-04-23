@@ -123,7 +123,7 @@ const ThreadList = () => {
     <div>
       <div className="grid grid-cols-1 md:grid-cols-8 gap-y-2">
         {user && (
-          <div className="flex justify-center md:justify-start md:col-start-2 gap-2 md:col-span-4">
+          <div className="flex justify-center md:justify-start md:col-start-2 gap-2 md:col-span-4 text-sm">
             <ThreadForm />
             <CommentSort />
           </div>
@@ -156,12 +156,13 @@ const ThreadList = () => {
                 )}
               </div>
               <Link to={`/posts/${post.id}`} className="grow">
-                <div className="grid grid-cols-4">
+                <div className="grid grid-cols-3">
                   <h1 className="font-bold text-base col-span-2">{post.title}</h1>
+                  <div className="col-start-1 col-span-2 truncate">{post.content}</div>
                   {image && (
                     <img
                       src={image.url}
-                      className="rounded col-start-4 row-span-2 place-self-end"
+                      className="rounded col-start-3 place-self-end h-36"
                       alt="alt"
                     />
                   )}{' '}
