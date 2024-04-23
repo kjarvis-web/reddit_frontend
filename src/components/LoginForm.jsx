@@ -27,7 +27,7 @@ const LoginForm = ({ modalRef }) => {
 
   if (loading && !error)
     return (
-      <div className="flex justify-center">
+      <div className="flex flex-col justify-center items-center">
         <p>Logging you in...</p>
         <ColorRing colors={['#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5', '#f4f4f5']} />
       </div>

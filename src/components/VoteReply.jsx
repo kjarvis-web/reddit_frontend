@@ -45,7 +45,7 @@ const VoteReply = ({ comment }) => {
         </div>
         <ModalReply replyId={comment.id} />
         {comment.edited && (
-          <div className="text-xs text-green-500 flex items-center">this post has been edited</div>
+          <div className="text-xs text-red-700 flex items-center">this post has been edited</div>
         )}
       </div>
     );

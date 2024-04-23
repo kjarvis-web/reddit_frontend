@@ -40,7 +40,7 @@ const VotePost = ({ thread }) => {
 
   if (!user || thread.removed === true) {
     return (
-      <div className="flex gap-4">
+      <div className="flex gap-4 text-zinc-800">
         <div className="flex items-center gap-1">
           <TiArrowUpThick className="w-10 h-10" />
           <span className="text-base font-bold">{thread.likes}</span>

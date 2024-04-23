@@ -97,18 +97,19 @@ const ThreadList = () => {
                   <TiArrowDownThick className="w-6 h-6" />
                 </div>
                 <Link to={`/posts/${post.id}`} className="grow">
-                  <div className="grid grid-cols-4">
-                    <h1 className="font-bold text-base col-span-2">{post.title}</h1>
+                  <div className="grid grid-cols-3 gap-y-2">
+                    <h1 className="font-bold text-base col-span-3">{post.title}</h1>
+                    <div className="col-start-1 col-span-2 flex flex-col justify-between">
+                      <div className="truncate">{post.content}</div>
+                      <div className="text-xs mt-2">{numberOfComments.length} comments</div>
+                    </div>
                     {image && (
                       <img
                         src={image.url}
-                        className="rounded col-start-4 row-span-2 place-self-end"
+                        className="rounded col-start-3 place-self-end md:h-36"
                         alt="alt"
                       />
-                    )}{' '}
-                    <div className="text-xs mt-2 col-start-1 self-end">
-                      {numberOfComments.length} comments
-                    </div>
+                    )}
                   </div>
                 </Link>
               </div>
@@ -156,19 +157,19 @@ const ThreadList = () => {
                 )}
               </div>
               <Link to={`/posts/${post.id}`} className="grow">
-                <div className="grid grid-cols-3">
-                  <h1 className="font-bold text-base col-span-2">{post.title}</h1>
-                  <div className="col-start-1 col-span-2 truncate">{post.content}</div>
+                <div className="grid grid-cols-3 gap-y-2">
+                  <h1 className="font-bold text-base col-span-3">{post.title}</h1>
+                  <div className="col-start-1 col-span-2 flex flex-col justify-between">
+                    <div className="truncate">{post.content}</div>
+                    <div className="text-xs mt-2">{numberOfComments.length} comments</div>
+                  </div>
                   {image && (
                     <img
                       src={image.url}
-                      className="rounded col-start-3 place-self-end h-36"
+                      className="rounded col-start-3 place-self-end md:h-36"
                       alt="alt"
                     />
-                  )}{' '}
-                  <div className="text-xs mt-2 col-start-1 self-end">
-                    {numberOfComments.length} comments
-                  </div>
+                  )}
                 </div>
               </Link>
             </div>
