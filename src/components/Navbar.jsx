@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { logout } from '../reducers/loginReducer';
 import ModalLogin from './ModalLogin';
-import { TiThMenu, TiTimes, TiUserOutline } from 'react-icons/ti';
+import { TiUserOutline } from 'react-icons/ti';
 import { TbLogout2 } from 'react-icons/tb';
 import { useState } from 'react';
+import { IoMenu, IoClose } from 'react-icons/io5';
 
 const Navbar = () => {
   const user = useSelector((state) => state.login.user);
@@ -19,9 +20,9 @@ const Navbar = () => {
         </Link>
         <div className="md:hidden">
           {isOpen ? (
-            <TiTimes onClick={() => setIsOpen(false)} className="w-10 h-10" />
+            <IoClose onClick={() => setIsOpen(false)} className="w-10 h-10" />
           ) : (
-            <TiThMenu onClick={() => setIsOpen(true)} className="w-10 h-10" />
+            <IoMenu onClick={() => setIsOpen(true)} className="w-10 h-10" />
           )}
         </div>
         {!user ? (
