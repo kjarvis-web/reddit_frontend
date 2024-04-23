@@ -158,6 +158,9 @@ const threadSlice = createSlice({
     setPost(state, action) {
       return { ...state, post: action.payload };
     },
+    resetPost(state) {
+      return { ...state, post: null };
+    },
   },
 });
 
@@ -179,6 +182,7 @@ export const {
   deleteComment,
   editComment,
   setPost,
+  resetPost,
 } = threadSlice.actions;
 
 export const createThread = (object) => {

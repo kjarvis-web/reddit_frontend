@@ -8,6 +8,7 @@ import { loggedUser } from './reducers/loginReducer';
 import User from './components/User';
 import SignUpForm from './components/SignUpForm';
 import Footer from './components/Footer';
+import { resetPost } from './reducers/threadReducer';
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function App() {
       dispatch(loggedUser(user));
     }
   }, [dispatch]);
+
   return (
     <Router>
       <main className="flex min-h-screen flex-col bg-zinc-800 text-zinc-100 font-inter">

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getComments, getPost, getThreads } from '../reducers/threadReducer';
+import { getComments, getPost, getThreads, resetPost } from '../reducers/threadReducer';
 import Reply from './Reply';
 import Timestamp from './Timestamp';
 import ModalComment from './ModalComment';
@@ -24,6 +24,7 @@ const Thread = () => {
   const page = useSelector((state) => state.page.number);
 
   useEffect(() => {
+    dispatch(resetPost());
     dispatch(getPost(id));
     dispatch(getComments());
     dispatch(getImages());
