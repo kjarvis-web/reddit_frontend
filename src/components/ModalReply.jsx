@@ -31,7 +31,7 @@ const ModalReply = ({ replyId }) => {
   if (!user)
     return (
       <Modal ref={ref} buttonLabel={<ReplyLabel />}>
-        <LoginForm />
+        <LoginForm modalRef={ref} />
       </Modal>
     );
 

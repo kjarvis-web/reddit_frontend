@@ -8,7 +8,6 @@ import { loggedUser } from './reducers/loginReducer';
 import User from './components/User';
 import SignUpForm from './components/SignUpForm';
 import Footer from './components/Footer';
-import { resetPost } from './reducers/threadReducer';
 
 function App() {
   const dispatch = useDispatch();

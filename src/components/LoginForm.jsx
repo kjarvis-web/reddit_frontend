@@ -21,6 +21,7 @@ const LoginForm = ({ modalRef }) => {
   };
 
   const handleSignUp = () => {
+    console.log('sign up', modalRef);
     modalRef.current.toggleModal();
     navigate('/signup');
   };
