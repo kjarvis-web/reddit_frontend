@@ -8,11 +8,16 @@ const Search = () => {
   const allPosts = useSelector((state) => state.query.posts);
   const allImages = useSelector((state) => state.images);
   const dispatch = useDispatch();
-  const results = allPosts.filter(
-    (p) =>
+  const users = useSelector((state) => state.users);
+
+  const results = allPosts.filter((p) => {
+    const user = users.find((user) => user.id === p.author);
+    return (
       p.title.toLowerCase().includes(query.toLowerCase()) ||
-      p.content.toLowerCase().includes(query.toLowerCase())
-  );
+      p.content.toLowerCase().includes(query.toLowerCase()) ||
+      user.username.toLowerCase().includes(query.toLowerCase())
+    );
+  });
 
   const resultSliced = results.slice(0, 5);
   const resultTotal = results.length - resultSliced.length;
