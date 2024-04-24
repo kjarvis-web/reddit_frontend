@@ -85,7 +85,7 @@ const Thread = () => {
           <CommentSort />
         </div>
         {sorted.length === 0 && (
-          <div className="text-zinc-100 md:text-zinc-800 mt-2 mr-2">
+          <div className="text-zinc-100 md:text-zinc-800 mt-2 ml-2">
             Nothing seems to be here yet...
           </div>
         )}

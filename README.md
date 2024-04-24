@@ -8,7 +8,7 @@
 5. Edit/delete posts/comments &#x2705;
 6. Comment/post karma user page? &#x2705;
 7. Implement pagination &#x2705;
-8. search
+8. search &#x2705; sort of
 9. collapse/expand comments with many replies
 
 Live: https://reddit-3map.onrender.com

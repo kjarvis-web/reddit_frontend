@@ -19,10 +19,13 @@ const pageSlice = createSlice({
     setLast(state) {
       return { ...state, number: state.total - 1 };
     },
+    goToPage(state, action) {
+      return { ...state, number: action.payload - 1 };
+    },
   },
 });
 
-export const { nextPage, previousPage, setTotal, setPage, setLast } = pageSlice.actions;
+export const { nextPage, previousPage, setTotal, setPage, setLast, goToPage } = pageSlice.actions;
 
 export const next = () => {
   return nextPage();

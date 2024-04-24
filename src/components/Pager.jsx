@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { firstPage, lastPage, next, previous } from '../reducers/pageReducer';
+import { firstPage, goToPage, lastPage, next, previous } from '../reducers/pageReducer';
 import {
   MdOutlineKeyboardDoubleArrowLeft,
   MdOutlineKeyboardDoubleArrowRight,
@@ -12,6 +12,8 @@ const Pager = () => {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.page.number);
   const total = useSelector((state) => state.page.total);
+  const pageNumbers = Array.from({ length: total }, (_, i) => i + 1);
+
   return (
     <div className="flex gap-8 justify-center mt-4">
       <button
@@ -30,6 +32,15 @@ const Pager = () => {
         <MdOutlineKeyboardArrowLeft />
         Previous
       </button>
+      {/* {pageNumbers.map((n) => (
+        <button
+          className={page + 1 === n && 'font-bold'}
+          key={n}
+          onClick={() => dispatch(goToPage(n))}
+        >
+          {n}
+        </button>
+      ))} */}
       <button
         disabled={page === total - 1}
         className="flex items-center justify-center"
