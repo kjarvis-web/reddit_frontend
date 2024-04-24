@@ -1,6 +1,6 @@
 import { IoSearch } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAll, resetQuery, setQuery, setResults } from '../reducers/queryReducer';
 import { useEffect } from 'react';
 const Search = () => {
@@ -9,7 +9,7 @@ const Search = () => {
   const allImages = useSelector((state) => state.images);
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
-
+  const navigate = useNavigate();
   const results = allPosts.filter((p) => {
     const user = users.find((user) => user.id === p.author);
     return (
@@ -26,9 +26,11 @@ const Search = () => {
     dispatch(setQuery(e.target.value));
   };
 
-  const handleSearchPage = () => {
+  const handleSearchPage = (e) => {
+    e.preventDefault();
     dispatch(setResults(results));
     dispatch(resetQuery());
+    navigate('/search');
   };
 
   useEffect(() => {
@@ -37,7 +39,7 @@ const Search = () => {
 
   return (
     <div className="relative">
-      <div className="search-container flex items-center gap-2">
+      <form onSubmit={handleSearchPage} className="search-container flex items-center gap-2">
         <label>
           <IoSearch className="w-5 h-5" />
         </label>
@@ -47,7 +49,7 @@ const Search = () => {
           className="rounded-full focus:outline-none text-zinc-900 px-2"
           onChange={handleSearch}
         />
-      </div>
+      </form>
       {query !== '' && query.length > 3 && (
         <div className="bg-zinc-800 absolute w-full shadow-lg rounded">
           {resultSliced.map((r) => {
@@ -67,9 +69,9 @@ const Search = () => {
             );
           })}
           {resultTotal !== 0 && (
-            <Link to="/search" onClick={handleSearchPage}>
-              <div className="text-center p-2 text-sm">{resultTotal} more results...</div>
-            </Link>
+            <div className="flex justify-center p-2 text-sm">
+              <button onClick={handleSearchPage}>{resultTotal} more results...</button>
+            </div>
           )}
         </div>
       )}
