@@ -15,7 +15,7 @@ const Pager = () => {
   const pageNumbers = Array.from({ length: total }, (_, i) => i + 1);
 
   return (
-    <div className="flex gap-8 justify-center mt-4">
+    <div className="flex gap-6 justify-center mt-4">
       <button
         className="flex items-center justify-center"
         disabled={page === 0}

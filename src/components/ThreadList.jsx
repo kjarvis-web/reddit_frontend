@@ -82,13 +82,13 @@ const ThreadList = () => {
   if (!user)
     return (
       <div>
-        <div className="grid grid-cols-1 md:grid-cols-8 gap-y-2">
+        <div className="grid grid-cols-1 md:grid-cols-8">
           {sorted.map((post) => {
             const numberOfComments = comments.filter((c) => c.thread === post.id);
             const image = images.find((image) => image.threadId === post.id);
             return (
               <div
-                className="md:col-start-2 md:col-span-6 flex items-center gap-2 md:bg-zinc-200 md:text-zinc-800 p-2 text-sm md:rounded border-b border-zinc-700"
+                className="md:col-start-2 md:col-span-6 flex items-center gap-2 md:bg-zinc-200 md:text-zinc-800 p-2 text-sm border-b border-zinc-500"
                 key={post.id}
               >
                 <div className="flex flex-col items-center">
