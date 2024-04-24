@@ -22,7 +22,9 @@ const Thread = () => {
   const thread = useSelector((state) => state.thread.post);
   const post = useSelector((state) => state.thread.threads);
   const findPost = post.find((p) => p.id === id);
-  const page = useSelector((state) => state.page.number);
+  const queryPosts = useSelector((state) => state.query.posts);
+  const index = queryPosts.findIndex((p) => p.id === id);
+  const page = Math.floor(index / 10);
 
   useEffect(() => {
     dispatch(resetPost());

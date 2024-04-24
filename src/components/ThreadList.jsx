@@ -122,9 +122,9 @@ const ThreadList = () => {
 
   return (
     <div>
-      <div className="md:grid-cols-8 gap-y-2">
+      <div className="grid grid-cols-1 md:grid-cols-8">
         {user && (
-          <div className="flex justify-center md:justify-start md:col-start-2 gap-2 md:col-span-4 text-sm">
+          <div className="flex justify-center md:justify-start md:col-start-2 gap-2 md:col-span-4 text-sm mb-2">
             <ThreadForm />
             <CommentSort />
           </div>
@@ -134,7 +134,7 @@ const ThreadList = () => {
           const image = images.find((image) => image.threadId === post.id);
           return (
             <div
-              className="md:col-start-2 md:col-span-6 flex items-center gap-2 md:bg-zinc-200 md:text-zinc-800 p-2 text-sm md:rounded border-b border-zinc-700"
+              className="md:col-start-2 md:col-span-6 flex items-center gap-2 md:bg-zinc-200 md:text-zinc-800 p-2 text-sm border-b border-zinc-500"
               key={post.id}
             >
               <div className="flex flex-col items-center">

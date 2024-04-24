@@ -41,6 +41,7 @@ const Pager = () => {
           {n}
         </button>
       ))} */}
+      {page + 1}
       <button
         disabled={page === total - 1}
         className="flex items-center justify-center"
