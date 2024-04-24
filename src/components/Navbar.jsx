@@ -7,6 +7,7 @@ import { TiUserOutline } from 'react-icons/ti';
 import { TbLogout2 } from 'react-icons/tb';
 import { useState } from 'react';
 import { IoMenu, IoClose } from 'react-icons/io5';
+import Search from './Search';
 
 const Navbar = () => {
   const user = useSelector((state) => state.login.user);
@@ -18,6 +19,10 @@ const Navbar = () => {
         <Link to="/">
           <div className="text-5xl font-bold text-orange-600">reddit</div>
         </Link>
+        <div className="hidden md:block">
+          <Search />
+        </div>
+
         <div className="md:hidden">
           {isOpen ? (
             <IoClose onClick={() => setIsOpen(false)} className="w-10 h-10" />
@@ -54,7 +59,10 @@ const Navbar = () => {
       </div>
       {isOpen && user ? (
         <ul className="flex flex-col items-start md:hidden gap-4">
-          <li className="flex gap-2 items-center mt-4">
+          <li className="mt-4">
+            <Search />
+          </li>
+          <li className="flex gap-2 items-center">
             <TiUserOutline className="h-5 w-5" />
             <Link to={`/users/${user.id}`}>
               <span className="hover:text-orange-600 font-bold">{user.username}</span>

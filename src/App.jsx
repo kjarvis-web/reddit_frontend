@@ -8,6 +8,7 @@ import { loggedUser } from './reducers/loginReducer';
 import User from './components/User';
 import SignUpForm from './components/SignUpForm';
 import Footer from './components/Footer';
+import SearchResults from './components/SearchResults';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
             <Route path="/posts/:id" element={<Thread />} />
             <Route path="/users/:id" element={<User />} />
             <Route path="/signup" element={<SignUpForm />} />
+            <Route path="/search" element={<SearchResults />} />
           </Routes>
         </div>
         <div className="mt-auto">

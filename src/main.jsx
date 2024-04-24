@@ -10,6 +10,7 @@ import userReducer from './reducers/userReducer.js';
 import filterReducer from './reducers/filterReducer.js';
 import imageReducer from './reducers/imageReducer.js';
 import pageReducer from './reducers/pageReducer.js';
+import queryReducer from './reducers/queryReducer.js';
 
 //redux toolkit
 const store = configureStore({
@@ -20,6 +21,7 @@ const store = configureStore({
     filter: filterReducer,
     images: imageReducer,
     page: pageReducer,
+    query: queryReducer,
   },
 });
 

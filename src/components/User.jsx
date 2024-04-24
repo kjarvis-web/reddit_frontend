@@ -6,6 +6,7 @@ import { getUsers } from '../reducers/userReducer';
 import { filterChange } from '../reducers/filterReducer';
 import { Link } from 'react-router-dom';
 import { getComments, getThreads } from '../reducers/threadReducer';
+import { resetQuery } from '../reducers/queryReducer';
 
 const User = () => {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const User = () => {
     dispatch(getUsers());
     dispatch(getComments());
     dispatch(getThreads());
+    dispatch(resetQuery());
     console.log('use effect');
   }, [dispatch]);
 

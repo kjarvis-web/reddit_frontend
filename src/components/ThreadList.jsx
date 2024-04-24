@@ -11,6 +11,7 @@ import { filterChange } from '../reducers/filterReducer';
 import CommentSort from './CommentSort';
 import { totalPages } from '../reducers/pageReducer';
 import Pager from './Pager';
+import { resetQuery } from '../reducers/queryReducer';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const ThreadList = () => {
     dispatch(getImages());
     dispatch(filterChange(''));
     dispatch(totalPages());
+    dispatch(resetQuery());
   }, [dispatch, page]);
 
   const addLike = (thread) => {
@@ -66,8 +68,6 @@ const ThreadList = () => {
       downVotes: !findUp ? thread.downVotes.concat(user.id) : thread.downVotes,
       author: thread.author.id,
     };
-
-    console.log('author.id', thread.author);
 
     dispatch(downVote(post));
   };
@@ -167,7 +167,7 @@ const ThreadList = () => {
                     <img
                       src={image.url}
                       className="rounded col-start-3 place-self-end md:h-36"
-                      alt="alt"
+                      alt={image.filename}
                     />
                   )}
                 </div>

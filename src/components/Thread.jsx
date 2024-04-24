@@ -13,6 +13,7 @@ import Toggle from './Toggle';
 import VotePost from './VotePost';
 import { ColorRing } from 'react-loader-spinner';
 import CommentSort from './CommentSort';
+import { resetQuery } from '../reducers/queryReducer';
 
 const Thread = () => {
   const comments = useSelector((state) => state.thread.comments);
@@ -29,6 +30,7 @@ const Thread = () => {
     dispatch(getComments());
     dispatch(getImages());
     dispatch(getThreads(page));
+    dispatch(resetQuery());
   }, [dispatch, id, page]);
 
   const user = useSelector((state) => state.login.user);
@@ -73,7 +75,7 @@ const Thread = () => {
           <div>{thread.content}</div>
           {image && (
             <Toggle>
-              <img src={image.url} className="rounded cursor-pointer" alt="alt" />
+              <img src={image.url} className="rounded cursor-pointer" alt={image.filename} />
             </Toggle>
           )}
         </div>
@@ -94,8 +96,6 @@ const Thread = () => {
               <div className="whitespace-pre-wrap p-1">{c.text}</div>
               <VoteReply comment={c} />
               {comments.map((reply) => {
-                const nestedComments = comments.filter((c) => c.parentId === reply.id);
-                console.log(nestedComments);
                 return (
                   reply.parentId === c.id && (
                     <div

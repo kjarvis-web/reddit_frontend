@@ -199,10 +199,12 @@ export const createThread = (object) => {
   };
 };
 
+
+
 export const getThreads = (page) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
-    const threads = await threadService.getAll(page);
+    const threads = await threadService.getPage(page);
     dispatch(initializeThreads(threads));
     dispatch(setLoading(false));
   };
