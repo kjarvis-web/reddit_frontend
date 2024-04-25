@@ -20,7 +20,7 @@ const User = () => {
   }, [dispatch]);
 
   const id = useParams().id;
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.user.users);
   const user = users.find((u) => u.id === id);
 
   const allPosts = useSelector((state) => state.thread.threads);

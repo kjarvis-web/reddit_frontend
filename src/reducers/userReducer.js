@@ -2,19 +2,25 @@ import { createSlice } from '@reduxjs/toolkit';
 import userService from '../services/users';
 
 const userSlice = createSlice({
-  name: 'users',
-  initialState: [],
+  name: 'user',
+  initialState: { users: [], error: '', success: false },
   reducers: {
     initializeUsers(state, action) {
-      return action.payload;
+      return { ...state, users: action.payload };
     },
     appendUser(state, action) {
-      return [...state, action.payload];
+      return { ...state, users: [...state.users, action.payload] };
+    },
+    setError(state, action) {
+      return { ...state, error: action.payload };
+    },
+    setSuccess(state, action) {
+      return { ...state, success: action.payload };
     },
   },
 });
 
-export const { initializeUsers, appendUser } = userSlice.actions;
+export const { initializeUsers, appendUser, setError, setSuccess } = userSlice.actions;
 
 export const getUsers = () => {
   return async (dispatch) => {
@@ -25,9 +31,20 @@ export const getUsers = () => {
 
 export const addUser = (newUser) => {
   return async (dispatch) => {
-    const user = await userService.createUser(newUser);
-    console.log(user);
-    dispatch(appendUser(user));
+    try {
+      const user = await userService.createUser(newUser);
+      dispatch(appendUser(user));
+      dispatch(setSuccess(true));
+      setTimeout(() => {
+        dispatch(setSuccess(false));
+      }, 4000);
+    } catch (error) {
+      console.log(error);
+      dispatch(setError(error.response.data.error));
+      setTimeout(() => {
+        dispatch(setError(false));
+      }, 5000);
+    }
   };
 };
 

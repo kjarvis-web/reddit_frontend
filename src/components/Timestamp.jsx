@@ -13,7 +13,7 @@ const Timestamp = ({ c }) => {
     dispatch(getComments());
   }, [dispatch]);
 
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.user.users);
   const user = users.find((user) => user.id === c.author);
 
   if (!user) return <div>loading...</div>;

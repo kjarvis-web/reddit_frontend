@@ -1,31 +1,39 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addUser } from '../reducers/userReducer';
+import { addUser, setSuccess } from '../reducers/userReducer';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import LoginForm from './LoginForm';
 
 const SignUpForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
+  const error = useSelector((state) => state.user.error);
+  const success = useSelector((state) => state.user.success);
+  console.log(success);
 
-  const handleSignUp = () => {
+  const handleSignUp = (e) => {
+    e.preventDefault();
     const user = {
       username,
       password,
     };
     dispatch(addUser(user));
-    setSuccess(true);
+  };
+  
+  if (success) {
     setTimeout(() => {
       navigate('/');
-      setSuccess(false);
     }, 3000);
-  };
+  }
+
   if (success)
     return (
-      <div className="flex justify-center text-xl font-bold text-zinc-100">
-        <span>Success! Your are now being redirected back to the homepage...</span>
+      <div className="text-center text-xl font-bold text-zinc-100">
+        <p>Success! Your are now being redirected back to the homepage...</p>
       </div>
     );
   return (
@@ -33,6 +41,7 @@ const SignUpForm = () => {
       <h1 className="font-bold mb-2 text-zinc-100 text-xl text-center">
         Enter a username and password to create an account.
       </h1>
+      {error !== '' && <div className="text-center text-red-500">{error}</div>}
       <form
         onSubmit={handleSignUp}
         className="grid auto-rows-min place-content-center place-items-end gap-2"

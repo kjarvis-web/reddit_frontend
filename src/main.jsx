@@ -17,7 +17,7 @@ const store = configureStore({
   reducer: {
     login: loginReducer,
     thread: threadReducer,
-    users: userReducer,
+    user: userReducer,
     filter: filterReducer,
     images: imageReducer,
     page: pageReducer,

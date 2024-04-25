@@ -8,7 +8,7 @@ const Search = () => {
   const allPosts = useSelector((state) => state.query.posts);
   const allImages = useSelector((state) => state.images);
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users);
+  const users = useSelector((state) => state.user.users);
   const navigate = useNavigate();
   const results = allPosts.filter((p) => {
     const user = users.find((user) => user.id === p.author);
