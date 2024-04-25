@@ -61,7 +61,7 @@ const ThreadList = () => {
 
   const removeLike = (thread) => {
     const findUp = thread.upVotes.find((userId) => userId === user.id);
-    console.log('findup', findUp);
+
     const post = {
       likes: thread.likes - 1,
       id: thread.id,
