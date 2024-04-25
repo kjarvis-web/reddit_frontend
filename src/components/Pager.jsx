@@ -12,7 +12,7 @@ const Pager = () => {
   const dispatch = useDispatch();
   const page = useSelector((state) => state.page.number);
   const total = useSelector((state) => state.page.total);
-  const pageNumbers = Array.from({ length: total }, (_, i) => i + 1);
+  // const pageNumbers = Array.from({ length: total }, (_, i) => i + 1);
 
   return (
     <div className="flex gap-6 justify-center mt-4">

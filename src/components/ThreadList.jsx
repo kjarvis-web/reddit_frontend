@@ -12,6 +12,7 @@ import CommentSort from './CommentSort';
 import { totalPages } from '../reducers/pageReducer';
 import Pager from './Pager';
 import { resetQuery } from '../reducers/queryReducer';
+import Timestamp from './Timestamp';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
@@ -23,13 +24,13 @@ const ThreadList = () => {
   const page = useSelector((state) => state.page.number);
 
   const sorted = useSelector((state) => {
-    if (state.filter === 'NEW') {
-      return [...threads].sort((a, b) => b.created - a.created);
+    if (state.filter === 'OLD') {
+      return [...threads].sort((a, b) => a.created - b.created);
     }
     if (state.filter === 'TOP') {
       return [...threads].sort((a, b) => b.likes - a.likes);
     }
-    return [...threads].sort((a, b) => a.created - b.created);
+    return [...threads].sort((a, b) => b.created - a.created);
   });
 
   useEffect(() => {
@@ -158,7 +159,12 @@ const ThreadList = () => {
               </div>
               <Link to={`/posts/${post.id}`} className="grow">
                 <div className="grid grid-cols-3 gap-y-2">
-                  <h1 className="font-bold text-base col-span-3">{post.title}</h1>
+                  <div>
+                    <h1 className="font-bold text-lg col-span-3">{post.title}</h1>
+                    <div className="text-xs">
+                      <Timestamp c={post} />
+                    </div>
+                  </div>
                   <div className="col-start-1 col-span-2 flex flex-col justify-between">
                     <div className="truncate">{post.content}</div>
                     <div className="text-xs mt-2">{numberOfComments.length} comments</div>

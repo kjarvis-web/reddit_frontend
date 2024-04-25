@@ -14,8 +14,8 @@ const CommentSort = () => {
         className="rounded bg-zinc-200 group-hover:bg-zinc-100 cursor-pointer focus:outline-none"
         onChange={(e) => dispatch(filterChange(e.target.value))}
       >
-        <option value="OLD">Old</option>
         <option value="NEW">New</option>
+        <option value="OLD">Old</option>
         <option value="TOP">Top</option>
       </select>
     </div>

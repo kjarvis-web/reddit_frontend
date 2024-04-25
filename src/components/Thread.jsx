@@ -22,30 +22,31 @@ const Thread = () => {
   const thread = useSelector((state) => state.thread.post);
   const post = useSelector((state) => state.thread.threads);
   const findPost = post.find((p) => p.id === id);
-  const queryPosts = useSelector((state) => state.query.posts);
-  const index = queryPosts.findIndex((p) => p.id === id);
-  const page = Math.floor(index / 10);
+  // const queryPosts = useSelector((state) => state.query.posts);
+  // const sortedPosts = [...queryPosts].sort((a, b) => b.created - a.created);
+  // const index = sortedPosts.findIndex((p) => p.id === id);
+  // const page = Math.floor(index / 20);
 
   useEffect(() => {
     dispatch(resetPost());
     dispatch(getPost(id));
     dispatch(getComments());
     dispatch(getImages());
-    dispatch(getThreads(page));
+    // dispatch(getThreads(page));
     dispatch(resetQuery());
-  }, [dispatch, id, page]);
+  }, [dispatch, id]);
 
   const user = useSelector((state) => state.login.user);
   const images = useSelector((state) => state.images);
   const findComments = comments.filter((comment) => comment.parentId === id);
   const sorted = useSelector((state) => {
-    if (state.filter === 'NEW') {
-      return [...findComments].sort((a, b) => b.created - a.created);
+    if (state.filter === 'OLD') {
+      return [...findComments].sort((a, b) => a.created - b.created);
     }
     if (state.filter === 'TOP') {
       return [...findComments].sort((a, b) => b.likes - a.likes);
     }
-    return [...findComments].sort((a, b) => a.created - b.created);
+    return [...findComments].sort((a, b) => b.created - a.created);
   });
 
   if (!thread || !findPost) {
