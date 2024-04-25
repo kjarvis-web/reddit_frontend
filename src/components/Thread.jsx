@@ -22,19 +22,21 @@ const Thread = () => {
   const thread = useSelector((state) => state.thread.post);
   const post = useSelector((state) => state.thread.threads);
   const findPost = post.find((p) => p.id === id);
-  // const queryPosts = useSelector((state) => state.query.posts);
-  // const sortedPosts = [...queryPosts].sort((a, b) => b.created - a.created);
-  // const index = sortedPosts.findIndex((p) => p.id === id);
-  // const page = Math.floor(index / 20);
+
+  // need this for search
+  const queryPosts = useSelector((state) => state.query.posts);
+  const sortedPosts = [...queryPosts].sort((a, b) => b.created - a.created);
+  const index = sortedPosts.findIndex((p) => p.id === id);
+  const page = Math.floor(index / 20);
 
   useEffect(() => {
     dispatch(resetPost());
     dispatch(getPost(id));
     dispatch(getComments());
     dispatch(getImages());
-    // dispatch(getThreads(page));
+    dispatch(getThreads(page));
     dispatch(resetQuery());
-  }, [dispatch, id]);
+  }, [dispatch, id, page]);
 
   const user = useSelector((state) => state.login.user);
   const images = useSelector((state) => state.images);
