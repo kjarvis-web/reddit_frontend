@@ -99,12 +99,7 @@ const ThreadList = () => {
                 </div>
                 <Link to={`/posts/${post.id}`} className="grow">
                   <div className="grid grid-cols-3 gap-y-2">
-                    <div className="col-span-3">
-                      <h1 className="font-bold text-xl">{post.title}</h1>
-                      <div className="text-xs">
-                        <Timestamp c={post} />
-                      </div>
-                    </div>
+                    <h1 className="font-bold text-xl col-span-3">{post.title}</h1>
                     <div className="col-start-1 col-span-2 flex flex-col justify-between">
                       <div className="truncate">{post.content}</div>
                       <div className="text-xs mt-2">{numberOfComments.length} comments</div>
@@ -164,12 +159,7 @@ const ThreadList = () => {
               </div>
               <Link to={`/posts/${post.id}`} className="grow">
                 <div className="grid grid-cols-3 gap-y-2">
-                  <div className="col-span-3">
-                    <h1 className="font-bold text-xl">{post.title}</h1>
-                    <div className="text-xs">
-                      <Timestamp c={post} />
-                    </div>
-                  </div>
+                  <h1 className="font-bold text-xl col-span-3">{post.title}</h1>
                   <div className="col-start-1 col-span-2 flex flex-col justify-between">
                     <div className="truncate">{post.content}</div>
                     <div className="text-xs mt-2">{numberOfComments.length} comments</div>
