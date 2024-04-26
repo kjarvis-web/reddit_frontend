@@ -84,7 +84,7 @@ const Thread = () => {
             </Toggle>
           )}
         </div>
-        <div className="flex flex-col justify-center items-center md:flex-row md:justify-start gap-4">
+        <div className="flex flex-col justify-center items-center md:flex-row md:justify-start gap-4 mt-4">
           <VotePost thread={findPost} />
           <ModalComment />
           <CommentSort />
