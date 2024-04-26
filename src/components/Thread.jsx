@@ -65,19 +65,19 @@ const Thread = () => {
     <div>
       <div className="md:bg-zinc-200 py-4 md:px-8 rounded md:shadow-lg md:border text-sm md:text-base">
         <div className="flex flex-row justify-between">
-          <h1 className="px-2 md:px-0 font-bold md:text-3xl text-xl text-zinc-100 md:text-zinc-900">
+          <h1 className="px-2 md:px-0 font-bold text-3xl text-zinc-100 md:text-zinc-800">
             {thread.title}
           </h1>
           {user && thread.author === user.id && <Dropdown />}
         </div>
-        <div className="text-zinc-100 md:text-zinc-800 px-2 md:px-0">
+        <div className="text-zinc-100 md:text-zinc-800 px-2 md:px-0 text-sm">
           <Timestamp c={thread} />
         </div>
         {thread.edited && (
           <div className="ml-4 mt-2 text-xs text-red-700">this post has been edited</div>
         )}
-        <div className="my-4 md:ml-0 p-2 md:p-8 md:bg-zinc-300 md:text-zinc-900 md:rounded whitespace-pre-wrap">
-          <div>{thread.content}</div>
+        <div className="my-4 md:ml-0 p-2 md:p-8 md:bg-zinc-300 md:text-zinc-900 md:rounded whitespace-pre-wrap text-sm">
+          <p>{thread.content}</p>
           {image && (
             <Toggle>
               <img src={image.url} className="rounded cursor-pointer" alt={image.filename} />
@@ -95,7 +95,7 @@ const Thread = () => {
           </div>
         )}
         {sorted.map((c, i) => (
-          <div key={i} className="text-zinc-100 text-sm bg-zinc-800 my-2 md:pb-2 rounded">
+          <div key={i} className="text-zinc-100 text-sm bg-zinc-800 my-4 md:pb-2 rounded">
             <div className="px-2">
               <Timestamp c={c} />
               <div className="whitespace-pre-wrap p-1">{c.text}</div>

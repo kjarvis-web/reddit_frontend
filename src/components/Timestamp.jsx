@@ -22,7 +22,9 @@ const Timestamp = ({ c }) => {
       <Link to={`/users/${c.author}`}>
         <span className="font-bold hover:underline">{user.username}</span>
       </Link>{' '}
-      {'\u2219'} {c.date}
+      <span className="text-xs">
+        {'\u2219'} {c.date}
+      </span>
     </div>
   );
 };

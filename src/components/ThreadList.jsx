@@ -159,8 +159,8 @@ const ThreadList = () => {
               </div>
               <Link to={`/posts/${post.id}`} className="grow">
                 <div className="grid grid-cols-3 gap-y-2">
-                  <div>
-                    <h1 className="font-bold text-lg col-span-3">{post.title}</h1>
+                  <div className="col-span-3">
+                    <h1 className="font-bold text-xl">{post.title}</h1>
                     <div className="text-xs">
                       <Timestamp c={post} />
                     </div>
