@@ -11,8 +11,7 @@ import { filterChange } from '../reducers/filterReducer';
 import CommentSort from './CommentSort';
 import { totalPages } from '../reducers/pageReducer';
 import Pager from './Pager';
-import { resetQuery } from '../reducers/queryReducer';
-import Timestamp from './Timestamp';
+import { getAll, resetQuery } from '../reducers/queryReducer';
 
 const ThreadList = () => {
   const dispatch = useDispatch();
@@ -41,6 +40,7 @@ const ThreadList = () => {
     dispatch(filterChange(''));
     dispatch(totalPages());
     dispatch(resetQuery());
+    dispatch(getAll());
   }, [dispatch, page]);
 
   const addLike = (thread) => {

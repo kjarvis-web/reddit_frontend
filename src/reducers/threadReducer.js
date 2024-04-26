@@ -199,8 +199,6 @@ export const createThread = (object) => {
   };
 };
 
-
-
 export const getThreads = (page) => {
   return async (dispatch) => {
     dispatch(setLoading(true));
