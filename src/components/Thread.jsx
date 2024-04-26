@@ -76,7 +76,7 @@ const Thread = () => {
         {thread.edited && (
           <div className="ml-4 mt-2 text-xs text-red-700">this post has been edited</div>
         )}
-        <div className="my-4 md:ml-0 p-2 md:p-8 md:bg-zinc-300 md:text-zinc-900 md:rounded whitespace-pre-wrap text-sm">
+        <div className="md:ml-0 p-2 md:p-8 md:bg-zinc-300 md:text-zinc-900 md:rounded whitespace-pre-wrap text-sm">
           <p>{thread.content}</p>
           {image && (
             <Toggle>
@@ -90,7 +90,7 @@ const Thread = () => {
           <CommentSort />
         </div>
         {sorted.length === 0 && (
-          <div className="text-zinc-100 md:text-zinc-800 mt-2 ml-2">
+          <div className="text-zinc-100 md:text-zinc-800 mt-2 ml-2 text-sm">
             Nothing seems to be here yet...
           </div>
         )}

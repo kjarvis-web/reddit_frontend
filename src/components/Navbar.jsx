@@ -8,6 +8,7 @@ import { TbLogout2 } from 'react-icons/tb';
 import { useState } from 'react';
 import { IoMenu, IoClose } from 'react-icons/io5';
 import Search from './Search';
+import { firstPage } from '../reducers/pageReducer';
 
 const Navbar = () => {
   const user = useSelector((state) => state.login.user);
@@ -17,7 +18,12 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-10 p-2 bg-zinc-800 text-zinc-100">
       <div className="flex flex-row justify-between md:justify-around items-center">
         <Link to="/">
-          <div className="text-5xl font-bold text-orange-600">reddit</div>
+          <button
+            className="text-5xl font-bold text-orange-600"
+            onClick={() => dispatch(firstPage())}
+          >
+            reddit
+          </button>
         </Link>
         <div className="hidden md:block">
           <Search />
